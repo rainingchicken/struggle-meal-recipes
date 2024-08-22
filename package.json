@@ -1,0 +1,28 @@
+{
+  "type": "module",
+  "name": "struggle-meal-recipes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend-recipe/server.js",
+    "server": "nodemon backend-recipe/server.js",
+    "client": "npm run dev --prefix frontend-recipe",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "npm install --prefix frontend-recipe --production=false && cd /opt/render/project/src/frontend-recipe && npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^8.2.2",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.5.3"
+  }
+}
