@@ -8,8 +8,9 @@ const port = process.env.PORT || 4000;
 
 conn();
 
-import recipeRoutes from "./routes/recipeRoutes.js";
+import userRecipeRoutes from "./routes/user-recipeRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import recipeRoutes from "./routes/recipeRoutes.js";
 
 const app = express();
 
@@ -18,7 +19,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/api/user", userRoutes);
-app.use("/api/recipes", recipeRoutes);
+app.use("/api/recipes", userRecipeRoutes);
+app.use("/api/struggle-meals", recipeRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
