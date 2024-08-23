@@ -67,7 +67,7 @@ const EditRecipeForm = ({ _id }: IParams) => {
         data: newRecipe,
       }).unwrap();
       setRecipe(res);
-      navigate("/dashboard");
+      navigate(`/dashboard/recipes/${recipe._id}`);
     } catch (error) {
       setError("Something went wrong. Cannot submit");
       console.log(error);

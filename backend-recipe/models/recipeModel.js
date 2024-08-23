@@ -1,21 +1,6 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const ingredientsSchema = new Schema({
-  amount: {
-    type: Number,
-    required: true,
-  },
-  unit: {
-    type: String,
-    required: true,
-  },
-  ingredient: {
-    type: String,
-    required: true,
-  },
-});
-
 const recipeSchema = new Schema(
   {
     title: {
@@ -34,7 +19,11 @@ const recipeSchema = new Schema(
     vegan: {
       type: Boolean,
     },
-    ingredients: [ingredientsSchema],
+    ingredients: {
+      type: Schema.Types.ObjectId,
+
+      ref: "Ingredient",
+    },
     procedures: [
       {
         type: String,

@@ -20,6 +20,7 @@ app.use(cookieParser());
 
 app.use("/api/user", userRoutes);
 app.use("/api/recipes", userRecipeRoutes);
+
 app.use("/api/struggle-meals", recipeRoutes);
 
 app.use(notFound);

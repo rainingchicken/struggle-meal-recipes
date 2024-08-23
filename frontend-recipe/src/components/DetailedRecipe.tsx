@@ -1,22 +1,34 @@
 import { useEffect, useState } from "react";
 import IIngredients from "../interfaces/IIngredients";
 import IRecipeDetails from "../interfaces/IRecipeDetails";
-import { useGetPersonalRecipeMutation } from "../slices/personalRecipeSlice";
+import {
+  useDeletePersonalRecipeMutation,
+  useGetPersonalRecipeMutation,
+} from "../slices/personalRecipeSlice";
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface IParams {
   _id: string | any;
 }
 
 const DetailedRecipe = ({ _id }: IParams) => {
+  const { userInfo } = useSelector((state: any) => state.auth);
+
   const [recipe, setRecipe] = useState<Array<IRecipeDetails> | any>([]);
   const [error, setError] = useState<string | null>(null);
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [getRecipeAPICall, { isLoading }] = useGetPersonalRecipeMutation();
+  const [deleteRecipeAPICall] = useDeletePersonalRecipeMutation();
 
   const fetchRecipe = async () => {
     try {
       const res = await getRecipeAPICall(_id).unwrap();
       setRecipe(res);
+      // console.log(res);
     } catch (err) {
       console.log(err);
       setError("Something went wrong. Cannot set error");
@@ -27,31 +39,46 @@ const DetailedRecipe = ({ _id }: IParams) => {
     fetchRecipe();
   }, []);
 
-  const title = recipe.title;
-  const categories = recipe.categories;
-  const servings = recipe.servings;
-  const author = recipe.user;
-  const vegan = recipe.vegan;
-  const desperation = recipe.desperation;
-  const health = recipe.health;
-  const ingredients = recipe.ingredients;
-  const procedures = recipe.procedures;
+  const handleDeleteClick = async () => {
+    try {
+      await deleteRecipeAPICall(recipe._id).unwrap();
+      console.log("deleted");
+
+      navigate("/dashboard");
+    } catch (error) {
+      setError("Cant delete");
+      console.log(error);
+    }
+  };
+
+  const handleEditClick = () => {
+    navigate(`/dashboard/edit/${recipe._id}`);
+  };
 
   return (
     <div>
       {!isLoading ? (
         <div className="recipeContainer">
-          <h1>{title}</h1>
-          <p>Categories: {categories}</p>
-          <p>Servings: {servings}</p>
-          <p>Vegan: {vegan ? "Yes" : "No"}</p>
-          <p>Desperation Level: {desperation}</p>
-          <p>Healthy Meter: {health}</p>
-          <p>Author: {author}</p>
+          {userInfo &&
+          location.pathname == `/dashboard/recipes/${recipe._id}` ? (
+            <>
+              <button onClick={handleEditClick}>EDIT</button>
+              <button onClick={handleDeleteClick}>DELETE</button>
+            </>
+          ) : (
+            <></>
+          )}
+          <h1>{recipe.title}</h1>
+          <p>Categories: {recipe.categories}</p>
+          <p>Servings: {recipe.servings}</p>
+          <p>Vegan: {recipe.vegan ? "Yes" : "No"}</p>
+          <p>Desperation Level: {recipe.desperation}</p>
+          <p>Healthy Meter: {recipe.health}</p>
+          <p>Author: {recipe.author}</p>
           <p>
             Ingredients:
-            {ingredients &&
-              ingredients.map((ingredient: IIngredients) => (
+            {recipe.ingredients &&
+              recipe.ingredients.map((ingredient: IIngredients) => (
                 <li key={ingredient._id}>
                   {ingredient.amount} {ingredient.unit} {ingredient.ingredient}
                 </li>
@@ -60,8 +87,8 @@ const DetailedRecipe = ({ _id }: IParams) => {
           <div>
             Procedures:
             <ul>
-              {procedures &&
-                procedures.map((procedure: string, index: number) => (
+              {recipe.procedures &&
+                recipe.procedures.map((procedure: string, index: number) => (
                   <li key={index}>{procedure}</li>
                 ))}
             </ul>

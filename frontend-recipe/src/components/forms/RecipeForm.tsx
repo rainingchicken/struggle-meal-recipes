@@ -11,7 +11,7 @@ const RecipeForm = () => {
     categories: [],
     servings: 1,
     vegan: false,
-    ingredients: [],
+
     procedures: [],
     desperation: 0,
     health: 0,
@@ -45,7 +45,7 @@ const RecipeForm = () => {
       servings: recipe.servings,
       vegan: recipe.vegan,
       health: recipe.health,
-      ingredients: recipe.ingredients,
+
       procedures: recipe.procedures,
       desperation: recipe.desperation,
       user: userInfo,
