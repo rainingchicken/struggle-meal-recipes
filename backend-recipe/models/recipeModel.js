@@ -35,7 +35,7 @@ const recipeSchema = new Schema(
       type: Boolean,
     },
     ingredients: [ingredientsSchema],
-    prodecures: [
+    procedures: [
       {
         type: String,
         required: true,
