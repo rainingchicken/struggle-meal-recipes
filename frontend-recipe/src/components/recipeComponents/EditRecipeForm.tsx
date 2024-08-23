@@ -5,6 +5,7 @@ import {
 } from "../../slices/personalRecipeSlice";
 import { useNavigate } from "react-router-dom";
 import IRecipeDetails from "../../interfaces/IRecipeDetails";
+import IngredientForm from "../ingredientComponents/IngredientForm";
 
 interface IParams {
   _id: string | any;
@@ -129,28 +130,6 @@ const EditRecipeForm = ({ _id }: IParams) => {
         id="health"
         name="health"
         value={recipe.health}
-      />
-
-      <label htmlFor="amount">Amount</label>
-      <input
-        onChange={handleChange}
-        type="number"
-        id="amount"
-        // value={recipe.ingredients.amount}
-      />
-      <label htmlFor="unit">Unit</label>
-      <input
-        onChange={handleChange}
-        type="string"
-        id="unit"
-        // value={recipe.ingredients.unit}
-      />
-      <label htmlFor="ingredient">Ingredient name</label>
-      <input
-        onChange={handleChange}
-        type="text"
-        id="ingredient"
-        // value={recipe.ingredients.ingredient}
       />
 
       <label htmlFor="procedures">Procedures</label>

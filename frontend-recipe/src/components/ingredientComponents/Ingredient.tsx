@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import IIngredients from "../../interfaces/IIngredients";
 import { useGetAllPersonalRecipesIngredientsMutation } from "../../slices/personalRecipeSlice";
+import { IngredientContext } from "../../context/IngredientContext";
 
 interface IParams {
   _id: string;
 }
 
 const Ingredient = ({ _id }: IParams) => {
-  const [ingredients, setIngredients] = useState<Array<IIngredients> | any>([]);
+  const { ingredients, setIngredients } = useContext(IngredientContext);
+
   const [error, setError] = useState<string | null>(null);
 
   const [

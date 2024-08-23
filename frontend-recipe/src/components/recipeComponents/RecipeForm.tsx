@@ -102,13 +102,6 @@ const RecipeForm = () => {
       <label htmlFor="health">health Meter: </label>
       <input onChange={handleChange} type="number" id="health" name="health" />
 
-      <label htmlFor="amount">Amount</label>
-      <input onChange={handleChange} type="number" id="amount" />
-      <label htmlFor="unit">Unit</label>
-      <input onChange={handleChange} type="string" id="unit" />
-      <label htmlFor="ingredient">Ingredient name</label>
-      <input onChange={handleChange} type="text" id="ingredient" />
-
       <label htmlFor="procedures">Procedures</label>
       <textarea
         onChange={handleChange}

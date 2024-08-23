@@ -98,6 +98,16 @@ h2 {
   text-align: center;
 } */
 
+.ingredientsForm {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+
+.ingredientsForm input {
+  width: 100px;
+}
+
 input {
   border-radius: 8px;
   border: 1px solid transparent;

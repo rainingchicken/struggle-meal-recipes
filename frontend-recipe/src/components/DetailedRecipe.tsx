@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import IRecipeDetails from "../interfaces/IRecipeDetails";
 import {
   useDeletePersonalRecipeMutation,
-  useGetAllPersonalRecipesIngredientsMutation,
   useGetPersonalRecipeMutation,
 } from "../slices/personalRecipeSlice";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import Ingredient from "./ingredientComponents/Ingredient";
+import IngredientForm from "./ingredientComponents/IngredientForm";
 
 interface IParams {
   _id: string | any;
@@ -79,6 +79,7 @@ const DetailedRecipe = ({ _id }: IParams) => {
           <p>Healthy Meter: {recipe.health}</p>
           <p>Author: {recipe.author}</p>
           <p>Ingredient</p>
+          <IngredientForm recipe_id={recipe._id} />
           {recipe._id ? <Ingredient _id={recipe._id} /> : <>Loading...</>}
 
           <div>
