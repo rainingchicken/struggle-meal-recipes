@@ -40,7 +40,7 @@ const DetailedRecipe = ({ _id }: IParams) => {
   return (
     <div>
       {!isLoading ? (
-        <div>
+        <div className="recipeContainer">
           <h1>{title}</h1>
           <p>Categories: {categories}</p>
           <p>Servings: {servings}</p>
@@ -57,13 +57,15 @@ const DetailedRecipe = ({ _id }: IParams) => {
                 </li>
               ))}
           </p>
-          <p>
+          <div>
             Procedures:
-            {procedures &&
-              procedures.map((procedure: string, index: number) => (
-                <li key={index}>{procedure}</li>
-              ))}
-          </p>
+            <ul>
+              {procedures &&
+                procedures.map((procedure: string, index: number) => (
+                  <li key={index}>{procedure}</li>
+                ))}
+            </ul>
+          </div>
           <p className="error">{error}</p>
         </div>
       ) : (

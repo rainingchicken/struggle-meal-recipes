@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
-
+import { useContext, useEffect, useState } from "react";
 import { useGetAllPersonalRecipesMutation } from "../slices/personalRecipeSlice.tsx";
-
 import ShortDetailedRecipe from "../components/ShortDetailedRecipe.tsx";
-import IRecipeDetails from "../interfaces/IRecipeDetails.tsx";
 import { Link, useNavigate } from "react-router-dom";
+import { RecipeContext } from "../context/RecipeContext.tsx";
+import IRecipeDetails from "../interfaces/IRecipeDetails.tsx";
 
 const Dashboard = () => {
-  const [recipes, setRecipes] = useState<null | Array<IRecipeDetails>>(null);
+  // const [recipes, setRecipes] = useState<null | Array<IRecipeDetails>>(null);
+  const { recipes, setRecipes } = useContext(RecipeContext);
+
   const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Dashboard = () => {
       setRecipes(res);
     } catch (err) {
       console.log(err);
-      setError("Something went wrong. Cannot set error");
+      setError("Something went wrong. Cannot get recipes");
     }
   };
 
@@ -39,8 +40,8 @@ const Dashboard = () => {
     return (
       <>
         {recipes &&
-          recipes.map((recipe) => (
-            <div key={`div${recipe._id}`}>
+          recipes.map((recipe: IRecipeDetails) => (
+            <div className="recipeContainer" key={`div${recipe._id}`}>
               <ShortDetailedRecipe key={recipe._id} recipe={recipe} />{" "}
               <Link key={`link${recipe._id}`} to={`recipes/${recipe._id}`}>
                 View

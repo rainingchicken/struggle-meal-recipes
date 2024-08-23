@@ -126,7 +126,7 @@ ul {
   padding: 0;
 }
 
-.workout {
+.recipeContainer {
   width: 80%;
   border-radius: 8px;
   border: 1px solid #535bf2;
@@ -135,22 +135,7 @@ ul {
   font-weight: 500;
   font-family: inherit;
   transition: border-color 0.25s;
-  margin: 1em auto;
-}
 
-
-.workoutTitle {
-  text-align: left;
-}
-
-.sets {
-  text-align: left;
-}
-
-
-
-.workout .date {
-  font-size: .8em;
 }
 
 @media (prefers-color-scheme: light) {

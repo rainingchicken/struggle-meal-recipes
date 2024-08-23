@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { FormEvent, useState } from "react";
 import { useCreatePersonalRecipeMutation } from "../../slices/personalRecipeSlice";
+import { useNavigate } from "react-router-dom";
 
 const RecipeForm = () => {
   const { userInfo } = useSelector((state: any) => state.auth);
@@ -16,6 +17,8 @@ const RecipeForm = () => {
     health: 0,
   });
   const [error, setError] = useState<string | null>(null);
+
+  const navigate = useNavigate();
 
   const [createRecipeAPICall] = useCreatePersonalRecipeMutation();
 
@@ -50,8 +53,9 @@ const RecipeForm = () => {
     try {
       const res = await createRecipeAPICall(newRecipe).unwrap();
       setRecipe(res);
+      navigate("/dashboard");
     } catch (error) {
-      setError("Cant submit");
+      setError("Something went wrong. Cannot submit");
       console.log(error);
     }
   };
