@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import EditRecipeForm from "../components/forms/EditRecipeForm";
+import EditRecipeForm from "../components/recipeComponents/EditRecipeForm";
 
 const EditForm = () => {
   const { _id } = useParams();

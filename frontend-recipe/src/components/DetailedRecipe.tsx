@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import IIngredients from "../interfaces/IIngredients";
 import IRecipeDetails from "../interfaces/IRecipeDetails";
 import {
   useDeletePersonalRecipeMutation,
+  useGetAllPersonalRecipesIngredientsMutation,
   useGetPersonalRecipeMutation,
 } from "../slices/personalRecipeSlice";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import Ingredient from "./ingredientComponents/Ingredient";
 
 interface IParams {
   _id: string | any;
@@ -16,12 +17,14 @@ const DetailedRecipe = ({ _id }: IParams) => {
   const { userInfo } = useSelector((state: any) => state.auth);
 
   const [recipe, setRecipe] = useState<Array<IRecipeDetails> | any>([]);
+
   const [error, setError] = useState<string | null>(null);
 
   const location = useLocation();
   const navigate = useNavigate();
 
   const [getRecipeAPICall, { isLoading }] = useGetPersonalRecipeMutation();
+
   const [deleteRecipeAPICall] = useDeletePersonalRecipeMutation();
 
   const fetchRecipe = async () => {
@@ -75,15 +78,9 @@ const DetailedRecipe = ({ _id }: IParams) => {
           <p>Desperation Level: {recipe.desperation}</p>
           <p>Healthy Meter: {recipe.health}</p>
           <p>Author: {recipe.author}</p>
-          <p>
-            Ingredients:
-            {recipe.ingredients &&
-              recipe.ingredients.map((ingredient: IIngredients) => (
-                <li key={ingredient._id}>
-                  {ingredient.amount} {ingredient.unit} {ingredient.ingredient}
-                </li>
-              ))}
-          </p>
+          <p>Ingredient</p>
+          {recipe._id ? <Ingredient _id={recipe._id} /> : <>Loading...</>}
+
           <div>
             Procedures:
             <ul>

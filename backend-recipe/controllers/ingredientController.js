@@ -6,9 +6,10 @@ import Ingredient from "../models/ingredientModel.js";
 // @access  Private
 const getAllIngredients = asyncHandler(async (req, res) => {
   // res.json({ message: "GET all user's ingredients" });
+  const recipe_id = req.params;
 
   try {
-    const allIngredients = await Ingredient.find({});
+    const allIngredients = await Ingredient.find({ recipe_id });
     res.status(200).json(allIngredients);
   } catch (error) {
     res.status(404).json({ error: `Something went wrong ${error.message}` });
@@ -21,7 +22,7 @@ const getAllIngredients = asyncHandler(async (req, res) => {
 const getIngredient = asyncHandler(async (req, res) => {
   //   res.json({ message: "GET this ingredient" });
   const ingredient_id = req.params.ingredient_id;
-  console.log(ingredient_id);
+
   try {
     const thisIngredient = await Ingredient.findById(ingredient_id);
     res.status(200).json(thisIngredient);
