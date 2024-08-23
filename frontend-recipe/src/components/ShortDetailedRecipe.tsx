@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import IRecipeDetails from "../interfaces/IRecipeDetails";
 import { useDeletePersonalRecipeMutation } from "../slices/personalRecipeSlice";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { RecipeContext } from "../context/RecipeContext";
 
@@ -25,6 +25,7 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
   const health = recipe.health;
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [deleteRecipeAPICall] = useDeletePersonalRecipeMutation();
 
@@ -42,8 +43,10 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
       setError("Cant delete");
       console.log(error);
     }
+  };
 
-    // location.reload(); //refresh page so see that deleted item is gone
+  const handleEditClick = () => {
+    navigate(`/dashboard/edit/${recipe._id}`);
   };
 
   return (
@@ -55,7 +58,10 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
       <span>Desperation Level: {desperation}</span>{" "}
       <span>Healthy Meter: {health}</span> <p>Author: {author}</p>
       {userInfo && location.pathname == "/dashboard" ? (
-        <button onClick={handleDeleteClick}>DELETE</button>
+        <>
+          <button onClick={handleEditClick}>EDIT</button>
+          <button onClick={handleDeleteClick}>DELETE</button>
+        </>
       ) : (
         <></>
       )}
