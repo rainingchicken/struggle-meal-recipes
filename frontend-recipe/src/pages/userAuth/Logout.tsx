@@ -2,8 +2,8 @@
 // @route   GET /api/users/logout
 // @access  Public
 import { useDispatch } from "react-redux";
-import { useLogoutMutation } from "../slices/usersApiSlice";
-import { logout } from "../slices/authSlice";
+import { useLogoutMutation } from "../../slices/usersApiSlice";
+import { logout } from "../../slices/authSlice";
 // import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 

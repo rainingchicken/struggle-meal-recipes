@@ -4,8 +4,8 @@
 // @access  Private
 import { useState, useEffect, FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useUpdateUserMutation } from "../slices/usersApiSlice";
-import { setCredentials } from "../slices/authSlice";
+import { useUpdateUserMutation } from "../../slices/usersApiSlice";
+import { setCredentials } from "../../slices/authSlice";
 
 const Profile = () => {
   const [email, setEmail] = useState("");

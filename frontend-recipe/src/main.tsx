@@ -13,13 +13,14 @@ import Dashboard from "./pages/Dashboard.tsx";
 import { Provider } from "react-redux";
 import store from "./store.tsx";
 import PrivateRoute from "./components/PrivateRoute.tsx";
-import Login from "./pages/Login.tsx";
-import Logout from "./pages/Logout.tsx";
-import Signup from "./pages/Signup.tsx";
-import Profile from "./pages/Profile.tsx";
+import Login from "./pages/userAuth/Login.tsx";
+import Logout from "./pages/userAuth/Logout.tsx";
+import Signup from "./pages/userAuth/Signup.tsx";
+import Profile from "./pages/userAuth/Profile.tsx";
 import About from "./pages/About.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Recipe from "./pages/Recipe.tsx";
+import CreateForm from "./pages/CreateForm.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
       <Route path="" element={<PrivateRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/recipes/:_id" element={<Recipe />} />
+        <Route path="/create" element={<CreateForm />} />
         <Route path="/profile" element={<Profile />} />
       </Route>
       <Route path="*" element={<NotFound />} />

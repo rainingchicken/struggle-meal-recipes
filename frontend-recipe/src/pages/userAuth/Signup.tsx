@@ -1,21 +1,23 @@
-// @desc    login page, creates token, checks user auth
-// @route   POST /api/users/login
+// @desc    signup page, creates token, checks user auth
+// @route   POST /api/users/signup
 // @access  Public
 import { useState, useEffect, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useLoginMutation } from "../slices/usersApiSlice";
-import { setCredentials } from "../slices/authSlice";
+import { useSignupMutation } from "../../slices/usersApiSlice";
+import { setCredentials } from "../../slices/authSlice";
 
-const Login = () => {
+const Signup = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [login, { isLoading }] = useLoginMutation();
+  const [signup, { isLoading }] = useSignupMutation();
 
   const { userInfo } = useSelector((state: any) => state.auth);
 
@@ -29,41 +31,62 @@ const Login = () => {
     e.preventDefault();
     // console.log("submit");
     try {
-      const res = await login({ email, password }).unwrap();
+      const res = await signup({
+        name,
+        email,
+        password,
+        confirmPassword,
+      }).unwrap();
       dispatch(setCredentials({ ...res }));
       navigate("/dashboard");
     } catch (err) {
       console.log(err);
-      setError("Incorrect email or password");
+      setError("Please fill all inputs");
     }
   };
 
   return (
     <>
-      <h1>Login</h1>
+      <h1>Sign Up</h1>
       <form onSubmit={submitHandler}>
-        <label htmlFor="loginEmail">Email Address: </label>
+        <label htmlFor="signupName">Name: </label>
         <input
-          id="loginEmail"
+          id="signupName"
+          type="text"
+          placeholder="Enter name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <label htmlFor="signupEmail">Email Address: </label>
+        <input
+          id="signupEmail"
           type="email"
           placeholder="Enter Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <label htmlFor="loginPassword">Password: </label>
+        <label htmlFor="signupPassword">Password: </label>
         <input
-          id="loginPassword"
+          id="signupPassword"
           type="password"
           placeholder="Enter password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <label htmlFor="signupConfirmPassword">Confirm Password: </label>
+        <input
+          id="signupConfirmPassword"
+          type="password"
+          placeholder="Confirm password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
         <button className="btn submitbtn" disabled={isLoading} type="submit">
-          Log In
+          Sign Up
         </button>
         <p>
-          New user? <Link to="/signup">Sign up</Link>
+          Already have an account?<Link to="/login">Login</Link>
         </p>
         {isLoading && <h1>Loading...</h1>}
       </form>
@@ -72,4 +95,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

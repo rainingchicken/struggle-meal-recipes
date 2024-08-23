@@ -6,7 +6,6 @@ const Recipe = () => {
 
   return (
     <div>
-      Detailed Recipe
       <DetailedRecipe _id={_id} />
     </div>
   );
