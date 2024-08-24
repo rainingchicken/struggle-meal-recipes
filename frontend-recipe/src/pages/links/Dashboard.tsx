@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { useGetAllPersonalRecipesMutation } from "../slices/personalRecipeSlice.tsx";
-import ShortDetailedRecipe from "../components/ShortDetailedRecipe.tsx";
+import { useGetAllPersonalRecipesMutation } from "../../slices/personalRecipeSlice.tsx";
+import ShortDetailedRecipe from "../../components/ShortDetailedRecipe.tsx";
 import { Link, useNavigate } from "react-router-dom";
-import { RecipeContext } from "../context/RecipeContext.tsx";
-import IRecipeDetails from "../interfaces/IRecipeDetails.tsx";
+import { RecipeContext } from "../../context/RecipeContext.tsx";
+import IRecipeDetails from "../../interfaces/IRecipeDetails.tsx";
 
 const Dashboard = () => {
   // const [recipes, setRecipes] = useState<null | Array<IRecipeDetails>>(null);

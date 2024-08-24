@@ -1,11 +1,10 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import {
   useGetPersonalRecipeMutation,
   useUpdatePersonalRecipeMutation,
 } from "../../slices/personalRecipeSlice";
 import { useNavigate } from "react-router-dom";
 import IRecipeDetails from "../../interfaces/IRecipeDetails";
-import IngredientForm from "../ingredientComponents/IngredientForm";
 
 interface IParams {
   _id: string | any;
@@ -13,6 +12,7 @@ interface IParams {
 
 const EditRecipeForm = ({ _id }: IParams) => {
   const [recipe, setRecipe] = useState<Array<IRecipeDetails> | any>([]);
+
   const [error, setError] = useState<string | null>(null);
 
   const [getRecipeAPICall] = useGetPersonalRecipeMutation();
@@ -68,7 +68,7 @@ const EditRecipeForm = ({ _id }: IParams) => {
         data: newRecipe,
       }).unwrap();
       setRecipe(res);
-      navigate(`/dashboard/recipes/${recipe._id}`);
+      navigate(`/dashboard/edit/${recipe._id}/ingredients`);
     } catch (error) {
       setError("Something went wrong. Cannot submit");
       console.log(error);
@@ -76,13 +76,13 @@ const EditRecipeForm = ({ _id }: IParams) => {
   };
 
   return (
-    <form id="updateRecipeForm" onSubmit={handleSubmit}>
+    <form className="updateRecipeForm" onSubmit={handleSubmit}>
       <label htmlFor="title">Recipe Name: </label>
       <input
         onChange={handleChange}
         type="text"
-        id="title"
         name="title"
+        id="title"
         value={recipe.title}
       />
 
@@ -90,57 +90,49 @@ const EditRecipeForm = ({ _id }: IParams) => {
       <input
         onChange={handleChange}
         type="text"
-        id="categories"
         placeholder="categories"
         name="categories"
         value={recipe.categories}
+        id="categories"
       />
 
       <label htmlFor="servings">Serving Size: </label>
       <input
         onChange={handleChange}
         type="number"
-        id="servings"
         name="servings"
         value={recipe.servings}
+        id="servings"
       />
 
       <label htmlFor="vegan">Vegan: </label>
       <input
         onChange={handleChange}
         type="checkbox"
-        id="vegan"
         name="vegan"
         checked={recipe.vegan}
+        id="vegan"
       />
 
       <label htmlFor="desperation">Desperation Level: </label>
       <input
         onChange={handleChange}
         type="number"
-        id="desperation"
         name="desperation"
         value={recipe.desperation}
+        id="desperation"
       />
 
       <label htmlFor="health">health Meter: </label>
       <input
         onChange={handleChange}
         type="number"
-        id="health"
         name="health"
         value={recipe.health}
+        id="health"
       />
 
-      <label htmlFor="procedures">Procedures</label>
-      <textarea
-        onChange={handleChange}
-        name="procedures"
-        id="procedures"
-        // value={recipe.procedures}
-      ></textarea>
-
-      <button>UPDATE</button>
+      <button>NEXT</button>
       <p className="error">{error}</p>
     </form>
   );

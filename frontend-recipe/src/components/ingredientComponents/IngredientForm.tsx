@@ -1,15 +1,17 @@
 import { FormEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCreatePersonalRecipesIngredientMutation } from "../../slices/personalRecipeSlice";
-import { IngredientContext } from "../../context/IngredientContext";
-import IIngredients from "../../interfaces/IIngredients";
+import Ingredient from "./Ingredient";
+// import { IngredientContext } from "../../context/IngredientContext";
+// import IIngredients from "../../interfaces/IIngredients";
+// import Ingredient from "./Ingredient";
 
 interface IParams {
-  recipe_id: string;
+  recipe_id: string | undefined;
 }
 
 const IngredientForm = ({ recipe_id }: IParams) => {
-  const [ingredients, setIngredients] = useState({
+  const [ingredient, setIngredient] = useState({
     amount: 0,
     unit: "",
     ingredient: "",
@@ -26,12 +28,12 @@ const IngredientForm = ({ recipe_id }: IParams) => {
   const handleChange = (e: FormEvent) => {
     const { name, type } = e.target as HTMLInputElement;
     if (type === "number") {
-      setIngredients((state) => ({
+      setIngredient((state) => ({
         ...state,
         [name]: +(e.target as HTMLInputElement).value,
       }));
     } else {
-      setIngredients((state) => ({
+      setIngredient((state) => ({
         ...state,
         [name]: (e.target as HTMLInputElement).value,
       }));
@@ -41,9 +43,9 @@ const IngredientForm = ({ recipe_id }: IParams) => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const newIngredient = {
-      amount: ingredients.amount,
-      unit: ingredients.unit,
-      ingredient: ingredients.ingredient,
+      amount: ingredient.amount,
+      unit: ingredient.unit,
+      ingredient: ingredient.ingredient,
       recipe_id: recipe_id,
     };
     try {
@@ -51,12 +53,19 @@ const IngredientForm = ({ recipe_id }: IParams) => {
         _id: recipe_id,
         data: newIngredient,
       }).unwrap();
-      setIngredients(res);
-      navigate(`/dashboard/recipes/${recipe_id}`);
+      setIngredient(res);
     } catch (error) {
       setError("Something went wrong. Cannot submit");
       console.log(error);
     }
+  };
+
+  const handleBackButton = () => {
+    navigate(`/dashboard/edit/${recipe_id}`);
+  };
+
+  const handleNextButton = () => {
+    navigate(`/dashboard/edit/${recipe_id}/procedures`);
   };
   return (
     <>
@@ -70,6 +79,8 @@ const IngredientForm = ({ recipe_id }: IParams) => {
         <button>ADD</button>
         <p className="error">{error}</p>
       </form>
+      <button onClick={handleBackButton}>BACK</button>
+      <button onClick={handleNextButton}>NEXT</button>
     </>
   );
 };

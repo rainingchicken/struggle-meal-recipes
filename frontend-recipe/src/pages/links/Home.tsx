@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { useGetAllRecipesMutation } from "../slices/recipesSlice";
+import { useGetAllRecipesMutation } from "../../slices/recipesSlice";
 
-import Recipe from "../components/ShortDetailedRecipe";
-import IRecipeDetails from "../interfaces/IRecipeDetails";
+import Recipe from "../../components/ShortDetailedRecipe";
+import IRecipeDetails from "../../interfaces/IRecipeDetails";
 
 const Home = () => {
   const [recipes, setRecipes] = useState<null | Array<IRecipeDetails>>(null);

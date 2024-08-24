@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { FormEvent, useState } from "react";
 import { useCreatePersonalRecipeMutation } from "../../slices/personalRecipeSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const RecipeForm = () => {
   const { userInfo } = useSelector((state: any) => state.auth);
@@ -53,7 +53,7 @@ const RecipeForm = () => {
     try {
       const res = await createRecipeAPICall(newRecipe).unwrap();
       setRecipe(res);
-      navigate("/dashboard");
+      navigate(`/create/${res._id}/ingredients`);
     } catch (error) {
       setError("Something went wrong. Cannot submit");
       console.log(error);
@@ -76,7 +76,7 @@ const RecipeForm = () => {
         onChange={handleChange}
         type="text"
         id="categories"
-        placeholder="categories"
+        placeholder="American, Asian, Mix, Other..."
         name="categories"
       />
 
@@ -102,14 +102,7 @@ const RecipeForm = () => {
       <label htmlFor="health">health Meter: </label>
       <input onChange={handleChange} type="number" id="health" name="health" />
 
-      <label htmlFor="procedures">Procedures</label>
-      <textarea
-        onChange={handleChange}
-        name="procedures"
-        id="procedures"
-      ></textarea>
-
-      <button>SHARE</button>
+      <button>NEXT</button>
       <p className="error">{error}</p>
     </form>
   );

@@ -79,7 +79,7 @@ const DetailedRecipe = ({ _id }: IParams) => {
           <p>Healthy Meter: {recipe.health}</p>
           <p>Author: {recipe.author}</p>
           <p>Ingredient</p>
-          <IngredientForm recipe_id={recipe._id} />
+
           {recipe._id ? <Ingredient _id={recipe._id} /> : <>Loading...</>}
 
           <div>

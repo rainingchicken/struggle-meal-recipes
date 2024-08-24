@@ -8,8 +8,8 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import Home from "./pages/Home.tsx";
-import Dashboard from "./pages/Dashboard.tsx";
+import Home from "./pages/links/Home.tsx";
+import Dashboard from "./pages/links/Dashboard.tsx";
 import { Provider } from "react-redux";
 import store from "./store.tsx";
 import PrivateRoute from "./components/PrivateRoute.tsx";
@@ -17,11 +17,13 @@ import Login from "./pages/userAuth/Login.tsx";
 import Logout from "./pages/userAuth/Logout.tsx";
 import Signup from "./pages/userAuth/Signup.tsx";
 import Profile from "./pages/userAuth/Profile.tsx";
-import About from "./pages/About.tsx";
+import About from "./pages/links/About.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Recipe from "./pages/Recipe.tsx";
 import CreateForm from "./pages/CreateForm.tsx";
 import EditForm from "./pages/EditForm.tsx";
+import EditIngredientForm from "./pages/EditIngredientForm.tsx";
+import CreateIngredientsForm from "./pages/CreateIngredientsForm.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,7 +37,15 @@ const router = createBrowserRouter(
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/recipes/:_id" element={<Recipe />} />
         <Route path="/create" element={<CreateForm />} />
+        <Route
+          path="/create/:_id/ingredients"
+          element={<CreateIngredientsForm />}
+        />
         <Route path="/dashboard/edit/:_id" element={<EditForm />} />
+        <Route
+          path="/dashboard/edit/:_id/ingredients"
+          element={<EditIngredientForm />}
+        />
         <Route path="/profile" element={<Profile />} />
       </Route>
       <Route path="*" element={<NotFound />} />

@@ -4,7 +4,7 @@ import { useGetAllPersonalRecipesIngredientsMutation } from "../../slices/person
 import { IngredientContext } from "../../context/IngredientContext";
 
 interface IParams {
-  _id: string;
+  _id: string | undefined;
 }
 
 const Ingredient = ({ _id }: IParams) => {
