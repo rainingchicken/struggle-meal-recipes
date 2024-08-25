@@ -2,13 +2,12 @@ import asyncHandler from "express-async-handler";
 import Procedure from "../models/procedureMode.js";
 
 // @desc    get the precedures of the specific recipe
-// @route   GET /api/recipies/:id/ingredient/:ingredient_id/procedures/:procedures_id
+// @route   GET /api/recipies/:id/ingredient/all/procedures
 // @access  Public
 const getProcedure = asyncHandler(async (req, res) => {
-  const procedures_id = req.params.procedures_id;
-
+  const recipe_id = req.params._id;
   try {
-    const thisProcedure = await Procedure.findById(procedures_id);
+    const thisProcedure = await Procedure.find({ recipe_id });
     res.status(200).json(thisProcedure);
   } catch (error) {
     res.status(404).json({ error: `Procedure not found ${error.message}` });
@@ -16,11 +15,12 @@ const getProcedure = asyncHandler(async (req, res) => {
 });
 
 // @desc   create a workout with user's _id
-// @route   POST /api/recipies/:id/ingredient/:ingredient_id/procedures
+// @route   POST /api/recipies/:id/ingredient/all/procedures
 // @access  Private
 const createProcedure = asyncHandler(async (req, res) => {
   const { steps } = req.body;
-  const recipe_id = req.params;
+  const recipe_id = req.params._id;
+
   try {
     const newProcedure = await Procedure.create({
       steps,
@@ -33,7 +33,7 @@ const createProcedure = asyncHandler(async (req, res) => {
 });
 
 // @desc    update the procedures
-// @route   PATCH /api/recipies/:id/ingredient/:ingredient_id/procedures/:procedures_id
+// @route   PATCH /api/recipies/:id/ingredient/all/procedures/:procedures_id
 // @access  Private
 const updateProcedure = asyncHandler(async (req, res) => {
   const _id = req.params.procedures_id;

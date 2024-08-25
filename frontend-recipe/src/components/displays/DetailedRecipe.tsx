@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import Ingredient from "./Ingredient";
 import IngredientForm from "../create/IngredientForm";
+import Procedures from "./Procedures";
 
 interface IParams {
   _id: string | any;
@@ -84,12 +85,7 @@ const DetailedRecipe = ({ _id }: IParams) => {
 
           <div>
             Procedures:
-            <ul>
-              {recipe.procedures &&
-                recipe.procedures.map((procedure: string, index: number) => (
-                  <li key={index}>{procedure}</li>
-                ))}
-            </ul>
+            {recipe._id ? <Procedures _id={recipe._id} /> : <>Loading...</>}
           </div>
           <p className="error">{error}</p>
         </div>

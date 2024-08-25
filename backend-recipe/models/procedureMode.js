@@ -6,6 +6,11 @@ const procedureSchema = new Schema({
     type: String,
     required: true,
   },
+  recipe_id: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "Recipe",
+  },
 });
 const Procedure = mongoose.model("Procedure", procedureSchema);
 export default Procedure;

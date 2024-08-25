@@ -70,6 +70,28 @@ export const personalRecipeApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    //-- procedures /:_id/ingredients/:ingredient_id/procedures/:procedures_id --//
+    getPersonalRecipeProcedures: builder.mutation({
+      query: (_id) => ({
+        url: `/api/recipes/${_id}/ingredients/all/procedures`,
+        method: "GET",
+      }),
+    }),
+    createPersonalRecipeProcedures: builder.mutation({
+      query: ({ _id, data }) => ({
+        url: `/api/recipes/${_id}/ingredients/all/procedures`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    updatePersonalRecipeProcedures: builder.mutation({
+      query: ({ _id, procedures_id, data }) => ({
+        url: `/api/recipes/${_id}/ingredients/all/procedures/${procedures_id}`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -85,4 +107,8 @@ export const {
   useCreatePersonalRecipesIngredientMutation,
   useDeletePersonalRecipesIngredientMutation,
   useUpdatePersonalRecipesIngredientMutation,
+
+  useGetPersonalRecipeProceduresMutation,
+  useCreatePersonalRecipeProceduresMutation,
+  useUpdatePersonalRecipeProceduresMutation,
 } = personalRecipeApiSlice;

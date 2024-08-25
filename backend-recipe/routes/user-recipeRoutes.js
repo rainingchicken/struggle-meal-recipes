@@ -38,11 +38,15 @@ router.delete("/:_id/ingredients/:ingredient_id", protect, deleteIngredient);
 //procedures
 
 router.get(
-  "/:_id/ingredients/:ingredient_id/procedures/:procedures_id",
+  "/:_id/ingredients/:ingredient_id/procedures",
   protect,
   getProcedure
 );
-router.post("/:_id/ingredients/procedures", protect, createProcedure);
+router.post(
+  "/:_id/ingredients/:ingredient_id/procedures",
+  protect,
+  createProcedure
+);
 router.patch(
   "/:_id/ingredients/:ingredient_id/procedures/:procedures_id",
   protect,

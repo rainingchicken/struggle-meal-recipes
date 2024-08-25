@@ -40,7 +40,7 @@ const createRecipe = asyncHandler(async (req, res) => {
     categories,
     servings,
     vegan,
-    procedures,
+
     desperation,
     health,
   } = req.body;
@@ -51,7 +51,7 @@ const createRecipe = asyncHandler(async (req, res) => {
       categories,
       servings,
       vegan,
-      procedures,
+
       desperation,
       health,
       user,

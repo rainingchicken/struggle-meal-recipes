@@ -9,7 +9,8 @@ interface IParams {
 }
 
 const Ingredient = ({ _id }: IParams) => {
-  const { ingredient, setIngredient } = useContext(RecipeIngredientContext);
+  // const { ingredient, setIngredient } = useContext(RecipeIngredientContext);
+  const [ingredient, setIngredient] = useState();
 
   const [error, setError] = useState<string | null>(null);
 

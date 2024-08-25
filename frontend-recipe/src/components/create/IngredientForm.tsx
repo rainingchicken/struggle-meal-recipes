@@ -4,9 +4,9 @@ import {
   useCreatePersonalRecipesIngredientMutation,
   useDeletePersonalRecipeMutation,
 } from "../../slices/personalRecipeSlice";
-import { RecipeIngredientContext } from "../../context/RecipeIngredientContext";
-import IIngredients from "../../interfaces/IIngredients";
-import { IngredientContext } from "../../context/IngredientContext";
+// import { RecipeIngredientContext } from "../../context/RecipeIngredientContext";
+// import IIngredients from "../../interfaces/IIngredients";
+// import { IngredientContext } from "../../context/IngredientContext";
 
 interface IParams {
   recipe_id: string | undefined;
@@ -65,11 +65,11 @@ const IngredientForm = ({ recipe_id }: IParams) => {
   };
 
   const handleBackButton = () => {
-    navigate(`/dashboard/edit/${recipe_id}`);
+    navigate(`/create/${recipe_id}`);
   };
 
   const handleNextButton = () => {
-    navigate(`/dashboard/edit/${recipe_id}/procedures`);
+    navigate(`/create/${recipe_id}/procedures`);
   };
 
   const handleDeleteClick = async () => {
