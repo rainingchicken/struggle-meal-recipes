@@ -28,6 +28,7 @@ const EditIngredientForm = () => {
 
   useEffect(() => {
     fetchRecipes();
+    document.title = "Edit Ingredients";
   }, []);
 
   const loaded = () => {

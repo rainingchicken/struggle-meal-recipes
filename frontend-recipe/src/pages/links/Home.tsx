@@ -22,6 +22,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchRecipes();
+    document.title = "Home";
   }, []);
 
   const loaded = () => {

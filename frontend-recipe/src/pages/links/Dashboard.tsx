@@ -30,6 +30,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchRecipes();
+    document.title = "Dashboard";
   }, []);
 
   const handleCreateRecipe = () => {

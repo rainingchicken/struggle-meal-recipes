@@ -25,6 +25,7 @@ const Signup = () => {
     if (userInfo) {
       navigate("/dashboard");
     }
+    document.title = "Signup Page";
   }, [navigate, userInfo]);
 
   const submitHandler = async (e: FormEvent) => {

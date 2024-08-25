@@ -23,6 +23,7 @@ const Login = () => {
     if (userInfo) {
       navigate("/dashboard");
     }
+    document.title = "Login Page";
   }, [navigate, userInfo]);
 
   const submitHandler = async (e: FormEvent) => {

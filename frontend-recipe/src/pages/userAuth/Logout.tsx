@@ -24,6 +24,7 @@ const Logout = () => {
   };
   useEffect(() => {
     logoutHandler();
+    document.title = "Logout Page";
   }, []);
 
   return <h1>You are logged out</h1>;

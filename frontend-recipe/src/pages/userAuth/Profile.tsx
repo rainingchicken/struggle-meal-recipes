@@ -23,6 +23,7 @@ const Profile = () => {
   useEffect(() => {
     setName(userInfo.name);
     setEmail(userInfo.email);
+    document.title = "Profile Page";
   }, [userInfo.email, userInfo.name]);
 
   const submitHandler = async (e: FormEvent) => {
