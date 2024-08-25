@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
-import IngredientForm from "../components/ingredientComponents/IngredientForm";
+import IngredientForm from "../components/create/IngredientForm";
 import { useContext, useEffect, useState } from "react";
 import { IngredientContext } from "../context/IngredientContext";
 import { useGetAllPersonalRecipesIngredientsMutation } from "../slices/personalRecipeSlice";
-import Ingredient from "../components/ingredientComponents/Ingredient";
+import Ingredient from "../components/displays/Ingredient";
 
 const EditIngredientForm = () => {
   const { _id } = useParams();

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const procedureSchema = new Schema({
   steps: {
-    type: Number,
+    type: String,
     required: true,
   },
 });

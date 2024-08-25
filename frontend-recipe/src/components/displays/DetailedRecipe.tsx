@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import IRecipeDetails from "../interfaces/IRecipeDetails";
+import IRecipeDetails from "../../interfaces/IRecipeDetails";
 import {
   useDeletePersonalRecipeMutation,
   useGetPersonalRecipeMutation,
-} from "../slices/personalRecipeSlice";
+} from "../../slices/personalRecipeSlice";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import Ingredient from "./ingredientComponents/Ingredient";
-import IngredientForm from "./ingredientComponents/IngredientForm";
+import Ingredient from "./Ingredient";
+import IngredientForm from "../create/IngredientForm";
 
 interface IParams {
   _id: string | any;

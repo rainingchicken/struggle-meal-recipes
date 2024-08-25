@@ -1,22 +1,24 @@
 import { FormEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCreatePersonalRecipesIngredientMutation } from "../../slices/personalRecipeSlice";
-import Ingredient from "./Ingredient";
-// import { IngredientContext } from "../../context/IngredientContext";
-// import IIngredients from "../../interfaces/IIngredients";
-// import Ingredient from "./Ingredient";
+import {
+  useCreatePersonalRecipesIngredientMutation,
+  useDeletePersonalRecipeMutation,
+} from "../../slices/personalRecipeSlice";
+import { RecipeIngredientContext } from "../../context/RecipeIngredientContext";
+import IIngredients from "../../interfaces/IIngredients";
+import { IngredientContext } from "../../context/IngredientContext";
 
 interface IParams {
   recipe_id: string | undefined;
 }
 
 const IngredientForm = ({ recipe_id }: IParams) => {
+  // const { ingredients, setIngredients } = useContext(IngredientContext);
   const [ingredient, setIngredient] = useState({
     amount: 0,
     unit: "",
     ingredient: "",
   });
-  // const { ingredients, setIngredients } = useContext(IngredientContext);
   const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
@@ -24,6 +26,7 @@ const IngredientForm = ({ recipe_id }: IParams) => {
   const [
     createIngredientAPICall,
   ] = useCreatePersonalRecipesIngredientMutation();
+  const [deleteRecipeAPICall] = useDeletePersonalRecipeMutation();
 
   const handleChange = (e: FormEvent) => {
     const { name, type } = e.target as HTMLInputElement;
@@ -40,8 +43,8 @@ const IngredientForm = ({ recipe_id }: IParams) => {
     }
   };
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    // e.preventDefault();
     const newIngredient = {
       amount: ingredient.amount,
       unit: ingredient.unit,
@@ -53,6 +56,7 @@ const IngredientForm = ({ recipe_id }: IParams) => {
         _id: recipe_id,
         data: newIngredient,
       }).unwrap();
+      // setIngredients(res);
       setIngredient(res);
     } catch (error) {
       setError("Something went wrong. Cannot submit");
@@ -67,6 +71,18 @@ const IngredientForm = ({ recipe_id }: IParams) => {
   const handleNextButton = () => {
     navigate(`/dashboard/edit/${recipe_id}/procedures`);
   };
+
+  const handleDeleteClick = async () => {
+    try {
+      await deleteRecipeAPICall(recipe_id).unwrap();
+      console.log("deleted");
+      navigate("/dashboard");
+    } catch (error) {
+      setError("Cant delete");
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <form onSubmit={handleSubmit} className="ingredientsForm">
@@ -81,6 +97,7 @@ const IngredientForm = ({ recipe_id }: IParams) => {
       </form>
       <button onClick={handleBackButton}>BACK</button>
       <button onClick={handleNextButton}>NEXT</button>
+      <button onClick={handleDeleteClick}>CANCEL</button>
     </>
   );
 };

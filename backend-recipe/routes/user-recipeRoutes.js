@@ -15,6 +15,11 @@ import {
   updateIngredient,
   deleteIngredient,
 } from "../controllers/ingredientController.js";
+import {
+  getProcedure,
+  createProcedure,
+  updateProcedure,
+} from "../controllers/proceduresController.js";
 
 //recipes
 router.get("/", protect, getAllRecipes);
@@ -29,5 +34,19 @@ router.get("/:_id/ingredients/:ingredient_id", protect, getIngredient);
 router.post("/:_id/ingredients", protect, createIngredient);
 router.patch("/:_id/ingredients/:ingredient_id", protect, updateIngredient);
 router.delete("/:_id/ingredients/:ingredient_id", protect, deleteIngredient);
+
+//procedures
+
+router.get(
+  "/:_id/ingredients/:ingredient_id/procedures/:procedures_id",
+  protect,
+  getProcedure
+);
+router.post("/:_id/ingredients/procedures", protect, createProcedure);
+router.patch(
+  "/:_id/ingredients/:ingredient_id/procedures/:procedures_id",
+  protect,
+  updateProcedure
+);
 
 export default router;

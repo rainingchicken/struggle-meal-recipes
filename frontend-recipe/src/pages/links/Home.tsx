@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { useGetAllRecipesMutation } from "../../slices/recipesSlice";
 
-import Recipe from "../../components/ShortDetailedRecipe";
+import Recipe from "../../components/displays/ShortDetailedRecipe";
 import IRecipeDetails from "../../interfaces/IRecipeDetails";
 
 const Home = () => {

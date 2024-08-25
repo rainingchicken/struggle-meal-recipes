@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
-import IRecipeDetails from "../interfaces/IRecipeDetails";
-import { useDeletePersonalRecipeMutation } from "../slices/personalRecipeSlice";
+import IRecipeDetails from "../../interfaces/IRecipeDetails";
+import { useDeletePersonalRecipeMutation } from "../../slices/personalRecipeSlice";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { RecipeContext } from "../context/RecipeContext";
+import { RecipeContext } from "../../context/RecipeContext";
 
 interface IParams {
   recipe: IRecipeDetails;

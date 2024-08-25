@@ -24,12 +24,12 @@ const recipeSchema = new Schema(
 
       ref: "Ingredient",
     },
-    procedures: [
-      {
-        type: String,
-        required: true,
-      },
-    ],
+    procedures: {
+      type: Schema.Types.ObjectId,
+
+      ref: "Procedures",
+    },
+
     desperation: {
       type: Number,
       required: true,
