@@ -1,10 +1,8 @@
 import { createContext } from "react";
 
-interface IProceduresContext {
-  procedures: string | null | any;
-  setProcedures: Function;
-}
+// interface IProceduresContext {
+//   procedures: string | null | any;
+//   setProcedures: Function;
+// }
 
-export const ProceduresContext = createContext<IProceduresContext>(
-  {} as IProceduresContext
-);
+export const ProceduresContext = createContext<any>({} as any);

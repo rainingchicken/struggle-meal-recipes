@@ -1,11 +1,9 @@
 import { createContext } from "react";
-import IRecipeDetails from "../interfaces/IRecipeDetails";
+// import IRecipeDetails from "../interfaces/IRecipeDetails";
 
-interface IRecipeContext {
-  recipes: IRecipeDetails | null | any;
-  setRecipes: Function;
-}
+// interface IRecipeContext {
+//   recipes: IRecipeDetails | null | any;
+//   setRecipes: Function;
+// }
 
-export const RecipeContext = createContext<IRecipeContext>(
-  {} as IRecipeContext
-);
+export const RecipeContext = createContext<any>({} as any);
