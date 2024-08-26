@@ -1,15 +1,16 @@
 import { useParams } from "react-router-dom";
 import EditProcedureForm from "../components/edit/editProceduresForm";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetPersonalRecipeProceduresMutation } from "../slices/personalRecipeSlice";
-import { ProceduresContext } from "../context/ProceduresContext";
+// import { ProceduresContext } from "../context/ProceduresContext";
 import IProcedures from "../interfaces/IProcedures";
 
 const EditProcedures = () => {
   const { _id } = useParams();
 
-  const { procedures, setProcedures } = useContext(ProceduresContext);
+  // const { procedures, setProcedures } = useContext(ProceduresContext);
 
+  const [procedures, setProcedures] = useState<any>([]);
   const [error, setError] = useState<string | null>(null);
 
   const [

@@ -1,13 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetAllPersonalRecipesMutation } from "../../slices/personalRecipeSlice.tsx";
 import ShortDetailedRecipe from "../../components/displays/ShortDetailedRecipe.tsx";
 import { useNavigate } from "react-router-dom";
-import { RecipeContext } from "../../context/RecipeContext.tsx";
+// import { RecipeContext } from "../../context/RecipeContext.tsx";
 import IRecipeDetails from "../../interfaces/IRecipeDetails.tsx";
 
 const Dashboard = () => {
   // const [recipes, setRecipes] = useState<null | Array<IRecipeDetails>>(null);
-  const { recipes, setRecipes } = useContext(RecipeContext);
+  // const { recipes, setRecipes } = useContext(RecipeContext);
+  const [recipes, setRecipes] = useState<any>([]);
 
   const [error, setError] = useState<string | null>(null);
 
