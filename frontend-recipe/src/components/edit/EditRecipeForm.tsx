@@ -11,7 +11,14 @@ interface IParams {
 }
 
 const EditRecipeForm = ({ _id }: IParams) => {
-  const [recipe, setRecipe] = useState<Array<IRecipeDetails> | any>([]);
+  const [recipe, setRecipe] = useState<Array<IRecipeDetails> | any>({
+    title: "",
+    categories: "",
+    servings: 1,
+    vegan: false,
+    health: 0,
+    desperation: 0,
+  });
 
   const [error, setError] = useState<string | null>(null);
 
@@ -58,8 +65,6 @@ const EditRecipeForm = ({ _id }: IParams) => {
       servings: recipe.servings,
       vegan: recipe.vegan,
       health: recipe.health,
-      ingredients: recipe.ingredients,
-      procedures: recipe.procedures,
       desperation: recipe.desperation,
     };
     try {
@@ -76,65 +81,76 @@ const EditRecipeForm = ({ _id }: IParams) => {
   };
 
   return (
-    <form className="updateRecipeForm" onSubmit={handleSubmit}>
-      <label htmlFor="title">Recipe Name: </label>
-      <input
-        onChange={handleChange}
-        type="text"
-        name="title"
-        id="title"
-        value={recipe.title}
-      />
+    <>
+      {_id && recipe ? (
+        <form className="updateRecipeForm" onSubmit={handleSubmit}>
+          <label htmlFor="title">Recipe Name: </label>
+          <input
+            onChange={handleChange}
+            type="text"
+            name="title"
+            id="title"
+            value={recipe.title}
+            required
+          />
 
-      <label htmlFor="categories">Categories: </label>
-      <input
-        onChange={handleChange}
-        type="text"
-        placeholder="categories"
-        name="categories"
-        value={recipe.categories}
-        id="categories"
-      />
+          <label htmlFor="categories">Categories: </label>
+          <input
+            onChange={handleChange}
+            type="text"
+            placeholder="categories"
+            name="categories"
+            value={recipe.categories}
+            id="categories"
+            required
+          />
 
-      <label htmlFor="servings">Serving Size: </label>
-      <input
-        onChange={handleChange}
-        type="number"
-        name="servings"
-        value={recipe.servings}
-        id="servings"
-      />
+          <label htmlFor="servings">Serving Size: </label>
+          <input
+            onChange={handleChange}
+            type="number"
+            name="servings"
+            value={recipe.servings}
+            id="servings"
+            required
+          />
 
-      <label htmlFor="vegan">Vegan: </label>
-      <input
-        onChange={handleChange}
-        type="checkbox"
-        name="vegan"
-        checked={recipe.vegan}
-        id="vegan"
-      />
+          <label htmlFor="vegan">Vegan: </label>
+          <input
+            onChange={handleChange}
+            type="checkbox"
+            name="vegan"
+            checked={recipe.vegan}
+            id="vegan"
+          />
 
-      <label htmlFor="desperation">Desperation Level: </label>
-      <input
-        onChange={handleChange}
-        type="number"
-        name="desperation"
-        value={recipe.desperation}
-        id="desperation"
-      />
+          <label htmlFor="desperation">Desperation Level: </label>
+          <input
+            onChange={handleChange}
+            type="number"
+            name="desperation"
+            value={recipe.desperation}
+            id="desperation"
+            required
+          />
 
-      <label htmlFor="health">health Meter: </label>
-      <input
-        onChange={handleChange}
-        type="number"
-        name="health"
-        value={recipe.health}
-        id="health"
-      />
+          <label htmlFor="health">health Meter: </label>
+          <input
+            onChange={handleChange}
+            type="number"
+            name="health"
+            value={recipe.health}
+            id="health"
+            required
+          />
 
-      <button>NEXT</button>
-      <p className="error">{error}</p>
-    </form>
+          <button>NEXT</button>
+          <p className="error">{error}</p>
+        </form>
+      ) : (
+        <h1>Loading...</h1>
+      )}
+    </>
   );
 };
 

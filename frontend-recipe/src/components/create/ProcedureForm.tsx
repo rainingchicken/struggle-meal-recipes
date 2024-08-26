@@ -46,7 +46,7 @@ const ProcedureForm = ({ recipe_id }: IParams) => {
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="steps">Procedures</label>
-      <input onChange={handleChange} name="steps" id="steps" />
+      <textarea onChange={handleChange} name="steps" id="steps" />
       <button>SHARE RECIPE</button>
       <p className="error">{error}</p>
     </form>

@@ -10,9 +10,12 @@ import {
 
 interface IParams {
   recipe_id: string | undefined;
+  userAction: string;
+  //  if mode === create, navigate to /create/${recipe_id}`
+  //  if mode === edit, navigate to /edit/${recipe_id}`
 }
 
-const IngredientForm = ({ recipe_id }: IParams) => {
+const IngredientForm = ({ recipe_id, userAction }: IParams) => {
   // const { ingredients, setIngredients } = useContext(IngredientContext);
   const [ingredient, setIngredient] = useState({
     amount: 0,
@@ -65,21 +68,29 @@ const IngredientForm = ({ recipe_id }: IParams) => {
   };
 
   const handleBackButton = () => {
-    navigate(`/create/${recipe_id}`);
+    navigate(`/dashboard/edit/${recipe_id}`);
   };
 
   const handleNextButton = () => {
-    navigate(`/create/${recipe_id}/procedures`);
+    if (userAction === "create") {
+      navigate(`/${userAction}/${recipe_id}/procedures`);
+    } else {
+      navigate(`/dashboard/${userAction}/${recipe_id}/procedures`);
+    }
   };
 
   const handleDeleteClick = async () => {
-    try {
-      await deleteRecipeAPICall(recipe_id).unwrap();
-      console.log("deleted");
+    if (userAction === "create") {
+      try {
+        await deleteRecipeAPICall(recipe_id).unwrap();
+        console.log("deleted");
+        navigate("/dashboard");
+      } catch (error) {
+        setError("Cant delete");
+        console.log(error);
+      }
+    } else {
       navigate("/dashboard");
-    } catch (error) {
-      setError("Cant delete");
-      console.log(error);
     }
   };
 

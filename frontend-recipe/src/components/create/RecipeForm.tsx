@@ -74,6 +74,7 @@ const RecipeForm = () => {
           id="title"
           placeholder="Recipe Name"
           name="title"
+          required
         />
 
         <label htmlFor="categories">Categories: </label>
@@ -83,6 +84,7 @@ const RecipeForm = () => {
           id="categories"
           placeholder="American, Asian, Mix, Other..."
           name="categories"
+          required
         />
 
         <label htmlFor="servings">Serving Size: </label>
@@ -91,6 +93,7 @@ const RecipeForm = () => {
           type="number"
           id="servings"
           name="servings"
+          required
         />
 
         <label htmlFor="vegan">Vegan: </label>
@@ -107,6 +110,7 @@ const RecipeForm = () => {
           type="number"
           id="desperation"
           name="desperation"
+          required
         />
 
         <label htmlFor="health">health Meter: </label>
@@ -115,6 +119,7 @@ const RecipeForm = () => {
           type="number"
           id="health"
           name="health"
+          required
         />
 
         <button>NEXT</button>
