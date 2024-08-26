@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { RecipeContext } from "./RecipeContext";
+import { RecipeContext } from "./RecipeContext.tsx";
 
 export const useRecipeContext = () => {
   const context = useContext(RecipeContext);

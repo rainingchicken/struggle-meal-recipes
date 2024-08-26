@@ -62,8 +62,7 @@ const DetailedRecipe = ({ _id }: IParams) => {
     <div>
       {!isLoading ? (
         <div className="recipeContainer">
-          {userInfo &&
-          userInfo._id === recipe.user &&
+          {userInfo._id === recipe.user &&
           location.pathname == `/recipes/${recipe._id}` ? (
             <>
               <button onClick={handleEditClick}>EDIT</button>

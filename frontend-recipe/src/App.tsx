@@ -2,11 +2,11 @@ import { useState } from "react";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { Outlet } from "react-router-dom";
-import { RecipeContext } from "./context/RecipeContext";
-import { IngredientContext } from "./context/IngredientContext";
-import { ProceduresContext } from "./context/ProceduresContext";
-import { RecipeIngredientContext } from "./context/RecipeIngredientContext";
-import { TheseProceduresContext } from "./context/TheseProceduresContext";
+import { RecipeContext } from "./context/RecipeContext.tsx";
+import { IngredientContext } from "./context/IngredientContext.tsx";
+import { ProceduresContext } from "./context/ProceduresContext.tsx";
+import { RecipeIngredientContext } from "./context/RecipeIngredientContext.tsx";
+import { TheseProceduresContext } from "./context/TheseProceduresContext.tsx";
 
 const App = () => {
   const [recipes, setRecipes] = useState(null);
@@ -29,7 +29,7 @@ const App = () => {
                 <Footer />
               </TheseProceduresContext.Provider>
             </ProceduresContext.Provider>
-          </IngredientContext.Provider>{" "}
+          </IngredientContext.Provider>
         </RecipeIngredientContext.Provider>
       </RecipeContext.Provider>
     </>

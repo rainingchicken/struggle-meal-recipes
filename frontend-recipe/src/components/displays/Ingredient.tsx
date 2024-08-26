@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import IIngredients from "../../interfaces/IIngredients";
 import { useGetAllPersonalRecipesIngredientsMutation } from "../../slices/personalRecipeSlice";
-import { IngredientContext } from "../../context/IngredientContext";
+import { IngredientContext } from "../../context/IngredientContext.tsx";
 import DetailedIngredient from "./DetailedIngredient";
 
 interface IParams {

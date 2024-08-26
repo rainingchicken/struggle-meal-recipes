@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useGetPersonalRecipeProceduresMutation } from "../../slices/personalRecipeSlice";
-import { ProceduresContext } from "../../context/ProceduresContext";
+import { ProceduresContext } from "../../context/ProceduresContext.tsx";
 import IProcedures from "../../interfaces/IProcedures";
 
 interface IParams {

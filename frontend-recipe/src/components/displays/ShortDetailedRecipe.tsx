@@ -4,7 +4,7 @@ import { useDeletePersonalRecipeMutation } from "../../slices/personalRecipeSlic
 import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { RecipeContext } from "../../context/RecipeContext";
+import { RecipeContext } from "../../context/RecipeContext.tsx";
 
 interface IParams {
   recipe: IRecipeDetails;

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { TheseProceduresContext } from "./TheseProceduresContext";
+import { TheseProceduresContext } from "./TheseProceduresContext.tsx";
 
 export const useProceduresContext = () => {
   const context = useContext(TheseProceduresContext);
