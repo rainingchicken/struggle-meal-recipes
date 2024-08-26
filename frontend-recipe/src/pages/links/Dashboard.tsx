@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useGetAllPersonalRecipesMutation } from "../../slices/personalRecipeSlice.tsx";
 import ShortDetailedRecipe from "../../components/displays/ShortDetailedRecipe.tsx";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RecipeContext } from "../../context/RecipeContext.tsx";
 import IRecipeDetails from "../../interfaces/IRecipeDetails.tsx";
 
@@ -44,9 +44,9 @@ const Dashboard = () => {
           recipes.map((recipe: IRecipeDetails) => (
             <div className="recipeContainer" key={`div${recipe._id}`}>
               <ShortDetailedRecipe key={recipe._id} recipe={recipe} />{" "}
-              <Link key={`link${recipe._id}`} to={`recipes/${recipe._id}`}>
+              {/* <Link key={`link${recipe._id}`} to={`/recipes/${recipe._id}`}>
                 View
-              </Link>
+              </Link> */}
             </div>
           ))}
         <p className="error">{error}</p>

@@ -37,7 +37,7 @@ const router = createBrowserRouter(
       <Route path="/logout" element={<Logout />} />
       <Route path="" element={<PrivateRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/dashboard/recipes/:_id" element={<Recipe />} />
+        <Route path="/recipes/:_id" element={<Recipe />} />
         <Route path="/create" element={<CreateForm />} />
         <Route
           path="/create/:_id/ingredients"

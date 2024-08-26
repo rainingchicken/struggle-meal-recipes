@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import IRecipeDetails from "../../interfaces/IRecipeDetails";
 import { useDeletePersonalRecipeMutation } from "../../slices/personalRecipeSlice";
 import { useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { RecipeContext } from "../../context/RecipeContext";
 
@@ -65,6 +65,9 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
       ) : (
         <></>
       )}
+      <Link key={`link${recipe._id}`} to={`/recipes/${recipe._id}`}>
+        View
+      </Link>
       <p className="error">{error}</p>
     </div>
   );

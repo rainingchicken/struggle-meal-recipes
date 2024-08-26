@@ -6,9 +6,10 @@ import DetailedIngredient from "./DetailedIngredient";
 
 interface IParams {
   _id: string | undefined;
+  user: string | undefined;
 }
 
-const Ingredient = ({ _id }: IParams) => {
+const Ingredient = ({ _id, user }: IParams) => {
   const { ingredients, setIngredients } = useContext(IngredientContext);
 
   const [error, setError] = useState<string | null>(null);
@@ -39,7 +40,11 @@ const Ingredient = ({ _id }: IParams) => {
           {ingredients &&
             ingredients.map((ingredient: IIngredients) => (
               <li key={ingredient._id}>
-                <DetailedIngredient recipe_id={_id} ingredient={ingredient} />
+                <DetailedIngredient
+                  recipe_id={_id}
+                  user={user}
+                  ingredient={ingredient}
+                />
               </li>
             ))}
         </ul>

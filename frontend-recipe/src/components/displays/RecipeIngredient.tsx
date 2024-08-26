@@ -9,7 +9,7 @@ interface IParams {
 }
 
 //_id is the recipe._id
-const Ingredient = ({ _id }: IParams) => {
+const RecipeIngredient = ({ _id }: IParams) => {
   const { ingredient, setIngredient } = useContext(RecipeIngredientContext);
   // const [ingredient, setIngredient] = useState({
   //   amount: 0,
@@ -58,4 +58,4 @@ const Ingredient = ({ _id }: IParams) => {
   return <>{isLoading ? <h1>Loading...</h1> : loaded()}</>;
 };
 
-export default Ingredient;
+export default RecipeIngredient;

@@ -7,7 +7,6 @@ import {
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import Ingredient from "./Ingredient";
-import IngredientForm from "../create/IngredientForm";
 import Procedures from "./Procedures";
 
 interface IParams {
@@ -64,7 +63,8 @@ const DetailedRecipe = ({ _id }: IParams) => {
       {!isLoading ? (
         <div className="recipeContainer">
           {userInfo &&
-          location.pathname == `/dashboard/recipes/${recipe._id}` ? (
+          userInfo._id === recipe.user &&
+          location.pathname == `/recipes/${recipe._id}` ? (
             <>
               <button onClick={handleEditClick}>EDIT</button>
               <button onClick={handleDeleteClick}>DELETE</button>
@@ -81,7 +81,11 @@ const DetailedRecipe = ({ _id }: IParams) => {
           <p>Author: {recipe.author}</p>
           <p>Ingredient</p>
 
-          {recipe._id ? <Ingredient _id={recipe._id} /> : <>Loading...</>}
+          {recipe._id ? (
+            <Ingredient _id={recipe._id} user={recipe.user} />
+          ) : (
+            <>Loading...</>
+          )}
 
           <div>
             Procedures:

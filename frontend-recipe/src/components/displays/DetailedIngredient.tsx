@@ -1,15 +1,16 @@
 import { useState } from "react";
 import IIngredients from "../../interfaces/IIngredients";
 import { useDeletePersonalRecipesIngredientMutation } from "../../slices/personalRecipeSlice";
-
-import IngredientForm from "../create/IngredientForm";
 import EditIngredientForm from "../edit/EditIngredientForm";
+import { useSelector } from "react-redux";
 
 interface IParams {
   recipe_id: string | undefined;
   ingredient: IIngredients;
+  user?: string | undefined;
 }
-const DetailedIngredient = ({ recipe_id, ingredient }: IParams) => {
+const DetailedIngredient = ({ recipe_id, ingredient, user }: IParams) => {
+  const { userInfo } = useSelector((state: any) => state.auth);
   //   const { ingredients, setIngredients } = useContext(IngredientContext);
   const [edit, setEdit] = useState(false);
 
@@ -49,8 +50,14 @@ const DetailedIngredient = ({ recipe_id, ingredient }: IParams) => {
     return (
       <>
         {amount} {unit} {ingredientName}
-        <button onClick={handleDeleteIngredient}>DELETE</button>
-        <button onClick={handleEditIngredient}>EDIT</button>
+        {userInfo && userInfo._id === user ? (
+          <>
+            <button onClick={handleDeleteIngredient}>DELETE</button>
+            <button onClick={handleEditIngredient}>EDIT</button>
+          </>
+        ) : (
+          <></>
+        )}
       </>
     );
   };
