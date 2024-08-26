@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
 import { useCreatePersonalRecipeProceduresMutation } from "../../slices/personalRecipeSlice";
 import { useNavigate } from "react-router-dom";
+// import ProcedureTextEditor from "./ProcedureTextEditor";
 
 interface IParams {
   recipe_id: string | undefined;
@@ -16,11 +17,11 @@ const ProcedureForm = ({ recipe_id }: IParams) => {
 
   const [createProceduresAPICall] = useCreatePersonalRecipeProceduresMutation();
 
-  const handleChange = (e: FormEvent) => {
-    setProcedures({
-      steps: (e.target as HTMLInputElement).value,
-    });
-  };
+  // const handleChange = (e: FormEvent) => {
+  //   setProcedures({
+  //     steps: (e.target as HTMLInputElement).value,
+  //   });
+  // };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -46,7 +47,10 @@ const ProcedureForm = ({ recipe_id }: IParams) => {
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="steps">Procedures</label>
-      <textarea onChange={handleChange} name="steps" id="steps" />
+      {/* <textarea onChange={handleChange} name="steps" id="steps" required /> */}
+      {/* <ProcedureTextEditor
+        
+      /> */}
       <button>SHARE RECIPE</button>
       <p className="error">{error}</p>
     </form>

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import ProcedureForm from "../components/create/ProcedureForm";
 import { useParams } from "react-router-dom";
+import ProcedureTextEditor from "../components/create/ProcedureTextEditor";
 
 const CreateProcedures = () => {
   const { _id } = useParams();
@@ -9,7 +9,8 @@ const CreateProcedures = () => {
   }, []);
   return (
     <>
-      <ProcedureForm recipe_id={_id} />
+      {/* <ProcedureForm recipe_id={_id} /> */}
+      <ProcedureTextEditor recipe_id={_id} />
     </>
   );
 };

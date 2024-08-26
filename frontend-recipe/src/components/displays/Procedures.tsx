@@ -1,7 +1,21 @@
 import { useEffect, useState } from "react";
 import { useGetPersonalRecipeProceduresMutation } from "../../slices/personalRecipeSlice";
 // import { ProceduresContext } from "../../context/ProceduresContext.tsx";
+/////////////////////
+import { LexicalComposer } from "@lexical/react/LexicalComposer";
+import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
+import { ContentEditable } from "@lexical/react/LexicalContentEditable";
+import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
+import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
+
+//////////////////
 import IProcedures from "../../interfaces/IProcedures";
+
+const theme = {};
+
+function onError(error: Error) {
+  console.error(error);
+}
 
 interface IParams {
   _id: string | undefined;
@@ -38,7 +52,24 @@ const Procedures = ({ _id }: IParams) => {
       <>
         {procedures &&
           procedures.map((procedure: IProcedures) => (
-            <div key={procedure._id}>{procedure.steps}</div>
+            // <div key={procedure._id}>{procedure.steps}</div>
+            <LexicalComposer
+              key={procedure._id}
+              initialConfig={{
+                namespace: "MyEditor",
+                theme,
+                onError,
+                editable: false,
+                editorState: procedure.steps,
+              }}
+            >
+              <RichTextPlugin
+                contentEditable={<ContentEditable />}
+                placeholder={<div></div>}
+                ErrorBoundary={LexicalErrorBoundary}
+              />
+              <HistoryPlugin />
+            </LexicalComposer>
           ))}
         <p className="errors">{error}</p>
       </>

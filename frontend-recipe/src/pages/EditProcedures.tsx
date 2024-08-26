@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
-import EditProcedureForm from "../components/edit/editProceduresForm";
+// import EditProcedureForm from "../components/edit/editProceduresForm";
 import { useEffect, useState } from "react";
 import { useGetPersonalRecipeProceduresMutation } from "../slices/personalRecipeSlice";
 // import { ProceduresContext } from "../context/ProceduresContext";
 import IProcedures from "../interfaces/IProcedures";
+import EditProcedureTextEditor from "../components/edit/editProceduresTextEditor";
 
 const EditProcedures = () => {
   const { _id } = useParams();
@@ -41,7 +42,12 @@ const EditProcedures = () => {
         <>
           {procedures &&
             procedures.map((procedure: IProcedures) => (
-              <EditProcedureForm
+              // <EditProcedureForm
+              //   key={procedure._id}
+              //   recipe_id={_id}
+              //   procedure={procedure}
+              // />
+              <EditProcedureTextEditor
                 key={procedure._id}
                 recipe_id={_id}
                 procedure={procedure}
