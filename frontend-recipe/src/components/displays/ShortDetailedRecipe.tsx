@@ -1,10 +1,10 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import IRecipeDetails from "../../interfaces/IRecipeDetails";
 import { useDeletePersonalRecipeMutation } from "../../slices/personalRecipeSlice";
 import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { RecipeContext } from "../../context/RecipeContext.tsx";
+// import { RecipeContext } from "../../context/RecipeContext.tsx";
 
 interface IParams {
   recipe: IRecipeDetails;
@@ -12,17 +12,16 @@ interface IParams {
 
 const ShortDetailedRecipe = ({ recipe }: IParams) => {
   const { userInfo } = useSelector((state: any) => state.auth);
-  const { recipes, setRecipes } = useContext(RecipeContext);
-
+  // const { recipes, setRecipes } = useContext(RecipeContext);
+  // const [recipes, setRecipes] = useState({
+  //   title: "",
+  //   servings: 1,
+  //   author: "",
+  //   vegan: false,
+  //   desperation: 0,
+  //   health: 0,
+  // });
   const [error, setError] = useState<string | null>(null);
-
-  const title = recipe.title;
-  const categories = recipe.categories;
-  const servings = recipe.servings;
-  const author = recipe.user;
-  const vegan = recipe.vegan;
-  const desperation = recipe.desperation;
-  const health = recipe.health;
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -35,10 +34,11 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
       console.log("deleted");
 
       //re-setRecipes to show only ones that are not deleted
-      const newRecipes = [...recipes].filter((thisRecipe) => {
-        return thisRecipe._id !== recipe._id;
-      });
-      setRecipes(newRecipes);
+      // const newRecipes = [...recipes].filter((thisRecipe) => {
+      //   return thisRecipe._id !== recipe._id;
+      // });
+      // setRecipes(newRecipes);
+      navigate("/dashboard");
     } catch (error) {
       setError("Cant delete");
       console.log(error);
@@ -51,12 +51,12 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
 
   return (
     <div>
-      <h1>{title}</h1>
-      <p>Categories: {categories}</p>
-      <span>Servings: {servings}</span>{" "}
-      <span>Vegan: {vegan ? "Yes" : "No"}</span>{" "}
-      <span>Desperation Level: {desperation}</span>{" "}
-      <span>Healthy Meter: {health}</span> <p>Author: {author}</p>
+      <h1>{recipe.title}</h1>
+      <p>Categories: {recipe.categories}</p>
+      <span>Servings: {recipe.servings}</span>{" "}
+      <span>Vegan: {recipe.vegan ? "Yes" : "No"}</span>{" "}
+      <span>Desperation Level: {recipe.desperation}</span>{" "}
+      <span>Healthy Meter: {recipe.health}</span> <p>Author: {recipe.user}</p>
       {userInfo && location.pathname == "/dashboard" ? (
         <>
           <button onClick={handleEditClick}>EDIT</button>

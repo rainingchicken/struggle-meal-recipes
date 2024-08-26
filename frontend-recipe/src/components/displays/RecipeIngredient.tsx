@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import IIngredients from "../../interfaces/IIngredients";
 import { useGetAllPersonalRecipesIngredientsMutation } from "../../slices/personalRecipeSlice";
-import { RecipeIngredientContext } from "../../context/RecipeIngredientContext";
+// import { RecipeIngredientContext } from "../../context/RecipeIngredientContext";
 import DetailedIngredient from "./DetailedIngredient";
 
 interface IParams {
@@ -10,12 +10,8 @@ interface IParams {
 
 //_id is the recipe._id
 const RecipeIngredient = ({ _id }: IParams) => {
-  const { ingredient, setIngredient } = useContext(RecipeIngredientContext);
-  // const [ingredient, setIngredient] = useState({
-  //   amount: 0,
-  //   unit: "",
-  //   ingredient: "",
-  // });
+  // const { ingredient, setIngredient } = useContext(RecipeIngredientContext);
+  const [ingredient, setIngredient] = useState<any>([]);
 
   const [error, setError] = useState<string | null>(null);
 

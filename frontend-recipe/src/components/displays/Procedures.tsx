@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetPersonalRecipeProceduresMutation } from "../../slices/personalRecipeSlice";
-import { ProceduresContext } from "../../context/ProceduresContext.tsx";
+// import { ProceduresContext } from "../../context/ProceduresContext.tsx";
 import IProcedures from "../../interfaces/IProcedures";
 
 interface IParams {
@@ -8,8 +8,8 @@ interface IParams {
 }
 
 const Procedures = ({ _id }: IParams) => {
-  //   const [procedures, setProcedures] = useState(null);
-  const { procedures, setProcedures } = useContext(ProceduresContext);
+  const [procedures, setProcedures] = useState<any>([]);
+  // const { procedures, setProcedures } = useContext(ProceduresContext);
 
   const [error, setError] = useState<string | null>(null);
 
