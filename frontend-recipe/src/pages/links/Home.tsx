@@ -28,8 +28,7 @@ const Home = () => {
   const loaded = () => {
     return (
       <>
-        {" "}
-        {console.log(recipes)}
+        {/* {console.log(recipes)} */}
         {recipes &&
           recipes.map((recipe: IRecipeDetails) => (
             <Recipe key={recipe._id} recipe={recipe} />

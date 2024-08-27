@@ -3,6 +3,8 @@ import IIngredients from "../../interfaces/IIngredients";
 import { useGetAllPersonalRecipesIngredientsMutation } from "../../slices/personalRecipeSlice";
 // import { IngredientContext } from "../../context/IngredientContext.tsx";
 import DetailedIngredient from "./DetailedIngredient";
+import { useDispatch, useSelector } from "react-redux";
+import { setIngredients } from "../../slices/ingredientsSlice";
 
 interface IParams {
   _id: string | undefined;
@@ -11,7 +13,9 @@ interface IParams {
 
 const Ingredient = ({ _id, user }: IParams) => {
   // const { ingredients, setIngredients } = useContext(IngredientContext);
-  const [ingredients, setIngredients] = useState<any>([]);
+  // const [ingredients, setIngredients] = useState<any>([]);
+  const dispatch = useDispatch();
+  const ingredients = useSelector((state: any) => state.ingredients.state);
 
   const [error, setError] = useState<string | null>(null);
 
@@ -23,7 +27,8 @@ const Ingredient = ({ _id, user }: IParams) => {
   const fetchRecipeIngredients = async () => {
     try {
       const res = await getAllRecipeIngredientAPICall(_id).unwrap();
-      setIngredients(res);
+      dispatch(setIngredients(res));
+      // console.log(res);
     } catch (err) {
       console.log(err);
       setError("Something went wrong. Cannot get ingredients");
@@ -38,6 +43,7 @@ const Ingredient = ({ _id, user }: IParams) => {
     return (
       <>
         <ul>
+          {/* {console.log(ingredients)} */}
           {ingredients &&
             ingredients.map((ingredient: IIngredients) => (
               <li key={ingredient._id}>

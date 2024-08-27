@@ -6,7 +6,7 @@ import {
 } from "../../slices/personalRecipeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { setRecipes } from "../../slices/recipesSlice.tsx";
+import { setRecipes } from "../../slices/recipesSlice";
 // import { RecipeContext } from "../../context/RecipeContext.tsx";
 
 interface IParams {

@@ -58,7 +58,9 @@ const updateIngredient = asyncHandler(async (req, res) => {
   //   res.json({ message: "PATCH this workout" });
   const _id = req.params.ingredient_id;
   try {
-    const updatedIngredient = await Ingredient.findByIdAndUpdate(_id, req.body);
+    await Ingredient.findByIdAndUpdate(_id, req.body);
+
+    const updatedIngredient = await Ingredient.findById(_id);
     res.status(200).json(updatedIngredient);
   } catch (error) {
     res.status(404).json({ error: error.message });

@@ -4,6 +4,8 @@ import {
   useCreatePersonalRecipesIngredientMutation,
   useDeletePersonalRecipeMutation,
 } from "../../slices/personalRecipeSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setIngredients } from "../../slices/ingredientsSlice";
 
 interface IParams {
   recipe_id: string | undefined;
@@ -19,6 +21,9 @@ const IngredientForm = ({ recipe_id, userAction }: IParams) => {
     unit: "",
     ingredient: "",
   });
+  const dispatch = useDispatch();
+  const ingredients = useSelector((state: any) => state.ingredients.state);
+
   const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
@@ -41,10 +46,16 @@ const IngredientForm = ({ recipe_id, userAction }: IParams) => {
         [name]: (e.target as HTMLInputElement).value,
       }));
     }
+    // console.log(type);
+    // if (type === "number") {
+    //   dispatch(setIngredients(+(e.target as HTMLInputElement).value));
+    // } else {
+    //   dispatch(setIngredients((e.target as HTMLInputElement).value));
+    // }
   };
 
-  const handleSubmit = async () => {
-    // e.preventDefault();
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
     const newIngredient = {
       amount: ingredient.amount,
       unit: ingredient.unit,
@@ -56,8 +67,15 @@ const IngredientForm = ({ recipe_id, userAction }: IParams) => {
         _id: recipe_id,
         data: newIngredient,
       }).unwrap();
-      // setIngredients(res);
       setIngredient(res);
+      const newIngredients = [...ingredients]
+        .concat([res])
+        .map((theseIngredients) => {
+          return theseIngredients;
+        });
+      // console.log(newIngredients);
+      dispatch(setIngredients(newIngredients));
+      // setIngredient({ amount: 0, unit: "", ingredient: "" });
     } catch (error) {
       setError("Something went wrong. Cannot submit");
       console.log(error);
@@ -77,7 +95,8 @@ const IngredientForm = ({ recipe_id, userAction }: IParams) => {
     }
   };
 
-  const handleDeleteClick = async () => {
+  const handleDeleteClick = async (e: FormEvent) => {
+    e.preventDefault();
     if (userAction === "create") {
       try {
         await deleteRecipeAPICall(recipe_id).unwrap();
@@ -94,6 +113,7 @@ const IngredientForm = ({ recipe_id, userAction }: IParams) => {
 
   return (
     <>
+      {/* {console.log(ingredients)} */}
       <form onSubmit={handleSubmit} className="ingredientsForm">
         <label htmlFor="amount">Amount</label>
         <input onChange={handleChange} type="number" name="amount" />

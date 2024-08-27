@@ -1,6 +1,8 @@
 import { FormEvent, useState } from "react";
 import { useUpdatePersonalRecipesIngredientMutation } from "../../slices/personalRecipeSlice";
 import IIngredients from "../../interfaces/IIngredients";
+import { useDispatch, useSelector } from "react-redux";
+import { setIngredients } from "../../slices/ingredientsSlice";
 
 interface IParams {
   recipe_id: string | undefined;
@@ -10,6 +12,10 @@ interface IParams {
 
 const EditIngredientForm = ({ recipe_id, ingredient, setEdit }: IParams) => {
   // const { ingredients, setIngredients } = useContext(IngredientContext);
+
+  const dispatch = useDispatch();
+  const ingredients = useSelector((state: any) => state.ingredients.state);
+
   const [thisIngredient, setThisIngredient] = useState({
     amount: ingredient.amount,
     unit: ingredient.unit,
@@ -36,8 +42,8 @@ const EditIngredientForm = ({ recipe_id, ingredient, setEdit }: IParams) => {
     }
   };
 
-  const handleSubmit = async () => {
-    // e.preventDefault();
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
     const newIngredient = {
       amount: thisIngredient.amount,
       unit: thisIngredient.unit,
@@ -51,6 +57,13 @@ const EditIngredientForm = ({ recipe_id, ingredient, setEdit }: IParams) => {
         data: newIngredient,
       }).unwrap();
       setThisIngredient(res);
+
+      const updatedIngredients = [...ingredients].map((thisIngredient) => {
+        return thisIngredient._id === ingredient._id ? res : thisIngredient;
+      });
+      // console.log(updatedIngredients);
+      // dispatch(setIngredients(updatedIngredients));
+      dispatch(setIngredients(updatedIngredients));
       setEdit(false);
     } catch (error) {
       setError("Something went wrong. Cannot submit");

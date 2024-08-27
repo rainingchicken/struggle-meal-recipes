@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import IIngredients from "../../interfaces/IIngredients";
 import { useDeletePersonalRecipesIngredientMutation } from "../../slices/personalRecipeSlice";
 import EditIngredientForm from "../edit/EditIngredientForm";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setIngredients } from "../../slices/ingredientsSlice";
 
 interface IParams {
   recipe_id: string | undefined;
@@ -14,28 +15,28 @@ const DetailedIngredient = ({ recipe_id, ingredient, user }: IParams) => {
   //   const { ingredients, setIngredients } = useContext(IngredientContext);
   const [edit, setEdit] = useState(false);
 
-  const amount = ingredient.amount;
-  const unit = ingredient.unit;
-  const ingredientName = ingredient.ingredient;
+  const dispatch = useDispatch();
+  const ingredients = useSelector((state: any) => state.ingredients.state);
 
   const [
     deleteIngredientAPICall,
   ] = useDeletePersonalRecipesIngredientMutation();
 
-  const handleDeleteIngredient = async () => {
+  const handleDeleteIngredient = async (e: FormEvent) => {
+    e.preventDefault();
     try {
       await deleteIngredientAPICall({
         _id: recipe_id,
         ingredient_id: ingredient._id,
       }).unwrap();
       //re-setRecipes to show only ones that are not deleted
-      //   console.log(ingredients);
-      //   const newIngredients = [...ingredients].filter((thisIngredient) => {
-      //     return thisIngredient._id !== ingredients._id;
-      //   });
-      //   setIngredients(newIngredients);
 
-      location.reload();
+      const newIngredients = [...ingredients].filter((thisIngredient) => {
+        return thisIngredient._id !== ingredient._id;
+      });
+      dispatch(setIngredients(newIngredients));
+
+      // location.reload();
       console.log("deleted ingredient");
     } catch (error) {
       console.log({ error });
@@ -49,7 +50,7 @@ const DetailedIngredient = ({ recipe_id, ingredient, user }: IParams) => {
   const displayMode = () => {
     return (
       <>
-        {amount} {unit} {ingredientName}
+        {ingredient.amount} {ingredient.unit} {ingredient.ingredient}
         {userInfo && userInfo._id === user ? (
           <>
             <button onClick={handleDeleteIngredient}>DELETE</button>

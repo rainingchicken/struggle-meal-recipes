@@ -3,7 +3,7 @@ import { apiSlice } from "./slices/apiSlice.tsx";
 import authReducer from "./slices/authSlice";
 import proceduresReducer from "./slices/proceduresSlice";
 import recipesReducer from "./slices/recipesSlice";
-import ingredientsReducer from "./slices/recipesSlice";
+import ingredientsReducer from "./slices/ingredientsSlice";
 
 const store = configureStore({
   reducer: {
