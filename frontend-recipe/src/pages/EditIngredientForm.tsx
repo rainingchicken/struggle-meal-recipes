@@ -2,7 +2,8 @@ import { useParams } from "react-router-dom";
 import IngredientForm from "../components/create/IngredientForm";
 import { useEffect } from "react";
 
-import RecipeIngredient from "../components/displays/RecipeIngredient";
+import Ingredient from "../components/displays/Ingredient";
+import { useSelector } from "react-redux";
 
 const EditIngredientForm = () => {
   const { _id } = useParams();
@@ -10,11 +11,11 @@ const EditIngredientForm = () => {
   useEffect(() => {
     document.title = "Edit Ingredients";
   }, []);
-
+  const { userInfo } = useSelector((state: any) => state.auth);
   return (
     <>
       <h1>Ingredients</h1>
-      <RecipeIngredient _id={_id} />
+      <Ingredient user={userInfo._id} _id={_id} />
       <IngredientForm recipe_id={_id} userAction="edit" />;
     </>
   );

@@ -84,7 +84,8 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
       <span>Servings: {recipe.servings}</span>{" "}
       <span>Vegan: {recipe.vegan ? "Yes" : "No"}</span>{" "}
       <span>Desperation Level: {recipe.desperation}</span>{" "}
-      <span>Healthy Meter: {recipe.health}</span> <p>Author: {recipe.user}</p>
+      <span>Healthy Meter: {recipe.health}</span>
+      <p>Author: {recipe.user}</p>
       {userInfo && location.pathname == "/dashboard" ? (
         <>
           <button onClick={handleEditClick}>EDIT</button>
