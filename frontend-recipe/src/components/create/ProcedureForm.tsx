@@ -1,16 +1,20 @@
 import { FormEvent, useState } from "react";
 import { useCreatePersonalRecipeProceduresMutation } from "../../slices/personalRecipeSlice";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 // import ProcedureTextEditor from "./ProcedureTextEditor";
-
+import { setProcedures } from "../../slices/proceduresSlice";
 interface IParams {
   recipe_id: string | undefined;
 }
 
 const ProcedureForm = ({ recipe_id }: IParams) => {
-  const [procedures, setProcedures] = useState({
-    steps: "",
-  });
+  // const [procedures, setProcedures] = useState({
+  //   steps: "",
+  // });
+  const dispatch = useDispatch();
+  const procedures = useSelector((state: any) => state.procedures.state);
+
   const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
@@ -36,7 +40,7 @@ const ProcedureForm = ({ recipe_id }: IParams) => {
         data: newProcedures,
       }).unwrap();
 
-      setProcedures(res);
+      dispatch(setProcedures(res));
       navigate("/dashboard");
     } catch (error) {
       setError("Something went wrong. Cannot submit");

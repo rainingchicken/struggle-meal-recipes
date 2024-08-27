@@ -37,6 +37,11 @@ const RecipeForm = () => {
     }
   };
 
+  const handleVeganClick = () => {
+    setRecipe({ ...recipe, vegan: !recipe.vegan });
+    console.log(recipe.vegan);
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const newRecipe = {
@@ -98,7 +103,7 @@ const RecipeForm = () => {
 
         <label htmlFor="vegan">Vegan: </label>
         <input
-          onChange={handleChange}
+          onClick={handleVeganClick}
           type="checkbox"
           id="vegan"
           name="vegan"

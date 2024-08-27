@@ -26,6 +26,7 @@ import EditIngredientForm from "./pages/EditIngredientForm.tsx";
 import CreateIngredientsForm from "./pages/CreateIngredientsForm.tsx";
 import CreateProcedures from "./pages/CreateProcedures.tsx";
 import EditProcedures from "./pages/EditProcedures.tsx";
+import SavedForm from "./pages/SavedForm.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -39,6 +40,7 @@ const router = createBrowserRouter(
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/recipes/:_id" element={<Recipe />} />
         <Route path="/create" element={<CreateForm />} />
+        <Route path="/create/:_id" element={<SavedForm />} />
         <Route
           path="/create/:_id/ingredients"
           element={<CreateIngredientsForm />}

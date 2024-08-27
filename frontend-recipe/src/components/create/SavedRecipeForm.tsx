@@ -3,14 +3,11 @@ import {
   useGetPersonalRecipeMutation,
   useUpdatePersonalRecipeMutation,
 } from "../../slices/personalRecipeSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import IRecipeDetails from "../../interfaces/IRecipeDetails";
 
-interface IParams {
-  _id: string | any;
-}
-
-const EditRecipeForm = ({ _id }: IParams) => {
+const SavedRecipeForm = () => {
+  const { _id } = useParams();
   const [recipe, setRecipe] = useState<Array<IRecipeDetails> | any>({
     title: "",
     categories: "",
@@ -57,11 +54,6 @@ const EditRecipeForm = ({ _id }: IParams) => {
     }
   };
 
-  const handleVeganClick = () => {
-    setRecipe({ ...recipe, vegan: !recipe.vegan });
-    console.log(recipe.vegan);
-  };
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const newRecipe = {
@@ -78,7 +70,7 @@ const EditRecipeForm = ({ _id }: IParams) => {
         data: newRecipe,
       }).unwrap();
       setRecipe(res);
-      navigate(`/dashboard/edit/${recipe._id}/ingredients`);
+      navigate(`/create/${recipe._id}/ingredients`);
     } catch (error) {
       setError("Something went wrong. Cannot submit");
       console.log(error);
@@ -122,7 +114,7 @@ const EditRecipeForm = ({ _id }: IParams) => {
 
           <label htmlFor="vegan">Vegan: </label>
           <input
-            onClick={handleVeganClick}
+            onChange={handleChange}
             type="checkbox"
             name="vegan"
             checked={recipe.vegan}
@@ -149,7 +141,7 @@ const EditRecipeForm = ({ _id }: IParams) => {
             required
           />
 
-          <button>SAVE and NEXT</button>
+          <button>NEXT</button>
           <p className="error">{error}</p>
         </form>
       ) : (
@@ -159,4 +151,4 @@ const EditRecipeForm = ({ _id }: IParams) => {
   );
 };
 
-export default EditRecipeForm;
+export default SavedRecipeForm;

@@ -72,20 +72,21 @@ const DetailedRecipe = ({ _id }: IParams) => {
             <></>
           )}
           <h1>{recipe.title}</h1>
+          <p>Author: {recipe.user}</p>
+          <p>
+            Created: {recipe.createdAt} Last updated: {recipe.updatedAt}
+          </p>
           <p>Categories: {recipe.categories}</p>
           <p>Servings: {recipe.servings}</p>
           <p>Vegan: {recipe.vegan ? "Yes" : "No"}</p>
           <p>Desperation Level: {recipe.desperation}</p>
           <p>Healthy Meter: {recipe.health}</p>
-          <p>Author: {recipe.author}</p>
           <p>Ingredient</p>
-
           {recipe._id ? (
             <Ingredient _id={recipe._id} user={recipe.user} />
           ) : (
             <>Loading...</>
           )}
-
           <div>
             Procedures:
             {recipe._id ? <Procedures _id={recipe._id} /> : <>Loading...</>}
