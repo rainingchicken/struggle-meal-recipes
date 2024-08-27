@@ -13,6 +13,7 @@ const EditIngredientForm = () => {
 
   return (
     <>
+      <h1>Ingredients</h1>
       <RecipeIngredient _id={_id} />
       <IngredientForm recipe_id={_id} userAction="edit" />;
     </>

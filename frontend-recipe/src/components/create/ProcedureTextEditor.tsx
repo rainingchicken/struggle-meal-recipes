@@ -1,12 +1,15 @@
 import { FormEvent, useEffect, useState } from "react";
-
+import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { useCreatePersonalRecipeProceduresMutation } from "../../slices/personalRecipeSlice";
+import {
+  useCreatePersonalRecipeProceduresMutation,
+  useDeletePersonalRecipeMutation,
+} from "../../slices/personalRecipeSlice";
 import { useNavigate } from "react-router-dom";
 
 const theme = {};
@@ -14,11 +17,9 @@ const theme = {};
 function onError(error: Error) {
   console.error(error);
 }
-const initialConfig = {
-  namespace: "MyEditor",
-  theme,
-  onError,
-};
+const initialConfig = { namespace: "MyEditor", theme, onError };
+const placeholder = "Enter some rich text...";
+
 interface IonChangeParams {
   onChange: Function;
 }
@@ -45,6 +46,7 @@ function ProcedureTextEditor({ recipe_id }: IEditorParams) {
   const navigate = useNavigate();
 
   const [createProceduresAPICall] = useCreatePersonalRecipeProceduresMutation();
+  const [deleteRecipeAPICall] = useDeletePersonalRecipeMutation();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -73,20 +75,74 @@ function ProcedureTextEditor({ recipe_id }: IEditorParams) {
     setEditorState(JSON.stringify(editorStateJSON));
   }
 
+  const handleBackButton = () => {
+    // //all of this is to prevent the editor from being empty
+    // e.preventDefault();
+    // const placeholder =
+    //   '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"Step 1...","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}';
+    // const newProcedures = {
+    //   steps: placeholder,
+    //   recipe_id: recipe_id,
+    // };
+    // try {
+    //   const res = await createProceduresAPICall({
+    //     _id: recipe_id,
+    //     data: newProcedures,
+    //   }).unwrap();
+    //   setEditorState(res);
+    //   navigate(`/create/${recipe_id}/ingredients`);
+    // } catch (error) {
+    //   setError("Something went wrong. Cannot set placeholder");
+    //   console.log(error);
+    // }
+    navigate(`/create/${recipe_id}/ingredients`);
+  };
+
+  const handleDeleteClick = async () => {
+    try {
+      await deleteRecipeAPICall(recipe_id).unwrap();
+      console.log("deleted");
+      navigate("/dashboard");
+    } catch (error) {
+      setError("Cant delete");
+      console.log(error);
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <LexicalComposer initialConfig={initialConfig}>
-        <RichTextPlugin
-          contentEditable={<ContentEditable />}
-          placeholder={<div>Enter some text...</div>}
-          ErrorBoundary={LexicalErrorBoundary}
-        />
-        <HistoryPlugin />
-        <MyOnChangePlugin onChange={onChange} />
-      </LexicalComposer>
-      <button>SHARE RECIPE</button>
-      <p className="error">{error}</p>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <LexicalComposer initialConfig={initialConfig}>
+          <RichTextPlugin
+            contentEditable={
+              <ContentEditable
+                className="editor-input"
+                aria-placeholder={placeholder}
+                placeholder={
+                  <span className="editor-placeholder">{placeholder}</span>
+                }
+              />
+            }
+            ErrorBoundary={LexicalErrorBoundary}
+          />
+          <HistoryPlugin />
+          <AutoFocusPlugin />
+          <MyOnChangePlugin onChange={onChange} />
+        </LexicalComposer>
+        {/* {console.log(editorState)} */}
+        <button
+          disabled={
+            editorState &&
+            JSON.parse(editorState).root.children[0].children == ""
+          }
+        >
+          SHARE RECIPE
+        </button>
+        <p className="error">{error}</p>
+      </form>
+      <button onClick={handleBackButton}>BACK</button>
+      <button onClick={handleDeleteClick}>CANCEL</button>
+    </>
   );
 }
 export default ProcedureTextEditor;

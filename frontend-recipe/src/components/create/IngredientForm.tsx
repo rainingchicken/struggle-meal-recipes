@@ -65,7 +65,8 @@ const IngredientForm = ({ recipe_id, userAction }: IParams) => {
   };
 
   const handleBackButton = () => {
-    navigate(`/dashboard/edit/${recipe_id}`);
+    // navigate(`/dashboard/edit/${recipe_id}`);
+    navigate("/create");
   };
 
   const handleNextButton = () => {

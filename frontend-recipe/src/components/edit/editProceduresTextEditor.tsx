@@ -9,6 +9,8 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { useUpdatePersonalRecipeProceduresMutation } from "../../slices/personalRecipeSlice";
 import { useNavigate } from "react-router-dom";
 import IProcedures from "../../interfaces/IProcedures";
+import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
+import "@lexical/rich-text";
 
 const theme = {};
 
@@ -19,8 +21,10 @@ function onError(error: Error) {
 interface IonChangeParams {
   onChange: Function;
 }
+
 function MyOnChangePlugin({ onChange }: IonChangeParams) {
   const [editor] = useLexicalComposerContext();
+
   useEffect(() => {
     return editor.registerUpdateListener(({ editorState }) => {
       onChange(editorState);
@@ -44,24 +48,32 @@ function EditProcedureTextEditor({ recipe_id, procedure }: IEditorParams) {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
     const newProcedures = {
       steps: editorState,
       recipe_id: recipe_id,
       procedures_id: procedure._id,
     };
+    if (
+      editorState &&
+      JSON.parse(editorState).root.children[0].children == ""
+    ) {
+      setError("Please provide instuctions for this recipe");
+    } else {
+      try {
+        const res = await updateProceduresAPICall({
+          _id: recipe_id,
+          procedures_id: procedure._id,
+          data: newProcedures,
+        }).unwrap();
 
-    try {
-      const res = await updateProceduresAPICall({
-        _id: recipe_id,
-        procedures_id: procedure._id,
-        data: newProcedures,
-      }).unwrap();
+        setEditorState(res);
 
-      setEditorState(res);
-      navigate("/dashboard");
-    } catch (error) {
-      setError("Something went wrong. Cannot submit");
-      console.log(error);
+        navigate("/dashboard");
+      } catch (error) {
+        setError("Something went wrong. Cannot submit");
+        console.log(error);
+      }
     }
   };
 
@@ -70,28 +82,52 @@ function EditProcedureTextEditor({ recipe_id, procedure }: IEditorParams) {
     setEditorState(JSON.stringify(editorStateJSON));
   }
 
+  const handleBackButton = () => {
+    navigate(`/dashboard/edit/${recipe_id}/ingredients`);
+  };
+
+  const handleCancelClick = async () => {
+    navigate("/dashboard");
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <LexicalComposer
-        initialConfig={{
-          namespace: "MyEditor",
-          theme,
-          onError,
-          editable: true,
-          editorState: procedure.steps,
-        }}
-      >
-        <RichTextPlugin
-          contentEditable={<ContentEditable />}
-          placeholder={<></>}
-          ErrorBoundary={LexicalErrorBoundary}
-        />
-        <HistoryPlugin />
-        <MyOnChangePlugin onChange={onChange} />
-      </LexicalComposer>
-      <button>UPDATE RECIPE</button>
-      <p className="error">{error}</p>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <LexicalComposer
+          initialConfig={{
+            namespace: "MyEditor",
+            theme,
+            onError,
+            editable: true,
+            editorState: procedure.steps,
+          }}
+        >
+          <RichTextPlugin
+            contentEditable={
+              <ContentEditable
+                className="editor-input"
+                aria-placeholder={"Please provide the steps..."}
+                placeholder={
+                  <span className="editor-placeholder">
+                    {"Please provide the steps..."}
+                  </span>
+                }
+              />
+            }
+            placeholder={<></>}
+            ErrorBoundary={LexicalErrorBoundary}
+          />
+          <AutoFocusPlugin />
+          <HistoryPlugin />
+          <MyOnChangePlugin onChange={onChange} />
+        </LexicalComposer>
+
+        <button> UPDATE RECIPE </button>
+        <p className="error">{error}</p>
+      </form>{" "}
+      <button onClick={handleBackButton}>BACK</button>
+      <button onClick={handleCancelClick}>CANCEL</button>
+    </>
   );
 }
 export default EditProcedureTextEditor;

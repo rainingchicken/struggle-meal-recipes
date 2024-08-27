@@ -9,6 +9,7 @@ const EditForm = () => {
   }, []);
   return (
     <div>
+      <h1>Edit Recipe</h1>
       <EditRecipeForm _id={_id} />
     </div>
   );

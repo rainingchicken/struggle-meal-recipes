@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import IRecipeDetails from "../../interfaces/IRecipeDetails";
-import { useDeletePersonalRecipeMutation } from "../../slices/personalRecipeSlice";
+import {
+  useDeletePersonalRecipeMutation,
+  useGetPersonalRecipeProceduresMutation,
+} from "../../slices/personalRecipeSlice";
 import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -22,11 +25,33 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
   //   health: 0,
   // });
   const [error, setError] = useState<string | null>(null);
+  const [procedures, setProcedures] = useState();
 
   const location = useLocation();
   const navigate = useNavigate();
 
   const [deleteRecipeAPICall] = useDeletePersonalRecipeMutation();
+
+  const [getRecipeProceduresAPICall] = useGetPersonalRecipeProceduresMutation();
+
+  const fetchRecipeProcedures = async () => {
+    try {
+      const res = await getRecipeProceduresAPICall(recipe._id).unwrap();
+      setProcedures(res);
+      //if user did not click cancel or share recipe during the creation of procedures, recipe will be deleted
+
+      if (res[0] == undefined) {
+        handleDeleteClick();
+      }
+    } catch (err) {
+      console.log(err);
+      setError("Something went wrong. Cannot get procedures");
+    }
+  };
+
+  useEffect(() => {
+    fetchRecipeProcedures();
+  }, []);
 
   const handleDeleteClick = async () => {
     try {
@@ -65,9 +90,11 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
       ) : (
         <></>
       )}
-      <Link key={`link${recipe._id}`} to={`/recipes/${recipe._id}`}>
-        View
-      </Link>
+      {procedures && (
+        <Link key={`link${recipe._id}`} to={`/recipes/${recipe._id}`}>
+          View
+        </Link>
+      )}
       <p className="error">{error}</p>
     </div>
   );

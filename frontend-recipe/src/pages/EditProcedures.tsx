@@ -40,6 +40,20 @@ const EditProcedures = () => {
         <h1>Loading...</h1>
       ) : (
         <>
+          <h1>Procedures</h1>
+          <div>
+            <ul>
+              <li>
+                <b>Bold</b>: ctrl + b
+              </li>
+              <li>
+                <em>Italics</em>: ctrl + i
+              </li>
+              <li>Undo: ctrl + z</li>
+              <li>Redo: ctrl + y</li>
+              <li>🍉 Emojis: window + .</li>
+            </ul>
+          </div>
           {procedures &&
             procedures.map((procedure: IProcedures) => (
               // <EditProcedureForm
