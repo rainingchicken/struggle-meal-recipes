@@ -4,11 +4,15 @@ import ShortDetailedRecipe from "../../components/displays/ShortDetailedRecipe.t
 import { useNavigate } from "react-router-dom";
 // import { RecipeContext } from "../../context/RecipeContext.tsx";
 import IRecipeDetails from "../../interfaces/IRecipeDetails.tsx";
+import { useDispatch, useSelector } from "react-redux";
+import { setRecipes } from "../../slices/recipesSlice.tsx";
 
 const Dashboard = () => {
   // const [recipes, setRecipes] = useState<null | Array<IRecipeDetails>>(null);
   // const { recipes, setRecipes } = useContext(RecipeContext);
-  const [recipes, setRecipes] = useState<any>([]);
+  // const [recipes, setRecipes] = useState<any>([]);
+  const dispatch = useDispatch();
+  const recipes = useSelector((state: any) => state.recipes.state);
 
   const [error, setError] = useState<string | null>(null);
 
@@ -22,7 +26,7 @@ const Dashboard = () => {
   const fetchRecipes = async () => {
     try {
       const res = await getAllRecipesAPICall(null).unwrap();
-      setRecipes(res);
+      dispatch(setRecipes(res));
     } catch (err) {
       console.log(err);
       setError("Something went wrong. Cannot get recipes");
@@ -41,13 +45,11 @@ const Dashboard = () => {
   const loaded = () => {
     return (
       <>
+        {/* {console.log(recipes)} */}
         {recipes &&
           recipes.map((recipe: IRecipeDetails) => (
             <div className="recipeContainer" key={`div${recipe._id}`}>
               <ShortDetailedRecipe key={recipe._id} recipe={recipe} />{" "}
-              {/* <Link key={`link${recipe._id}`} to={`/recipes/${recipe._id}`}>
-                View
-              </Link> */}
             </div>
           ))}
         <p className="error">{error}</p>

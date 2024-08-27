@@ -1,24 +1,27 @@
-import { apiSlice } from "./apiSlice.tsx";
+import { createSlice } from "@reduxjs/toolkit";
+import IRecipeDetails from "../interfaces/IRecipeDetails";
 
-export const recipeApiSlice = apiSlice.injectEndpoints({
-  endpoints: (builder) => ({
-    getAllRecipes: builder.mutation({
-      query: () => ({
-        url: `/api/struggle-meals`,
-        method: "GET",
-      }),
-    }),
-    getRecipe: builder.mutation({
-      query: (data) => ({
-        url: `/api/struggle-meals/${data}`,
-        method: "GET",
-        body: data,
-      }),
-    }),
-  }),
+// const initialState = {
+//   categories: "",
+//   servings: 1,
+//   vegan: false,
+//   desperation: 0,
+//   health: 0,
+//   user: "",
+// };
+
+const initialState: Array<IRecipeDetails> = [];
+
+const recipesSlice = createSlice({
+  name: "recipes",
+  initialState,
+  reducers: {
+    setRecipes: (state, action) => {
+      return { ...state, state: action.payload };
+    },
+  },
 });
 
-export const {
-  useGetAllRecipesMutation,
-  useGetRecipeMutation,
-} = recipeApiSlice;
+export const { setRecipes } = recipesSlice.actions;
+
+export default recipesSlice.reducer;

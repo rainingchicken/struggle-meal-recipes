@@ -4,9 +4,9 @@ import {
   useDeletePersonalRecipeMutation,
   useGetPersonalRecipeProceduresMutation,
 } from "../../slices/personalRecipeSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
+import { setRecipes } from "../../slices/recipesSlice.tsx";
 // import { RecipeContext } from "../../context/RecipeContext.tsx";
 
 interface IParams {
@@ -24,11 +24,14 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
   //   desperation: 0,
   //   health: 0,
   // });
+  const recipes = useSelector((state: any) => state.recipes.state);
+
   const [error, setError] = useState<string | null>(null);
   const [procedures, setProcedures] = useState();
 
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [deleteRecipeAPICall] = useDeletePersonalRecipeMutation();
 
@@ -59,10 +62,10 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
       console.log("deleted");
 
       //re-setRecipes to show only ones that are not deleted
-      // const newRecipes = [...recipes].filter((thisRecipe) => {
-      //   return thisRecipe._id !== recipe._id;
-      // });
-      // setRecipes(newRecipes);
+      const newRecipes = [...recipes].filter((thisRecipe) => {
+        return thisRecipe._id !== recipe._id;
+      });
+      dispatch(setRecipes(newRecipes));
       navigate("/dashboard");
     } catch (error) {
       setError("Cant delete");

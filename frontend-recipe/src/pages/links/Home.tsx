@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useGetAllRecipesMutation } from "../../slices/recipesSlice";
+import { useGetAllRecipesMutation } from "../../slices/recipeApiSlice";
 
 import Recipe from "../../components/displays/ShortDetailedRecipe";
 import IRecipeDetails from "../../interfaces/IRecipeDetails";
@@ -28,6 +28,8 @@ const Home = () => {
   const loaded = () => {
     return (
       <>
+        {" "}
+        {console.log(recipes)}
         {recipes &&
           recipes.map((recipe: IRecipeDetails) => (
             <Recipe key={recipe._id} recipe={recipe} />
