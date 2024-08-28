@@ -40,7 +40,7 @@ const EditIngredientsandProceduresForm = () => {
   return (
     <div>
       <>
-        <h1>Ingredients</h1>
+        <h1 className="title">Ingredients</h1>
         <Ingredient user={userInfo._id} _id={_id} />
         <IngredientForm recipe_id={_id} />;
       </>{" "}
@@ -49,8 +49,8 @@ const EditIngredientsandProceduresForm = () => {
           <h1>Loading...</h1>
         ) : (
           <>
-            <h1>Procedures</h1>
-            <div>
+            <h1 className="title">Procedures</h1>
+            <div className="toolbar">
               <ul>
                 <li>
                   <b>Bold</b>: ctrl + b

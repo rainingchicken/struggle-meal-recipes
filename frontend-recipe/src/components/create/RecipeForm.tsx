@@ -186,7 +186,7 @@ const RecipeForm = () => {
           required
         />
         <div>
-          <button className="btn">NEXT</button>
+          <button className="btnForm">NEXT</button>
         </div>
         <p className="error">{error}</p>
       </form>

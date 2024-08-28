@@ -113,6 +113,14 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.btnForm {
+  margin: 2em auto 0;
+  display: flex;
+
+  background-color: #535bf2;
+  align-content: center;
+}
+
 .error {
   color: white;
   text-align: center;
@@ -169,7 +177,7 @@ span:has(> .ingredientsFormIngredientInput)>label {
 }
 
 .ingredientsFormIngredientInput {
-  width: 20em;
+  width: 15em;
   margin: 0 1em;
 }
 
@@ -225,7 +233,7 @@ li {
   font-weight: 500;
   font-family: inherit;
   transition: border-color 0.25s;
-
+  margin: 1em auto;
 }
 
 .RecipeForm {
@@ -235,12 +243,25 @@ li {
   width: 500px;
 }
 
+.RecipeForm input:not(input[type='range']) {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  transition: border-color 0.25s;
+}
+
+.RecipeForm label {
+  margin: 1em 0;
+}
 
 .RecipeFormSelection {
 
   display: flex;
   flex-direction: column;
-  width: 97%;
+  /* width: 97%; */
   max-width: 100%;
   height: 2.5em;
   border-radius: 8px;

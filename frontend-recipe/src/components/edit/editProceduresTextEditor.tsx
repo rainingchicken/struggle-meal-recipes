@@ -122,11 +122,13 @@ function EditProcedureTextEditor({ recipe_id, procedure }: IEditorParams) {
           <MyOnChangePlugin onChange={onChange} />
         </LexicalComposer>
 
-        <button> UPDATE RECIPE </button>
+        <button className="btnForm"> UPDATE RECIPE </button>
         <p className="error">{error}</p>
       </form>{" "}
       {/* <button onClick={handleBackButton}>BACK</button> */}
-      <button onClick={handleCancelClick}>CANCEL</button>
+      <button className="btnForm" onClick={handleCancelClick}>
+        CANCEL
+      </button>
     </>
   );
 }

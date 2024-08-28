@@ -122,7 +122,7 @@ const EditRecipeForm = ({ _id }: IParams) => {
     <>
       {_id && recipe ? (
         <>
-          <form className="updateRecipeForm" onSubmit={handleSubmit}>
+          <form className="RecipeForm" onSubmit={handleSubmit}>
             <label htmlFor="title">Recipe Name: </label>
             <input
               onChange={handleChange}
@@ -145,6 +145,7 @@ const EditRecipeForm = ({ _id }: IParams) => {
           /> */}
             <label htmlFor="categories">Category</label>
             <select
+              className="RecipeFormSelection"
               name="categories"
               id="categories"
               onChange={handleChange}
@@ -173,13 +174,20 @@ const EditRecipeForm = ({ _id }: IParams) => {
             />
 
             <label htmlFor="vegan">Vegan: </label>
-            <select name="vegan" id="vegan" onChange={handleVeganClick}>
+            <select
+              className="RecipeFormSelection"
+              name="vegan"
+              id="vegan"
+              onChange={handleVeganClick}
+            >
               <option value="notvegan">No</option>
 
               <option value="true">Yes</option>
             </select>
 
-            <label htmlFor="desperation">Desperation Level: </label>
+            {/* <label className="form-label" htmlFor="desperation">
+              Desperation Level:{" "}
+            </label>
             <input
               onChange={handleChange}
               type="number"
@@ -187,6 +195,7 @@ const EditRecipeForm = ({ _id }: IParams) => {
               value={recipe.desperation}
               id="desperation"
               required
+              className="slider"
             />
 
             <label htmlFor="health">health Meter: </label>
@@ -197,14 +206,48 @@ const EditRecipeForm = ({ _id }: IParams) => {
               value={recipe.health}
               id="health"
               required
+              className="slider"
+            /> */}
+            <label htmlFor="desperation" className="form-label">
+              Desperation Level: {recipe.desperation}
+            </label>
+
+            <input
+              type="range"
+              className="slider"
+              min="0"
+              max="10"
+              step="1"
+              id="desperation"
+              name="desperation"
+              value={recipe.desperation}
+              onChange={handleChange}
             />
 
-            <button>SAVE and NEXT</button>
+            <label htmlFor="health">health Meter: {recipe.health}</label>
+            <input
+              onChange={handleChange}
+              type="range"
+              min="0"
+              max="10"
+              step="1"
+              id="health"
+              name="health"
+              value={recipe.health}
+              className="slider"
+              required
+            />
+
+            <button className="btnForm">SAVE and NEXT</button>
 
             <p className="error">{error}</p>
           </form>{" "}
-          <button onClick={handleSaveandExit}>SAVE and EXIT</button>
-          <button onClick={handleCancel}>CANCEL</button>
+          <button className="btn" onClick={handleSaveandExit}>
+            SAVE and EXIT
+          </button>
+          <button className="btnForm" onClick={handleCancel}>
+            CANCEL
+          </button>
         </>
       ) : (
         <h1>Loading...</h1>
