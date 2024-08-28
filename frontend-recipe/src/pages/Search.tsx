@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
+import { useGetAllRecipesMutation } from "../slices/recipeApiSlice";
+import IRecipeDetails from "../interfaces/IRecipeDetails";
 
-import { useGetAllRecipesMutation } from "../../slices/recipeApiSlice";
+import ShortDetailedRecipe from "../components/displays/ShortDetailedRecipe";
 
-import ShortDetailedRecipe from "../../components/displays/ShortDetailedRecipe";
-import IRecipeDetails from "../../interfaces/IRecipeDetails";
+const Search = () => {
+  //   const urlParams = new URLSearchParams(location.search);
+  //   const navigate = useNavigate();
 
-const Home = () => {
   const [recipes, setRecipes] = useState<Array<IRecipeDetails>>([]);
   const [showMore, setShowMore] = useState(true);
 
   const [error, setError] = useState<string | null>(null);
   const [getAllRecipesAPICall, { isLoading }] = useGetAllRecipesMutation();
 
-  const fetchRecipes = async () => {
+  const fetchRecipes = async (searchQuery: string | null) => {
     try {
-      const res = await getAllRecipesAPICall(null).unwrap();
+      const res = await getAllRecipesAPICall(searchQuery).unwrap();
       if (res.length < 5) {
         setShowMore(false);
       }
@@ -26,9 +28,15 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetchRecipes();
-    document.title = "Home";
-  }, []);
+    const urlParams = new URLSearchParams(location.search);
+    // const searchTermFromURL = urlParams.get("searchTerm");
+    const searchQuery = urlParams.toString();
+    // if (searchTermFromURL) {
+    //   setSearchTerm(searchTermFromURL);
+    // }
+    fetchRecipes(searchQuery);
+    document.title = "Search";
+  }, [location.search]);
 
   const handleShowMore = async () => {
     const startIndex = recipes.length;
@@ -47,6 +55,7 @@ const Home = () => {
       setError("Something went wrong. Cannot load recipes");
     }
   };
+
   const loaded = () => {
     return (
       <>
@@ -66,10 +75,10 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Struggle Meal Recipes</h1>
+      <h1>Search Results</h1>
       <>{isLoading ? loading() : loaded()}</>
     </div>
   );
 };
 
-export default Home;
+export default Search;

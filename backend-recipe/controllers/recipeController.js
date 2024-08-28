@@ -20,9 +20,9 @@ const getAllRecipes = asyncHandler(async (req, res) => {
       ...(req.query._id && { _id: req.query._id }),
       ...(req.query.searchTerm && {
         $or: [
-          { title: { $regex: req.query.searchTerm, $options: "i" } },
-          { ingredients: { $regex: req.query.searchTerm, $options: "i" } },
-          { procedures: { $regex: req.query.searchTerm, $options: "i" } },
+          { title: new RegExp(req.query.searchTerm, "i") },
+          // { ingredients: new RegExp(req.query.searchTerm, "i") },
+          // { procedures: new RegExp(req.query.searchTerm, "i") },
         ],
       }),
     })
