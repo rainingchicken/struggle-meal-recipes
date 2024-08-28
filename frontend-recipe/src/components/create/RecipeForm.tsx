@@ -24,7 +24,7 @@ const RecipeForm = () => {
 
   const handleChange = (e: FormEvent) => {
     const { name, type } = e.target as HTMLInputElement;
-    if (type === "number") {
+    if (type === "number" || type === "range") {
       setRecipe((state) => ({
         ...state,
         [name]: +(e.target as HTMLInputElement).value,
@@ -79,7 +79,7 @@ const RecipeForm = () => {
 
   return (
     <>
-      <form id="createRecipeForm" onSubmit={handleSubmit}>
+      <form className="RecipeForm" onSubmit={handleSubmit}>
         <label htmlFor="title">Recipe Name: </label>
         <input
           onChange={handleChange}
@@ -101,7 +101,12 @@ const RecipeForm = () => {
         /> */}
 
         <label htmlFor="categories">Category</label>
-        <select name="categories" id="categories" onChange={handleChange}>
+        <select
+          name="categories"
+          className="RecipeFormSelection"
+          id="categories"
+          onChange={handleChange}
+        >
           <option value="uncategorized"></option>
           <option value="Mix">Mix</option>
           <option value="Asia">Asia</option>
@@ -130,12 +135,18 @@ const RecipeForm = () => {
           id="vegan"
           name="vegan"
         /> */}
-        <select name="vegan" id="vegan" onChange={handleVeganClick}>
+        <select
+          name="vegan"
+          id="vegan"
+          onChange={handleVeganClick}
+          className="RecipeFormSelection"
+        >
           <option value="notvegan">No</option>
 
           <option value="true">Yes</option>
         </select>
 
+        {/* 
         <label htmlFor="desperation">Desperation Level: </label>
         <input
           onChange={handleChange}
@@ -143,23 +154,46 @@ const RecipeForm = () => {
           id="desperation"
           name="desperation"
           required
+        /> */}
+
+        <label htmlFor="desperation" className="form-label">
+          Desperation Level: {recipe.desperation}
+        </label>
+
+        <input
+          type="range"
+          className="slider"
+          min="0"
+          max="10"
+          step="1"
+          id="desperation"
+          name="desperation"
+          defaultValue={0}
+          onChange={handleChange}
         />
 
-        <label htmlFor="health">health Meter: </label>
+        <label htmlFor="health">health Meter: {recipe.health}</label>
         <input
           onChange={handleChange}
-          type="number"
+          type="range"
+          min="0"
+          max="10"
+          step="1"
           id="health"
           name="health"
+          defaultValue={0}
+          className="slider"
           required
         />
-
-        <button>NEXT</button>
-
+        <div>
+          <button className="btn">NEXT</button>
+        </div>
         <p className="error">{error}</p>
       </form>
 
-      <button onClick={handleCancel}>CANCEL</button>
+      <button className="btn" onClick={handleCancel}>
+        CANCEL
+      </button>
     </>
   );
 };

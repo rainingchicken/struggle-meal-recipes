@@ -33,7 +33,8 @@ function Navbar() {
   return (
     <div className="navbar">
       <span>
-        <Link to="/">Home</Link> <Link to="/about">About</Link>
+        <Link to="/">Home</Link> <Link to="/search">Recipes</Link>{" "}
+        <Link to="/about">About</Link>
       </span>
       <form onSubmit={handleSearchSubmit}>
         <input

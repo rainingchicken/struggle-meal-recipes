@@ -13,38 +13,50 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.editorContainer {
+  width: 100%;
+}
+
 .editor-input {
   border-radius: 8px;
   border: 1px solid white;
-  min-height: 150px;
+  min-height: 50vh;
   resize: none;
-  font-size: 15px;
+  /* font-size: 15px; */
   caret-color: rgb(5, 5, 5);
   position: relative;
   tab-size: 1;
   outline: 0;
-  padding: 15px 10px;
+  padding: 0 1em;
   caret-color: #444;
+  width: 80%;
+  margin: 0 auto;
+}
+
+div:has(> .editor-placeholder) {
+  display: flex;
+
 }
 
 .editor-placeholder {
+  max-width: 50vw;
   color: #999;
   overflow: hidden;
-  position: absolute;
+  position: relative;
   text-overflow: ellipsis;
-  top: 75px;
-  left: 28px;
-  font-size: 15px;
   user-select: none;
-  display: inline-block;
+  display: flex;
   pointer-events: none;
-  margin: 0;
   padding: 0;
+  /* margin: 0 auto; */
+  top: -28em;
+  left: 12%;
 }
 
 
 * {
   box-sizing: border-box;
+  text-overflow: ellipsis;
 }
 
 a {
@@ -112,30 +124,71 @@ footer {
   text-align: center;
 }
 
-form {
+/* form {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   width: 500px;
-}
-
-form * {
-  margin: .5em;
-}
-
-/* h1,
-h2 {
-  text-align: center;
 } */
+
+
+.ingredientsFormDiv {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+}
 
 .ingredientsForm {
   display: flex;
   flex-direction: row;
-  margin: 0;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
-.ingredientsForm input {
+/* .ingredientsForm input {
   width: 100px;
+} */
+
+.ingredientsFormAmountInput,
+.ingredientsFormUnitInput {
+  width: 6em;
+  margin: 1em;
+}
+
+span:has(> .ingredientsFormIngredientInput) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+span:has(> .ingredientsFormIngredientInput)>label {
+  margin: 1em
+}
+
+.ingredientsFormIngredientInput {
+  width: 20em;
+  margin: 0 1em;
+}
+
+.ingredientListContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.ingredientDisplays {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 25%;
+}
+
+
+.inline-btn {
+  margin: .5em;
 }
 
 input {
@@ -175,12 +228,89 @@ li {
 
 }
 
-pre {
-  margin: 0;
+.RecipeForm {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+
+.RecipeFormSelection {
+
+  display: flex;
+  flex-direction: column;
+  width: 97%;
+  max-width: 100%;
+  height: 2.5em;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: .5em 1em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  max-width: 100%;
+  height: 1em;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  border-radius: 8px;
   padding: 0;
-  width: 80vw;
-  height: 80vh;
-  white-space: pre-wrap;
+}
+
+.slider:hover {
+  opacity: 1;
+
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 2.1em;
+  height: 2.1em;
+  ;
+  background: #1a1a1a;
+  cursor: pointer;
+  border-radius: 50%
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #1a1a1a;
+  cursor: pointer;
+  border-radius: 50%
+}
+
+.title {
+  text-align: center
+}
+
+.toolbar {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.toolbar ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.toolbar li {
+  margin: 1em;
 }
 
 ul {

@@ -117,22 +117,46 @@ const IngredientForm = ({ recipe_id }: IParams) => {
   // };
 
   return (
-    <>
+    <div className="ingredientsFormDiv">
       {/* {console.log(ingredients)} */}
-      <form onSubmit={handleSubmit} className="ingredientsForm">
-        <label htmlFor="amount">Amount</label>
-        <input onChange={handleChange} type="number" name="amount" />
-        <label htmlFor="unit">Unit</label>
-        <input onChange={handleChange} type="text" name="unit" />
-        <label htmlFor="ingredient">Ingredient name</label>
-        <input onChange={handleChange} type="text" name="ingredient" />
-        <button>ADD</button>
+      <form className="ingredientsForm" onSubmit={handleSubmit}>
+        <span>
+          <label htmlFor="amount">Amount</label>
+          <input
+            className="ingredientsFormAmountInput"
+            onChange={handleChange}
+            type="number"
+            name="amount"
+            placeholder="1"
+          />
+        </span>
+        <span>
+          <label htmlFor="unit">Unit</label>
+          <input
+            className="ingredientsFormUnitInput"
+            onChange={handleChange}
+            type="text"
+            name="unit"
+            placeholder="tsb"
+          />
+        </span>
+        <span>
+          <label htmlFor="ingredient">Ingredient</label>
+          <input
+            className="ingredientsFormIngredientInput"
+            onChange={handleChange}
+            type="text"
+            name="ingredient"
+            placeholder="honey mustard"
+          />
+        </span>
+        <button className="inline-btn">ADD</button>
         <p className="error">{error}</p>
       </form>
       {/* <button onClick={handleBackButton}>BACK</button>
       <button onClick={handleNextButton}>NEXT</button>
       <button onClick={handleDeleteClick}>CANCEL</button> */}
-    </>
+    </div>
   );
 };
 

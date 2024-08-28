@@ -18,7 +18,8 @@ function onError(error: Error) {
   console.error(error);
 }
 const initialConfig = { namespace: "MyEditor", theme, onError };
-const placeholder = "Enter some rich text...";
+
+const placeholder = "Step 1: Mix...";
 
 interface IonChangeParams {
   onChange: Function;
@@ -111,7 +112,7 @@ function ProcedureTextEditor({ recipe_id }: IEditorParams) {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form className="editorContainer" onSubmit={handleSubmit}>
         <LexicalComposer initialConfig={initialConfig}>
           <RichTextPlugin
             contentEditable={
@@ -119,7 +120,7 @@ function ProcedureTextEditor({ recipe_id }: IEditorParams) {
                 className="editor-input"
                 aria-placeholder={placeholder}
                 placeholder={
-                  <span className="editor-placeholder">{placeholder}</span>
+                  <div className="editor-placeholder">{placeholder}</div>
                 }
               />
             }
@@ -130,7 +131,9 @@ function ProcedureTextEditor({ recipe_id }: IEditorParams) {
           <MyOnChangePlugin onChange={onChange} />
         </LexicalComposer>
         {/* {console.log(editorState)} */}
+        <br />
         <button
+          className="btn"
           disabled={
             editorState &&
             JSON.parse(editorState).root.children[0].children == ""
@@ -141,7 +144,9 @@ function ProcedureTextEditor({ recipe_id }: IEditorParams) {
         <p className="error">{error}</p>
       </form>
       {/* <button onClick={handleBackButton}>BACK</button> */}
-      <button onClick={handleDeleteClick}>CANCEL</button>
+      <button className="btn" onClick={handleDeleteClick}>
+        CANCEL
+      </button>
     </>
   );
 }

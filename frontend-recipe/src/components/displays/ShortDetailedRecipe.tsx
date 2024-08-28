@@ -88,7 +88,7 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
       <span>Healthy Meter: {recipe.health}</span>
       <p>Last updated: {recipe.updatedAt}</p>
       <div>
-        {userInfo && location.pathname == "/dashboard" ? (
+        {procedures && userInfo && location.pathname == "/dashboard" ? (
           <>
             <button onClick={handleEditClick}>EDIT</button>
             <button onClick={handleDeleteClick}>DELETE</button>
@@ -96,11 +96,11 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
         ) : (
           <></>
         )}
-        {procedures && (
+        {
           <Link key={`link${recipe._id}`} to={`/recipes/${recipe._id}`}>
             View
           </Link>
-        )}
+        }
       </div>
       <p className="error">{error}</p>
     </div>

@@ -42,11 +42,11 @@ const Ingredient = ({ _id, user }: IParams) => {
   const loaded = () => {
     return (
       <>
-        <ul>
+        <ul className="ingredientListContainer">
           {/* {console.log(ingredients)} */}
           {ingredients &&
             ingredients.map((ingredient: IIngredients) => (
-              <li key={ingredient._id}>
+              <li className="ingredientList" key={ingredient._id}>
                 <DetailedIngredient
                   recipe_id={_id}
                   user={user}

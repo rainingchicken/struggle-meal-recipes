@@ -7,7 +7,7 @@ const CreateForm = () => {
   }, []);
   return (
     <div>
-      <h1>Create Recipe</h1>
+      <h1 className="title">Create Recipe</h1>
       <RecipeForm />
     </div>
   );

@@ -2,8 +2,9 @@ import { FormEvent, useEffect, useState } from "react";
 import { useGetAllRecipesMutation } from "../slices/recipeApiSlice";
 import IRecipeDetails from "../interfaces/IRecipeDetails";
 
-import ShortDetailedRecipe from "../components/displays/ShortDetailedRecipe";
+// import ShortDetailedRecipe from "../components/displays/ShortDetailedRecipe";
 import { useLocation, useNavigate } from "react-router-dom";
+import PublicShortDetailedRecipe from "../components/displays/PublicShortDetailedRecipe";
 
 const Search = () => {
   //   const urlParams = new URLSearchParams(location.search);
@@ -209,7 +210,7 @@ const Search = () => {
 
         {recipes &&
           recipes.map((recipe: IRecipeDetails) => (
-            <ShortDetailedRecipe key={recipe._id} recipe={recipe} />
+            <PublicShortDetailedRecipe key={recipe._id} recipe={recipe} />
           ))}
         {showMore && <button onClick={handleShowMore}>SHOW MORE</button>}
         <p className="error">{error}</p>

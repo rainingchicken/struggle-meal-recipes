@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 
 import { useGetAllRecipesMutation } from "../../slices/recipeApiSlice";
 
-import ShortDetailedRecipe from "../../components/displays/ShortDetailedRecipe";
+// import ShortDetailedRecipe from "../../components/displays/ShortDetailedRecipe";
 import IRecipeDetails from "../../interfaces/IRecipeDetails";
+import PublicShortDetailedRecipe from "../../components/displays/PublicShortDetailedRecipe";
 
 const Home = () => {
   const [recipes, setRecipes] = useState<Array<IRecipeDetails>>([]);
@@ -53,7 +54,7 @@ const Home = () => {
         {/* {console.log(recipes)} */}
         {recipes &&
           recipes.map((recipe: IRecipeDetails) => (
-            <ShortDetailedRecipe key={recipe._id} recipe={recipe} />
+            <PublicShortDetailedRecipe key={recipe._id} recipe={recipe} />
           ))}
         {showMore && <button onClick={handleShowMore}>SHOW MORE</button>}
         <p className="error">{error}</p>

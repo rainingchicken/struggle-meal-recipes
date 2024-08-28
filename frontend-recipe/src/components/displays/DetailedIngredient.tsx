@@ -49,17 +49,23 @@ const DetailedIngredient = ({ recipe_id, ingredient, user }: IParams) => {
 
   const displayMode = () => {
     return (
-      <>
-        {ingredient.amount} {ingredient.unit} {ingredient.ingredient}
+      <span className="ingredientDisplays">
+        <span className="ingredientDetails">
+          {ingredient.amount} {ingredient.unit} {ingredient.ingredient}
+        </span>
         {userInfo && userInfo._id === user ? (
-          <>
-            <button onClick={handleDeleteIngredient}>DELETE</button>
-            <button onClick={handleEditIngredient}>EDIT</button>
-          </>
+          <span className="ingredientBtns">
+            <button className="inline-btn" onClick={handleDeleteIngredient}>
+              DELETE
+            </button>
+            <button className="inline-btn" onClick={handleEditIngredient}>
+              EDIT
+            </button>
+          </span>
         ) : (
           <></>
         )}
-      </>
+      </span>
     );
   };
 
