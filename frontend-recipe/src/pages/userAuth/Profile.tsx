@@ -48,8 +48,8 @@ const Profile = () => {
 
   return (
     <>
-      <h1>Profile</h1>
-      <form onSubmit={submitHandler}>
+      <h1 className="title">Profile</h1>
+      <form className="RecipeForm" onSubmit={submitHandler}>
         <label htmlFor="profileName">Name: </label>
         <input
           id="profileName"
@@ -82,7 +82,11 @@ const Profile = () => {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <button className="btn submitbtn" disabled={isLoading} type="submit">
+        <button
+          className="btnForm submitbtn"
+          disabled={isLoading}
+          type="submit"
+        >
           Update
         </button>
         {isLoading && <h1>Loading...</h1>}

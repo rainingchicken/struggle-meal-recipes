@@ -72,31 +72,42 @@ const EditIngredientForm = ({ recipe_id, ingredient, setEdit }: IParams) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="ingredientsForm">
-      <label htmlFor="amount">Amount</label>
-      <input
-        onChange={handleChange}
-        type="number"
-        name="amount"
-        value={thisIngredient.amount}
-      />
-      <label htmlFor="unit">Unit</label>
-      <input
-        onChange={handleChange}
-        type="text"
-        name="unit"
-        value={thisIngredient.unit}
-      />
-      <label htmlFor="ingredient">Ingredient name</label>
-      <input
-        onChange={handleChange}
-        type="text"
-        name="ingredient"
-        value={thisIngredient.ingredient}
-      />
-      <button>SAVE</button>
-      <p className="error">{error}</p>
-    </form>
+    <div className="ingredientsFormDiv">
+      <form onSubmit={handleSubmit} className="ingredientsForm">
+        <span>
+          <label htmlFor="amount">Amount</label>
+          <input
+            className="ingredientsFormAmountInput"
+            onChange={handleChange}
+            type="number"
+            name="amount"
+            value={thisIngredient.amount}
+          />
+        </span>
+        <span>
+          <label htmlFor="unit">Unit</label>
+          <input
+            className="ingredientsFormUnitInput"
+            onChange={handleChange}
+            type="text"
+            name="unit"
+            value={thisIngredient.unit}
+          />
+        </span>
+        <span>
+          <label htmlFor="ingredient">Ingredient name</label>
+          <input
+            className="ingredientsFormIngredientInput"
+            onChange={handleChange}
+            type="text"
+            name="ingredient"
+            value={thisIngredient.ingredient}
+          />
+        </span>
+        <button className="inline-btn">SAVE</button>
+        <p className="error">{error}</p>
+      </form>
+    </div>
   );
 };
 

@@ -48,8 +48,8 @@ const Signup = () => {
 
   return (
     <>
-      <h1>Sign Up</h1>
-      <form onSubmit={submitHandler}>
+      <h1 className="title">Sign Up</h1>
+      <form className="RecipeForm" onSubmit={submitHandler}>
         <label htmlFor="signupName">Name: </label>
         <input
           id="signupName"
@@ -83,11 +83,15 @@ const Signup = () => {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <button className="btn submitbtn" disabled={isLoading} type="submit">
+        <button
+          className="btnForm submitbtn"
+          disabled={isLoading}
+          type="submit"
+        >
           Sign Up
         </button>
         <p>
-          Already have an account?<Link to="/login">Login</Link>
+          Already have an account?<Link to="/login"> Login</Link>
         </p>
         {isLoading && <h1>Loading...</h1>}
       </form>

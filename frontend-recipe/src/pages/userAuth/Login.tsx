@@ -41,10 +41,11 @@ const Login = () => {
 
   return (
     <>
-      <h1>Login</h1>
-      <form onSubmit={submitHandler}>
+      <h1 className="title">Login</h1>
+      <form className="RecipeForm" onSubmit={submitHandler}>
         <label htmlFor="loginEmail">Email Address: </label>
         <input
+          required
           id="loginEmail"
           type="email"
           placeholder="Enter Email"
@@ -54,13 +55,18 @@ const Login = () => {
 
         <label htmlFor="loginPassword">Password: </label>
         <input
+          required
           id="loginPassword"
           type="password"
           placeholder="Enter password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="btn submitbtn" disabled={isLoading} type="submit">
+        <button
+          className="btnForm submitbtn"
+          disabled={isLoading}
+          type="submit"
+        >
           Log In
         </button>
         <p>
