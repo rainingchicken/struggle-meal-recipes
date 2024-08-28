@@ -3,7 +3,7 @@ import IIngredients from "./IIngredients";
 interface IRecipeDetails {
   _id: string;
   title: string;
-  categories: Array<string>;
+  categories: string;
   servings: number;
   vegan: string;
   ingredients: Array<IIngredients>;

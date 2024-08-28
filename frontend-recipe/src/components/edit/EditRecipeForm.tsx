@@ -106,7 +106,7 @@ const EditRecipeForm = ({ _id }: IParams) => {
             value={recipe.title}
             required
           />
-
+          {/* 
           <label htmlFor="categories">Categories: </label>
           <input
             onChange={handleChange}
@@ -116,7 +116,25 @@ const EditRecipeForm = ({ _id }: IParams) => {
             value={recipe.categories}
             id="categories"
             required
-          />
+          /> */}
+          <label htmlFor="categories">Category</label>
+          <select
+            name="categories"
+            id="categories"
+            onChange={handleChange}
+            value={recipe.categories}
+          >
+            <option value="uncategorized"></option>
+            <option value="Mix">Mix</option>
+            <option value="Asia">Asia</option>
+            <option value="Africa">Africa</option>
+            <option value="NorthAmerica">North America</option>
+            <option value="SouthAmerica">South America</option>
+            <option value="Antarctica">Antarctica</option>
+            <option value="Europe">Europe</option>
+            <option value="Australia">Australia</option>
+            <option value="Other">Other</option>
+          </select>
 
           <label htmlFor="servings">Serving Size: </label>
           <input

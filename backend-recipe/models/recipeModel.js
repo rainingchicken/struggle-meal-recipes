@@ -7,11 +7,11 @@ const recipeSchema = new Schema(
       type: String,
       required: true,
     },
-    categories: [
-      {
-        type: String,
-      },
-    ],
+    categories: {
+      type: String,
+      default: "uncategorized",
+    },
+
     servings: {
       type: Number,
       required: true,

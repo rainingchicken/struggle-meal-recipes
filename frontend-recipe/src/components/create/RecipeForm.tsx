@@ -8,7 +8,7 @@ const RecipeForm = () => {
 
   const [recipe, setRecipe] = useState({
     title: "",
-    categories: [],
+    categories: "",
     servings: 1,
     vegan: "notvegan",
 
@@ -90,7 +90,7 @@ const RecipeForm = () => {
           required
         />
 
-        <label htmlFor="categories">Categories: </label>
+        {/* <label htmlFor="categories">Categories: </label>
         <input
           onChange={handleChange}
           type="text"
@@ -98,7 +98,21 @@ const RecipeForm = () => {
           placeholder="American, Asian, Mix, Other..."
           name="categories"
           required
-        />
+        /> */}
+
+        <label htmlFor="categories">Category</label>
+        <select name="categories" id="categories" onChange={handleChange}>
+          <option value="uncategorized"></option>
+          <option value="Mix">Mix</option>
+          <option value="Asia">Asia</option>
+          <option value="Africa">Africa</option>
+          <option value="NorthAmerica">North America</option>
+          <option value="SouthAmerica">South America</option>
+          <option value="Antarctica">Antarctica</option>
+          <option value="Europe">Europe</option>
+          <option value="Australia">Australia</option>
+          <option value="Other">Other</option>
+        </select>
 
         <label htmlFor="servings">Serving Size: </label>
         <input
