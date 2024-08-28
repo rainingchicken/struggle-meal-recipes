@@ -152,7 +152,7 @@ const Search = () => {
             value={filters.categories}
             onChange={handleSearchChange}
           >
-            <option value="uncategorized"></option>
+            <option value=""></option>
             <option value="Mix">Mix</option>
             <option value="Asia">Asia</option>
             <option value="Africa">Africa</option>

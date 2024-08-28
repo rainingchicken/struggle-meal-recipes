@@ -1,5 +1,7 @@
 # Struggle Meal Recipe
 
+https://struggle-meal-recipes.onrender.com
+
 Can't afford to go to the stores to get groceries right now? Look through this struggle meal recipes application to find the perfect recipe for you!
 
 ## Features
@@ -12,6 +14,13 @@ Can't afford to go to the stores to get groceries right now? Look through this s
   - delete recipes
   - edit recipes
   - view published recipes
+- search page
+  - filters
+    - vegan only
+    - food categories
+    - search term
+    - health level
+    - desperation level
 
 ## Capstone Objective
 
