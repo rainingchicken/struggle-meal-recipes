@@ -3,8 +3,8 @@ import { apiSlice } from "./apiSlice.tsx";
 export const recipeApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllRecipes: builder.mutation({
-      query: () => ({
-        url: `/api/struggle-meals`,
+      query: (queries) => ({
+        url: `/api/struggle-meals?${queries}`,
         method: "GET",
       }),
     }),

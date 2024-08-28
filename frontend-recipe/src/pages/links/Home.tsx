@@ -6,13 +6,18 @@ import Recipe from "../../components/displays/ShortDetailedRecipe";
 import IRecipeDetails from "../../interfaces/IRecipeDetails";
 
 const Home = () => {
-  const [recipes, setRecipes] = useState<null | Array<IRecipeDetails>>(null);
+  const [recipes, setRecipes] = useState<Array<IRecipeDetails>>([]);
+  const [showMore, setShowMore] = useState(true);
+
   const [error, setError] = useState<string | null>(null);
   const [getAllRecipesAPICall, { isLoading }] = useGetAllRecipesMutation();
 
   const fetchRecipes = async () => {
     try {
       const res = await getAllRecipesAPICall(null).unwrap();
+      if (res.length < 5) {
+        setShowMore(false);
+      }
       setRecipes(res);
     } catch (err) {
       console.log(err);
@@ -25,6 +30,23 @@ const Home = () => {
     document.title = "Home";
   }, []);
 
+  const handleShowMore = async () => {
+    const startIndex = recipes.length;
+    try {
+      const res = await getAllRecipesAPICall(
+        `startIndex=${startIndex}`
+      ).unwrap();
+
+      setRecipes((state) => [...state, ...res]);
+
+      if (res.length < 5) {
+        setShowMore(false);
+      }
+    } catch (err) {
+      console.log(err);
+      setError("Something went wrong. Cannot load recipes");
+    }
+  };
   const loaded = () => {
     return (
       <>
@@ -33,6 +55,7 @@ const Home = () => {
           recipes.map((recipe: IRecipeDetails) => (
             <Recipe key={recipe._id} recipe={recipe} />
           ))}
+        {showMore && <button onClick={handleShowMore}>SHOW MORE</button>}
         <p className="error">{error}</p>
       </>
     );

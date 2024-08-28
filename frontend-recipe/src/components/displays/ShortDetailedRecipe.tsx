@@ -80,12 +80,12 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
   return (
     <div>
       <h1>{recipe.title}</h1>
+      <p>Author: {recipe.user}</p>
       <p>Categories: {recipe.categories}</p>
       <span>Servings: {recipe.servings}</span>{" "}
       <span>Vegan: {recipe.vegan ? "Yes" : "No"}</span>{" "}
       <span>Desperation Level: {recipe.desperation}</span>{" "}
       <span>Healthy Meter: {recipe.health}</span>
-      <p>Author: {recipe.user}</p>
       {userInfo && location.pathname == "/dashboard" ? (
         <>
           <button onClick={handleEditClick}>EDIT</button>
