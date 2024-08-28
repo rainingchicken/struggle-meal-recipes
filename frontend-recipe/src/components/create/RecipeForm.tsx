@@ -66,7 +66,7 @@ const RecipeForm = () => {
     try {
       const res = await createRecipeAPICall(newRecipe).unwrap();
       setRecipe(res);
-      navigate(`/create/${res._id}/ingredients`);
+      navigate(`/create/${res._id}/ingredients-and-procedures`);
     } catch (error) {
       setError("Something went wrong. Cannot submit");
       console.log(error);

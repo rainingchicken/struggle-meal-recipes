@@ -16,7 +16,7 @@ const CreateIngredientsForm = () => {
       <h1>Ingredients</h1>
       <Ingredient user={userInfo._id} _id={_id} />
       {/* <RecipeIngredient _id={_id} /> */}
-      <IngredientForm recipe_id={_id} userAction="create" />
+      <IngredientForm recipe_id={_id} />
     </div>
   );
 };

@@ -86,27 +86,53 @@ const EditRecipeForm = ({ _id }: IParams) => {
         data: newRecipe,
       }).unwrap();
       setRecipe(res);
-      navigate(`/dashboard/edit/${recipe._id}/ingredients`);
+      navigate(`/dashboard/edit/${recipe._id}/ingredients-and-procedures`);
     } catch (error) {
       setError("Something went wrong. Cannot submit");
       console.log(error);
     }
   };
 
+  const handleSaveandExit = async (e: FormEvent) => {
+    e.preventDefault();
+    const newRecipe = {
+      title: recipe.title,
+      categories: recipe.categories,
+      servings: recipe.servings,
+      vegan: recipe.vegan,
+      health: recipe.health,
+      desperation: recipe.desperation,
+    };
+    try {
+      const res = await updateRecipeAPICall({
+        id: _id,
+        data: newRecipe,
+      }).unwrap();
+      setRecipe(res);
+      navigate(`/dashboard`);
+    } catch (error) {
+      setError("Something went wrong. Cannot submit");
+      console.log(error);
+    }
+  };
+  const handleCancel = () => {
+    navigate(`/dashboard`);
+  };
   return (
     <>
       {_id && recipe ? (
-        <form className="updateRecipeForm" onSubmit={handleSubmit}>
-          <label htmlFor="title">Recipe Name: </label>
-          <input
-            onChange={handleChange}
-            type="text"
-            name="title"
-            id="title"
-            value={recipe.title}
-            required
-          />
-          {/* 
+        <>
+          <form className="updateRecipeForm" onSubmit={handleSubmit}>
+            <label htmlFor="title">Recipe Name: </label>
+            <input
+              onChange={handleChange}
+              type="text"
+              name="title"
+              id="title"
+              value={recipe.title}
+              required
+            />
+            {/* 
           <label htmlFor="categories">Categories: </label>
           <input
             onChange={handleChange}
@@ -117,65 +143,69 @@ const EditRecipeForm = ({ _id }: IParams) => {
             id="categories"
             required
           /> */}
-          <label htmlFor="categories">Category</label>
-          <select
-            name="categories"
-            id="categories"
-            onChange={handleChange}
-            value={recipe.categories}
-          >
-            <option value="uncategorized"></option>
-            <option value="Mix">Mix</option>
-            <option value="Asia">Asia</option>
-            <option value="Africa">Africa</option>
-            <option value="NorthAmerica">North America</option>
-            <option value="SouthAmerica">South America</option>
-            <option value="Antarctica">Antarctica</option>
-            <option value="Europe">Europe</option>
-            <option value="Australia">Australia</option>
-            <option value="Other">Other</option>
-          </select>
+            <label htmlFor="categories">Category</label>
+            <select
+              name="categories"
+              id="categories"
+              onChange={handleChange}
+              value={recipe.categories}
+            >
+              <option value="uncategorized"></option>
+              <option value="Mix">Mix</option>
+              <option value="Asia">Asia</option>
+              <option value="Africa">Africa</option>
+              <option value="NorthAmerica">North America</option>
+              <option value="SouthAmerica">South America</option>
+              <option value="Antarctica">Antarctica</option>
+              <option value="Europe">Europe</option>
+              <option value="Australia">Australia</option>
+              <option value="Other">Other</option>
+            </select>
 
-          <label htmlFor="servings">Serving Size: </label>
-          <input
-            onChange={handleChange}
-            type="number"
-            name="servings"
-            value={recipe.servings}
-            id="servings"
-            required
-          />
+            <label htmlFor="servings">Serving Size: </label>
+            <input
+              onChange={handleChange}
+              type="number"
+              name="servings"
+              value={recipe.servings}
+              id="servings"
+              required
+            />
 
-          <label htmlFor="vegan">Vegan: </label>
-          <select name="vegan" id="vegan" onChange={handleVeganClick}>
-            <option value="notvegan">No</option>
+            <label htmlFor="vegan">Vegan: </label>
+            <select name="vegan" id="vegan" onChange={handleVeganClick}>
+              <option value="notvegan">No</option>
 
-            <option value="true">Yes</option>
-          </select>
+              <option value="true">Yes</option>
+            </select>
 
-          <label htmlFor="desperation">Desperation Level: </label>
-          <input
-            onChange={handleChange}
-            type="number"
-            name="desperation"
-            value={recipe.desperation}
-            id="desperation"
-            required
-          />
+            <label htmlFor="desperation">Desperation Level: </label>
+            <input
+              onChange={handleChange}
+              type="number"
+              name="desperation"
+              value={recipe.desperation}
+              id="desperation"
+              required
+            />
 
-          <label htmlFor="health">health Meter: </label>
-          <input
-            onChange={handleChange}
-            type="number"
-            name="health"
-            value={recipe.health}
-            id="health"
-            required
-          />
+            <label htmlFor="health">health Meter: </label>
+            <input
+              onChange={handleChange}
+              type="number"
+              name="health"
+              value={recipe.health}
+              id="health"
+              required
+            />
 
-          <button>SAVE and NEXT</button>
-          <p className="error">{error}</p>
-        </form>
+            <button>SAVE and NEXT</button>
+
+            <p className="error">{error}</p>
+          </form>{" "}
+          <button onClick={handleSaveandExit}>SAVE and EXIT</button>
+          <button onClick={handleCancel}>CANCEL</button>
+        </>
       ) : (
         <h1>Loading...</h1>
       )}

@@ -82,9 +82,9 @@ function EditProcedureTextEditor({ recipe_id, procedure }: IEditorParams) {
     setEditorState(JSON.stringify(editorStateJSON));
   }
 
-  const handleBackButton = () => {
-    navigate(`/dashboard/edit/${recipe_id}/ingredients`);
-  };
+  // const handleBackButton = () => {
+  //   navigate(`/dashboard/edit/${recipe_id}`);
+  // };
 
   const handleCancelClick = async () => {
     navigate("/dashboard");
@@ -125,7 +125,7 @@ function EditProcedureTextEditor({ recipe_id, procedure }: IEditorParams) {
         <button> UPDATE RECIPE </button>
         <p className="error">{error}</p>
       </form>{" "}
-      <button onClick={handleBackButton}>BACK</button>
+      {/* <button onClick={handleBackButton}>BACK</button> */}
       <button onClick={handleCancelClick}>CANCEL</button>
     </>
   );

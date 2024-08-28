@@ -1,20 +1,20 @@
 import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import {
   useCreatePersonalRecipesIngredientMutation,
-  useDeletePersonalRecipeMutation,
+  // useDeletePersonalRecipeMutation,
 } from "../../slices/personalRecipeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setIngredients } from "../../slices/ingredientsSlice";
 
 interface IParams {
   recipe_id: string | undefined;
-  userAction: string;
+  // userAction: string;
   //  if mode === create, navigate to /create/${recipe_id}`
   //  if mode === edit, navigate to /edit/${recipe_id}`
 }
 
-const IngredientForm = ({ recipe_id, userAction }: IParams) => {
+const IngredientForm = ({ recipe_id }: IParams) => {
   // const { ingredients, setIngredients } = useContext(IngredientContext);
   const [ingredient, setIngredient] = useState({
     amount: 0,
@@ -26,12 +26,12 @@ const IngredientForm = ({ recipe_id, userAction }: IParams) => {
 
   const [error, setError] = useState<string | null>(null);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [
     createIngredientAPICall,
   ] = useCreatePersonalRecipesIngredientMutation();
-  const [deleteRecipeAPICall] = useDeletePersonalRecipeMutation();
+  // const [deleteRecipeAPICall] = useDeletePersonalRecipeMutation();
 
   const handleChange = (e: FormEvent) => {
     const { name, type } = e.target as HTMLInputElement;
@@ -82,39 +82,39 @@ const IngredientForm = ({ recipe_id, userAction }: IParams) => {
     }
   };
 
-  const handleBackButton = () => {
-    // navigate(`/dashboard/edit/${recipe_id}`);
-    if (userAction === "create") {
-      navigate(`/create/${recipe_id}`);
-    } else {
-      navigate(`/dashboard/edit/${recipe_id}`);
-    }
-    // navigate("/create");
-  };
+  // const handleBackButton = () => {
+  //   // navigate(`/dashboard/edit/${recipe_id}`);
+  //   if (userAction === "create") {
+  //     navigate(`/create/${recipe_id}`);
+  //   } else {
+  //     navigate(`/dashboard/edit/${recipe_id}`);
+  //   }
+  //   // navigate("/create");
+  // };
 
-  const handleNextButton = () => {
-    if (userAction === "create") {
-      navigate(`/${userAction}/${recipe_id}/procedures`);
-    } else {
-      navigate(`/dashboard/${userAction}/${recipe_id}/procedures`);
-    }
-  };
+  // const handleNextButton = () => {
+  //   if (userAction === "create") {
+  //     navigate(`/${userAction}/${recipe_id}/procedures`);
+  //   } else {
+  //     navigate(`/dashboard/${userAction}/${recipe_id}/procedures`);
+  //   }
+  // };
 
-  const handleDeleteClick = async (e: FormEvent) => {
-    e.preventDefault();
-    if (userAction === "create") {
-      try {
-        await deleteRecipeAPICall(recipe_id).unwrap();
-        console.log("deleted");
-        navigate("/dashboard");
-      } catch (error) {
-        setError("Cant delete");
-        console.log(error);
-      }
-    } else {
-      navigate("/dashboard");
-    }
-  };
+  // const handleDeleteClick = async (e: FormEvent) => {
+  //   e.preventDefault();
+  //   if (userAction === "create") {
+  //     try {
+  //       await deleteRecipeAPICall(recipe_id).unwrap();
+  //       console.log("deleted");
+  //       navigate("/dashboard");
+  //     } catch (error) {
+  //       setError("Cant delete");
+  //       console.log(error);
+  //     }
+  //   } else {
+  //     navigate("/dashboard");
+  //   }
+  // };
 
   return (
     <>
@@ -129,9 +129,9 @@ const IngredientForm = ({ recipe_id, userAction }: IParams) => {
         <button>ADD</button>
         <p className="error">{error}</p>
       </form>
-      <button onClick={handleBackButton}>BACK</button>
+      {/* <button onClick={handleBackButton}>BACK</button>
       <button onClick={handleNextButton}>NEXT</button>
-      <button onClick={handleDeleteClick}>CANCEL</button>
+      <button onClick={handleDeleteClick}>CANCEL</button> */}
     </>
   );
 };

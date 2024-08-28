@@ -67,6 +67,7 @@ const SavedRecipeForm = () => {
     }
   };
 
+  //the next button
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const newRecipe = {
@@ -83,7 +84,7 @@ const SavedRecipeForm = () => {
         data: newRecipe,
       }).unwrap();
       setRecipe(res);
-      navigate(`/create/${recipe._id}/ingredients`);
+      navigate(`/create/${recipe._id}/ingredients-and-procedures`);
     } catch (error) {
       setError("Something went wrong. Cannot submit");
       console.log(error);

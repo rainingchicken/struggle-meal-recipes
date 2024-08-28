@@ -28,6 +28,8 @@ import CreateProcedures from "./pages/CreateProcedures.tsx";
 import EditProcedures from "./pages/EditProcedures.tsx";
 import SavedForm from "./pages/SavedForm.tsx";
 import Search from "./pages/Search.tsx";
+import CreateIngredientsandProceduresForm from "./pages/CreateIngredientsandProceduresForm.tsx";
+import EditIngredientsandProceduresForm from "./pages/EditIngredientsandProceduresForm.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -43,19 +45,27 @@ const router = createBrowserRouter(
         <Route path="/recipes/:_id" element={<Recipe />} />
         <Route path="/create" element={<CreateForm />} />
         <Route path="/create/:_id" element={<SavedForm />} />
-        <Route
+        {/* <Route
           path="/create/:_id/ingredients"
           element={<CreateIngredientsForm />}
         />
-        <Route path="/create/:_id/procedures" element={<CreateProcedures />} />
-        <Route path="/dashboard/edit/:_id" element={<EditForm />} />
+        <Route path="/create/:_id/procedures" element={<CreateProcedures />} /> */}
         <Route
+          path="/create/:_id/ingredients-and-procedures"
+          element={<CreateIngredientsandProceduresForm />}
+        />
+        <Route path="/dashboard/edit/:_id" element={<EditForm />} />
+        {/* <Route
           path="/dashboard/edit/:_id/ingredients"
           element={<EditIngredientForm />}
         />
         <Route
           path="/dashboard/edit/:_id/procedures"
           element={<EditProcedures />}
+        /> */}
+        <Route
+          path="/dashboard/edit/:_id/ingredients-and-procedures"
+          element={<EditIngredientsandProceduresForm />}
         />
         <Route path="/profile" element={<Profile />} />
       </Route>

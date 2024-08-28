@@ -75,28 +75,28 @@ function ProcedureTextEditor({ recipe_id }: IEditorParams) {
     setEditorState(JSON.stringify(editorStateJSON));
   }
 
-  const handleBackButton = () => {
-    // //all of this is to prevent the editor from being empty
-    // e.preventDefault();
-    // const placeholder =
-    //   '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"Step 1...","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}';
-    // const newProcedures = {
-    //   steps: placeholder,
-    //   recipe_id: recipe_id,
-    // };
-    // try {
-    //   const res = await createProceduresAPICall({
-    //     _id: recipe_id,
-    //     data: newProcedures,
-    //   }).unwrap();
-    //   setEditorState(res);
-    //   navigate(`/create/${recipe_id}/ingredients`);
-    // } catch (error) {
-    //   setError("Something went wrong. Cannot set placeholder");
-    //   console.log(error);
-    // }
-    navigate(`/create/${recipe_id}/ingredients`);
-  };
+  // const handleBackButton = () => {
+  //   // //all of this is to prevent the editor from being empty
+  //   // e.preventDefault();
+  //   // const placeholder =
+  //   //   '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"Step 1...","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}';
+  //   // const newProcedures = {
+  //   //   steps: placeholder,
+  //   //   recipe_id: recipe_id,
+  //   // };
+  //   // try {
+  //   //   const res = await createProceduresAPICall({
+  //   //     _id: recipe_id,
+  //   //     data: newProcedures,
+  //   //   }).unwrap();
+  //   //   setEditorState(res);
+  //   //   navigate(`/create/${recipe_id}/ingredients`);
+  //   // } catch (error) {
+  //   //   setError("Something went wrong. Cannot set placeholder");
+  //   //   console.log(error);
+  //   // }
+  //   navigate(`/create/${recipe_id}`);
+  // };
 
   const handleDeleteClick = async () => {
     try {
@@ -140,7 +140,7 @@ function ProcedureTextEditor({ recipe_id }: IEditorParams) {
         </button>
         <p className="error">{error}</p>
       </form>
-      <button onClick={handleBackButton}>BACK</button>
+      {/* <button onClick={handleBackButton}>BACK</button> */}
       <button onClick={handleDeleteClick}>CANCEL</button>
     </>
   );
