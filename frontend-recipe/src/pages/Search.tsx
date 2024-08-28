@@ -96,7 +96,7 @@ const Search = () => {
         [id]: (e.target as HTMLInputElement).value,
       });
     }
-    if ((type === "number" && id === "health") || id === "desperation") {
+    if ((type === "range" && id === "health") || id === "desperation") {
       setFilters({
         ...filters,
         [id]: +(e.target as HTMLInputElement).value,
@@ -137,7 +137,7 @@ const Search = () => {
       <>
         {/* {console.log(filters)}
         {console.log(recipes)} */}
-        <form onSubmit={handleSubmit}>
+        <form className="RecipeForm" onSubmit={handleSubmit}>
           <label htmlFor="searchTerm">Search</label>
           <input
             type="text"
@@ -149,6 +149,7 @@ const Search = () => {
 
           <label htmlFor="categories">Category</label>
           <select
+            className="RecipeFormSelection"
             name="categories"
             id="categories"
             value={filters.categories}
@@ -158,8 +159,8 @@ const Search = () => {
             <option value="Mix">Mix</option>
             <option value="Asia">Asia</option>
             <option value="Africa">Africa</option>
-            <option value="NorthAmerica">North America</option>
-            <option value="SouthAmerica">South America</option>
+            <option value="North America">North America</option>
+            <option value="South America">South America</option>
             <option value="Antarctica">Antarctica</option>
             <option value="Europe">Europe</option>
             <option value="Australia">Australia</option>
@@ -168,6 +169,7 @@ const Search = () => {
 
           <label htmlFor="vegan">Vegan only?</label>
           <select
+            className="RecipeFormSelection"
             name="vegan"
             id="vegan"
             value={filters.vegan}
@@ -180,6 +182,7 @@ const Search = () => {
 
           <label htmlFor="sort">Sort</label>
           <select
+            className="RecipeFormSelection"
             name="sort"
             id="sort"
             value={filters.sort}
@@ -188,24 +191,36 @@ const Search = () => {
             <option value="desc">Latest</option>
             <option value="asc">Oldest</option>
           </select>
-          <label htmlFor="health">Health</label>
+
+          <label htmlFor="desperation">
+            Desperation: {filters.desperation}{" "}
+          </label>
           <input
-            type="number"
-            name="health"
-            id="health"
-            value={filters.health}
-            onChange={handleSearchChange}
-          />
-          <label htmlFor="desperation">Desperation</label>
-          <input
-            type="number"
-            name="desperation"
+            type="range"
+            className="slider"
+            min="0"
+            max="10"
+            step="1"
             id="desperation"
+            name="desperation"
             value={filters.desperation}
             onChange={handleSearchChange}
           />
 
-          <button>FILTER</button>
+          <label htmlFor="health">Health: {filters.health}</label>
+          <input
+            type="range"
+            min="0"
+            max="10"
+            step="1"
+            id="health"
+            name="health"
+            className="slider"
+            value={filters.health}
+            onChange={handleSearchChange}
+          />
+
+          <button className="btnForm">FILTER</button>
         </form>
 
         {recipes &&

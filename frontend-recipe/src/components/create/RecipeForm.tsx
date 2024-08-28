@@ -111,8 +111,8 @@ const RecipeForm = () => {
           <option value="Mix">Mix</option>
           <option value="Asia">Asia</option>
           <option value="Africa">Africa</option>
-          <option value="NorthAmerica">North America</option>
-          <option value="SouthAmerica">South America</option>
+          <option value="North America">North America</option>
+          <option value="South America">South America</option>
           <option value="Antarctica">Antarctica</option>
           <option value="Europe">Europe</option>
           <option value="Australia">Australia</option>
