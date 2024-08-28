@@ -9,7 +9,8 @@ const getAllRecipes = asyncHandler(async (req, res) => {
   // const query = req.query;
   const startIndex = parseInt(req.query.startIndex) || 0;
   const limit = parseInt(req.query.limit) || 5;
-  const sortDirection = req.body.order === "asc" ? 1 : -1;
+  const sortDirection = req.query.sort === "asc" ? 1 : -1;
+
   try {
     const allRecipes = await Recipe.find({
       ...(req.query.vegan && { vegan: req.query.vegan }),
@@ -28,7 +29,7 @@ const getAllRecipes = asyncHandler(async (req, res) => {
         ],
       }),
     })
-      .sort({ updateAt: sortDirection })
+      .sort({ updatedAt: sortDirection })
       .skip(startIndex)
       .limit(limit);
 

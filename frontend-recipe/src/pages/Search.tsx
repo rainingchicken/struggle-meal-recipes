@@ -48,7 +48,7 @@ const Search = () => {
         // categories: "",
         health: healthFromURL,
         desperation: desperationFromURL,
-        sort: "desc",
+        sort: sortFromURL,
       });
     }
     const fetchRecipes = async () => {
@@ -128,6 +128,7 @@ const Search = () => {
     urlParams.set("desperation", filters.desperation);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
+    // console.log(filters.sort);
   };
 
   const loaded = () => {

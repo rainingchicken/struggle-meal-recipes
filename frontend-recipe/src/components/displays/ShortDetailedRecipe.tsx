@@ -86,19 +86,22 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
       <span>Vegan: {recipe.vegan !== "notvegan" ? "Yes" : "No"}</span>{" "}
       <span>Desperation Level: {recipe.desperation}</span>{" "}
       <span>Healthy Meter: {recipe.health}</span>
-      {userInfo && location.pathname == "/dashboard" ? (
-        <>
-          <button onClick={handleEditClick}>EDIT</button>
-          <button onClick={handleDeleteClick}>DELETE</button>
-        </>
-      ) : (
-        <></>
-      )}
-      {procedures && (
-        <Link key={`link${recipe._id}`} to={`/recipes/${recipe._id}`}>
-          View
-        </Link>
-      )}
+      <p>Last updated: {recipe.updatedAt}</p>
+      <div>
+        {userInfo && location.pathname == "/dashboard" ? (
+          <>
+            <button onClick={handleEditClick}>EDIT</button>
+            <button onClick={handleDeleteClick}>DELETE</button>
+          </>
+        ) : (
+          <></>
+        )}
+        {procedures && (
+          <Link key={`link${recipe._id}`} to={`/recipes/${recipe._id}`}>
+            View
+          </Link>
+        )}
+      </div>
       <p className="error">{error}</p>
     </div>
   );
