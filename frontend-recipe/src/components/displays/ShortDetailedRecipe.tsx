@@ -82,8 +82,8 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
       <h1>{recipe.title}</h1>
       <p>Author: {recipe.user}</p>
       <p>Categories: {recipe.categories}</p>
-      <span>Servings: {recipe.servings}</span>{" "}
-      <span>Vegan: {recipe.vegan ? "Yes" : "No"}</span>{" "}
+      <span>Servings: {recipe.servings}</span>
+      <span>Vegan: {recipe.vegan !== "notvegan" ? "Yes" : "No"}</span>{" "}
       <span>Desperation Level: {recipe.desperation}</span>{" "}
       <span>Healthy Meter: {recipe.health}</span>
       {userInfo && location.pathname == "/dashboard" ? (

@@ -17,7 +17,8 @@ const recipeSchema = new Schema(
       required: true,
     },
     vegan: {
-      type: Boolean,
+      type: String,
+      default: "notvegan",
     },
     ingredients: {
       type: Schema.Types.ObjectId,

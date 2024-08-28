@@ -13,10 +13,12 @@ const getAllRecipes = asyncHandler(async (req, res) => {
   try {
     const allRecipes = await Recipe.find({
       ...(req.query.vegan && { vegan: req.query.vegan }),
-      ...(req.query.health && { vegan: req.query.health }),
-      ...(req.query.servings && { vegan: req.query.servings }),
-      ...(req.query.categories && { vegan: req.query.categories }),
-      ...(req.query.desperation && { vegan: req.query.desperation }),
+      ...(req.query.health && { health: { $gte: req.query.health } }),
+      ...(req.query.servings && { servings: req.query.servings }),
+      ...(req.query.categories && { categories: req.query.categories }),
+      ...(req.query.desperation && {
+        desperation: { $gte: req.query.desperation },
+      }),
       ...(req.query._id && { _id: req.query._id }),
       ...(req.query.searchTerm && {
         $or: [

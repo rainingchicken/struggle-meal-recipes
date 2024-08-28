@@ -5,7 +5,7 @@ interface IRecipeDetails {
   title: string;
   categories: Array<string>;
   servings: number;
-  vegan: boolean;
+  vegan: string;
   ingredients: Array<IIngredients>;
   procedures: Array<String>;
   desperation: number;

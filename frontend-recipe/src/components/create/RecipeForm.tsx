@@ -10,7 +10,7 @@ const RecipeForm = () => {
     title: "",
     categories: [],
     servings: 1,
-    vegan: false,
+    vegan: "notvegan",
 
     procedures: [],
     desperation: 0,
@@ -37,9 +37,17 @@ const RecipeForm = () => {
     }
   };
 
-  const handleVeganClick = () => {
-    setRecipe({ ...recipe, vegan: !recipe.vegan });
-    console.log(recipe.vegan);
+  const handleVeganClick = (e: FormEvent) => {
+    // setRecipe({ ...recipe, vegan: !recipe.vegan });
+    // console.log(recipe.vegan);
+    const { id, value } = e.target as HTMLInputElement;
+    if (id === "vegan") {
+      const isVegan = value || "notvegan";
+      setRecipe((state) => ({
+        ...state,
+        [id]: isVegan,
+      }));
+    }
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -102,12 +110,17 @@ const RecipeForm = () => {
         />
 
         <label htmlFor="vegan">Vegan: </label>
-        <input
+        {/* <input
           onClick={handleVeganClick}
           type="checkbox"
           id="vegan"
           name="vegan"
-        />
+        /> */}
+        <select name="vegan" id="vegan" onChange={handleVeganClick}>
+          <option value="notvegan">No</option>
+
+          <option value="true">Yes</option>
+        </select>
 
         <label htmlFor="desperation">Desperation Level: </label>
         <input

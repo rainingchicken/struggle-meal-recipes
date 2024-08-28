@@ -12,7 +12,7 @@ const SavedRecipeForm = () => {
     title: "",
     categories: "",
     servings: 1,
-    vegan: false,
+    vegan: "notvegan",
     health: 0,
     desperation: 0,
   });
@@ -54,10 +54,17 @@ const SavedRecipeForm = () => {
     }
   };
 
-  const handleVeganClick = () => {
-    console.log(recipe.vegan);
-    setRecipe({ ...recipe, vegan: !recipe.vegan });
-    console.log(recipe.vegan);
+  const handleVeganClick = (e: FormEvent) => {
+    // setRecipe({ ...recipe, vegan: !recipe.vegan });
+    // console.log(recipe.vegan);
+    const { id, value } = e.target as HTMLInputElement;
+    if (id === "vegan") {
+      const isVegan = value || "notvegan";
+      setRecipe((state: IRecipeDetails) => ({
+        ...state,
+        [id]: isVegan,
+      }));
+    }
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -118,13 +125,19 @@ const SavedRecipeForm = () => {
             required
           />
 
-          <label htmlFor="vegan">Vegan: </label>
+          {/* <label htmlFor="vegan">Vegan: </label>
           <input
             onClick={handleVeganClick}
             type="checkbox"
             name="vegan"
             id="vegan"
-          />
+          /> */}
+          <label htmlFor="vegan">Vegan: </label>
+          <select name="vegan" id="vegan" onChange={handleVeganClick}>
+            <option value="notvegan">No</option>
+
+            <option value="true">Yes</option>
+          </select>
 
           <label htmlFor="desperation">Desperation Level: </label>
           <input
