@@ -11,6 +11,7 @@ import {
   useDeletePersonalRecipeMutation,
 } from "../../slices/personalRecipeSlice";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const theme = {};
 
@@ -42,7 +43,7 @@ function ProcedureTextEditor({ recipe_id }: IEditorParams) {
   //   const [procedures, setProcedures] = useState({
   //     steps: "",
   //   });
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -66,7 +67,8 @@ function ProcedureTextEditor({ recipe_id }: IEditorParams) {
       setEditorState(res);
       navigate("/dashboard");
     } catch (error) {
-      setError("Something went wrong. Cannot submit");
+      // setError("Something went wrong. Cannot submit");
+      toast.dark("Something went wrong. Cannot create the procedures");
       console.log(error);
     }
   };
@@ -102,10 +104,12 @@ function ProcedureTextEditor({ recipe_id }: IEditorParams) {
   const handleDeleteClick = async () => {
     try {
       await deleteRecipeAPICall(recipe_id).unwrap();
-      console.log("deleted");
+      // console.log("deleted");
+      toast.dark("Recipe deleted!");
       navigate("/dashboard");
     } catch (error) {
-      setError("Cant delete");
+      // setError("Cant delete");
+      toast.dark("Something went wrong. Cannot delete");
       console.log(error);
     }
   };
@@ -141,7 +145,7 @@ function ProcedureTextEditor({ recipe_id }: IEditorParams) {
         >
           SHARE RECIPE
         </button>
-        <p className="error">{error}</p>
+        {/* <p className="error">{error}</p> */}
       </form>
       {/* <button onClick={handleBackButton}>BACK</button> */}
       <button className="btn" onClick={handleDeleteClick}>

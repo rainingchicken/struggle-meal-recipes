@@ -1,9 +1,10 @@
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import { useCreatePersonalRecipeProceduresMutation } from "../../slices/personalRecipeSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // import ProcedureTextEditor from "./ProcedureTextEditor";
 import { setProcedures } from "../../slices/proceduresSlice";
+import { toast } from "react-toastify";
 interface IParams {
   recipe_id: string | undefined;
 }
@@ -15,7 +16,7 @@ const ProcedureForm = ({ recipe_id }: IParams) => {
   const dispatch = useDispatch();
   const procedures = useSelector((state: any) => state.procedures.state);
 
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -43,8 +44,9 @@ const ProcedureForm = ({ recipe_id }: IParams) => {
       dispatch(setProcedures(res));
       navigate("/dashboard");
     } catch (error) {
-      setError("Something went wrong. Cannot submit");
+      // setError("Something went wrong. Cannot submit");
       console.log(error);
+      toast.dark("Something went wrong. Cannot get the procedures");
     }
   };
 
@@ -56,7 +58,7 @@ const ProcedureForm = ({ recipe_id }: IParams) => {
         
       /> */}
       <button>SHARE RECIPE</button>
-      <p className="error">{error}</p>
+      {/* <p className="error">{error}</p> */}
     </form>
   );
 };

@@ -5,6 +5,7 @@ import {
 } from "../../slices/personalRecipeSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import IRecipeDetails from "../../interfaces/IRecipeDetails";
+import { toast } from "react-toastify";
 
 const SavedRecipeForm = () => {
   const { _id } = useParams();
@@ -17,7 +18,7 @@ const SavedRecipeForm = () => {
     desperation: 0,
   });
 
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const [getRecipeAPICall] = useGetPersonalRecipeMutation();
 
@@ -27,7 +28,8 @@ const SavedRecipeForm = () => {
       setRecipe(res);
     } catch (err) {
       console.log(err);
-      setError("Something went wrong. Cannot set error");
+      // setError("Something went wrong. Cannot set error");
+      toast.dark("Something went wrong. Cannot get the recipe");
     }
   };
 
@@ -86,7 +88,8 @@ const SavedRecipeForm = () => {
       setRecipe(res);
       navigate(`/create/${recipe._id}/ingredients-and-procedures`);
     } catch (error) {
-      setError("Something went wrong. Cannot submit");
+      // setError("Something went wrong. Cannot submit");
+      toast.dark("Something went wrong. Cannot update the recipe");
       console.log(error);
     }
   };
@@ -161,7 +164,7 @@ const SavedRecipeForm = () => {
           />
 
           <button>NEXT</button>
-          <p className="error">{error}</p>
+          {/* <p className="error">{error}</p> */}
         </form>
       ) : (
         <h1>Loading...</h1>

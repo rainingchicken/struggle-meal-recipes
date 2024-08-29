@@ -6,13 +6,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useSignupMutation } from "../../slices/usersApiSlice";
 import { setCredentials } from "../../slices/authSlice";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -42,7 +43,8 @@ const Signup = () => {
       navigate("/dashboard");
     } catch (err) {
       console.log(err);
-      setError("Please fill all inputs");
+      // setError("Please fill all inputs");
+      toast.dark("Please fill all fields");
     }
   };
 
@@ -95,7 +97,7 @@ const Signup = () => {
         </p>
         {isLoading && <h1>Loading...</h1>}
       </form>
-      <p className="error">{error}</p>
+      {/* <p className="error">{error}</p> */}
     </>
   );
 };

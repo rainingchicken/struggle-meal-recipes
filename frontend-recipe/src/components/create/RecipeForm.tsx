@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { FormEvent, useState } from "react";
 import { useCreatePersonalRecipeMutation } from "../../slices/personalRecipeSlice";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const RecipeForm = () => {
   const { userInfo } = useSelector((state: any) => state.auth);
@@ -16,7 +17,7 @@ const RecipeForm = () => {
     desperation: 0,
     health: 0,
   });
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -68,8 +69,9 @@ const RecipeForm = () => {
       setRecipe(res);
       navigate(`/create/${res._id}/ingredients-and-procedures`);
     } catch (error) {
-      setError("Something went wrong. Cannot submit");
+      // setError("Something went wrong. Cannot submit");
       console.log(error);
+      toast.dark("Something went wrong. Cannot create the recipe");
     }
   };
 
@@ -188,7 +190,7 @@ const RecipeForm = () => {
         <div>
           <button className="btnForm">NEXT</button>
         </div>
-        <p className="error">{error}</p>
+        {/* <p className="error">{error}</p> */}
       </form>
 
       <button className="btn" onClick={handleCancel}>

@@ -4,6 +4,7 @@ import { useDeletePersonalRecipesIngredientMutation } from "../../slices/persona
 import EditIngredientForm from "../edit/EditIngredientForm";
 import { useDispatch, useSelector } from "react-redux";
 import { setIngredients } from "../../slices/ingredientsSlice";
+import { toast } from "react-toastify";
 
 interface IParams {
   recipe_id: string | undefined;
@@ -37,9 +38,10 @@ const DetailedIngredient = ({ recipe_id, ingredient, user }: IParams) => {
       dispatch(setIngredients(newIngredients));
 
       // location.reload();
-      console.log("deleted ingredient");
+      // console.log("deleted ingredient");
     } catch (error) {
-      console.log({ error });
+      console.log(error);
+      toast.dark("Something went wrong. Cannot delete the ingredient");
     }
   };
 

@@ -7,6 +7,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setRecipes } from "../../slices/recipesSlice";
+import { toast } from "react-toastify";
 // import { RecipeContext } from "../../context/RecipeContext.tsx";
 
 interface IParams {
@@ -26,7 +27,7 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
   // });
   const recipes = useSelector((state: any) => state.recipes.state);
 
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
   const [procedures, setProcedures] = useState();
 
   const location = useLocation();
@@ -48,7 +49,8 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
       }
     } catch (err) {
       console.log(err);
-      setError("Something went wrong. Cannot get procedures");
+      // setError("Something went wrong. Cannot get procedures");
+      toast.dark("Something went wrong. Cannot get the procedures");
     }
   };
 
@@ -59,7 +61,7 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
   const handleDeleteClick = async () => {
     try {
       await deleteRecipeAPICall(recipe._id).unwrap();
-      console.log("deleted");
+      // console.log("deleted");
 
       //re-setRecipes to show only ones that are not deleted
       const newRecipes = [...recipes].filter((thisRecipe) => {
@@ -67,8 +69,10 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
       });
       dispatch(setRecipes(newRecipes));
       navigate("/dashboard");
+      toast.dark("Cancelled sharing recipe");
     } catch (error) {
-      setError("Cant delete");
+      // setError("Cant delete");
+      toast.dark("Something went wrong. Cannot get delete");
       console.log(error);
     }
   };
@@ -112,7 +116,7 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
           </Link>
         }
       </div>
-      <p className="error">{error}</p>
+      {/* <p className="error">{error}</p> */}
     </div>
   );
 };

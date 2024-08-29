@@ -6,12 +6,13 @@ import { useGetAllRecipesMutation } from "../../slices/recipeApiSlice";
 import IRecipeDetails from "../../interfaces/IRecipeDetails";
 import PublicShortDetailedRecipe from "../../components/displays/PublicShortDetailedRecipe";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const [recipes, setRecipes] = useState<Array<IRecipeDetails>>([]);
   const [showMore, setShowMore] = useState(true);
 
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
   const [getAllRecipesAPICall, { isLoading }] = useGetAllRecipesMutation();
 
   const navigate = useNavigate();
@@ -25,7 +26,8 @@ const Home = () => {
       setRecipes(res);
     } catch (err) {
       console.log(err);
-      setError("Something went wrong. Cannot load recipes");
+      // setError("Something went wrong. Cannot load recipes");
+      toast.dark("Something went wrong. Cannot get the recipes");
     }
   };
 
@@ -48,7 +50,8 @@ const Home = () => {
       }
     } catch (err) {
       console.log(err);
-      setError("Something went wrong. Cannot load recipes");
+      // setError("Something went wrong. Cannot load recipes");
+      toast.dark("Something went wrong. Cannot get the recipes");
     }
   };
   const handlesignup = () => {
@@ -67,7 +70,7 @@ const Home = () => {
                 </div>
               ))}
 
-            <p className="error">{error}</p>
+            {/* <p className="error">{error}</p> */}
           </div>{" "}
         </div>{" "}
         <div>

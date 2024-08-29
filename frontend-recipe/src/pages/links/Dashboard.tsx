@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useGetAllPersonalRecipesMutation } from "../../slices/personalRecipeSlice.tsx";
 import ShortDetailedRecipe from "../../components/displays/ShortDetailedRecipe.tsx";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import IRecipeDetails from "../../interfaces/IRecipeDetails.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import { setRecipes } from "../../slices/recipesSlice.tsx";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
   // const [recipes, setRecipes] = useState<null | Array<IRecipeDetails>>(null);
@@ -14,7 +15,7 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const recipes = useSelector((state: any) => state.recipes.state);
 
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -29,7 +30,8 @@ const Dashboard = () => {
       dispatch(setRecipes(res));
     } catch (err) {
       console.log(err);
-      setError("Something went wrong. Cannot get recipes");
+      // setError("Something went wrong. Cannot get recipes");
+      toast.dark("Something went wrong. Cannot get the recipes");
     }
   };
 
@@ -53,7 +55,7 @@ const Dashboard = () => {
                 <ShortDetailedRecipe key={recipe._id} recipe={recipe} />{" "}
               </div>
             ))}
-          <p className="error">{error}</p>
+          {/* <p className="error">{error}</p> */}
         </div>
       </div>
     );

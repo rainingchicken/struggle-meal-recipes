@@ -6,6 +6,7 @@ import { useLogoutMutation } from "../../slices/usersApiSlice";
 import { logout } from "../../slices/authSlice";
 // import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const Logout = () => {
   const dispatch = useDispatch();
@@ -18,8 +19,10 @@ const Logout = () => {
       await logoutApiCall(null).unwrap();
       dispatch(logout());
       //   navigate("/");
+      toast.dark("Logout successful!");
     } catch (err) {
       console.log(err);
+      toast.dark("Something went wrong. Cannot logout");
     }
   };
   useEffect(() => {

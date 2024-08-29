@@ -10,6 +10,7 @@ import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 
 //////////////////
 import IProcedures from "../../interfaces/IProcedures";
+import { toast } from "react-toastify";
 
 const theme = {};
 
@@ -25,7 +26,7 @@ const Procedures = ({ _id }: IParams) => {
   const [procedures, setProcedures] = useState<any>([]);
   // const { procedures, setProcedures } = useContext(ProceduresContext);
 
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const [
     getRecipeProceduresAPICall,
@@ -39,7 +40,8 @@ const Procedures = ({ _id }: IParams) => {
       //   console.log(res);
     } catch (err) {
       console.log(err);
-      setError("Something went wrong. Cannot get procedures");
+      // setError("Something went wrong. Cannot get procedures");
+      toast.dark("Something went wrong. Cannot get the procedures");
     }
   };
 
@@ -71,7 +73,7 @@ const Procedures = ({ _id }: IParams) => {
               <HistoryPlugin />
             </LexicalComposer>
           ))}
-        <p className="errors">{error}</p>
+        {/* <p className="errors">{error}</p> */}
       </>
     );
   };

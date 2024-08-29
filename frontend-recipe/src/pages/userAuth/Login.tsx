@@ -6,11 +6,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "../../slices/usersApiSlice";
 import { setCredentials } from "../../slices/authSlice";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,7 +36,8 @@ const Login = () => {
       navigate("/dashboard");
     } catch (err) {
       console.log(err);
-      setError("Incorrect email or password");
+      // setError("Incorrect email or password");
+      toast.dark("Incorrect email or password");
     }
   };
 
@@ -74,7 +76,7 @@ const Login = () => {
         </p>
         {isLoading && <h1>Loading...</h1>}
       </form>
-      <p className="error">{error}</p>
+      {/* <p className="error">{error}</p> */}
     </>
   );
 };

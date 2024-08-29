@@ -3,6 +3,7 @@ import { useUpdatePersonalRecipesIngredientMutation } from "../../slices/persona
 import IIngredients from "../../interfaces/IIngredients";
 import { useDispatch, useSelector } from "react-redux";
 import { setIngredients } from "../../slices/ingredientsSlice";
+import { toast } from "react-toastify";
 
 interface IParams {
   recipe_id: string | undefined;
@@ -21,7 +22,7 @@ const EditIngredientForm = ({ recipe_id, ingredient, setEdit }: IParams) => {
     unit: ingredient.unit,
     ingredient: ingredient.ingredient,
   });
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const [
     updateIngredientAPICall,
@@ -66,7 +67,8 @@ const EditIngredientForm = ({ recipe_id, ingredient, setEdit }: IParams) => {
       dispatch(setIngredients(updatedIngredients));
       setEdit(false);
     } catch (error) {
-      setError("Something went wrong. Cannot submit");
+      // setError("Something went wrong. Cannot submit");
+      toast.dark("Something went wrong. Cannot update the ingredients");
       console.log(error);
     }
   };
@@ -106,7 +108,7 @@ const EditIngredientForm = ({ recipe_id, ingredient, setEdit }: IParams) => {
           />
         </span>
         <button className="inline-btn">SAVE</button>
-        <p className="error">{error}</p>
+        {/* <p className="error">{error}</p> */}
       </form>
     </div>
   );

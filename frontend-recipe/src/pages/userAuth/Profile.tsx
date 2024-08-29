@@ -6,13 +6,14 @@ import { useState, useEffect, FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useUpdateUserMutation } from "../../slices/usersApiSlice";
 import { setCredentials } from "../../slices/authSlice";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const dispatch = useDispatch();
 
@@ -29,7 +30,8 @@ const Profile = () => {
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      // setError("Passwords do not match");
+      toast.dark("Passwords do not match");
     } else {
       try {
         const res = await updateProfile({
@@ -39,9 +41,11 @@ const Profile = () => {
           password,
         }).unwrap();
         dispatch(setCredentials(res));
-        alert("Profile updated!");
+        // alert("Profile updated!");
+        toast.dark("Profile updated!");
       } catch (err) {
-        setError("Cannot update profile");
+        // setError("Cannot update profile");
+        toast.dark("Something went wrong. Cannot update profile");
       }
     }
   };
@@ -91,7 +95,7 @@ const Profile = () => {
         </button>
         {isLoading && <h1>Loading...</h1>}
       </form>
-      <p className="error">{error}</p>
+      {/* <p className="error">{error}</p> */}
     </>
   );
 };

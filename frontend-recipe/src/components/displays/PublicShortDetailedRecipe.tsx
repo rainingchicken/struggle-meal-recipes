@@ -1,6 +1,7 @@
 import { useState } from "react";
 import IRecipeDetails from "../../interfaces/IRecipeDetails";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // import { RecipeContext } from "../../context/RecipeContext.tsx";
 
@@ -19,10 +20,11 @@ const PublicShortDetailedRecipe = ({ recipe }: IParams) => {
   //   health: 0,
   // });
 
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   if (!recipe) {
-    setError(error);
+    // setError(error);
+    toast.dark("Something went wrong. Cannot get the recipe");
   }
 
   return (
@@ -52,7 +54,7 @@ const PublicShortDetailedRecipe = ({ recipe }: IParams) => {
           </Link>
         }
       </div>
-      <p className="error">{error}</p>
+      {/* <p className="error">{error}</p> */}
     </div>
   );
 };

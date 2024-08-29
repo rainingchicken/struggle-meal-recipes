@@ -2,6 +2,7 @@ import { FormEvent, useState } from "react";
 import { useUpdatePersonalRecipeProceduresMutation } from "../../slices/personalRecipeSlice";
 import { useNavigate } from "react-router-dom";
 import IProcedures from "../../interfaces/IProcedures";
+import { toast } from "react-toastify";
 
 interface IParams {
   recipe_id: string | undefined;
@@ -14,7 +15,7 @@ const EditProcedureForm = ({ recipe_id, procedure }: IParams) => {
     _id: procedure._id,
     recipe_id: procedure.recipe_id,
   });
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -45,7 +46,8 @@ const EditProcedureForm = ({ recipe_id, procedure }: IParams) => {
       setEditProcedures(res);
       navigate("/dashboard");
     } catch (error) {
-      setError("Something went wrong. Cannot submit");
+      // setError("Something went wrong. Cannot submit");
+      toast.dark("Something went wrong. Cannot update the procedures");
       console.log(error);
     }
   };
@@ -64,7 +66,7 @@ const EditProcedureForm = ({ recipe_id, procedure }: IParams) => {
             value={editProcedures.steps}
           />
           <button>UPDATE RECIPE</button>
-          <p className="error">{error}</p>
+          {/* <p className="error">{error}</p> */}
         </form>
       )}
     </>

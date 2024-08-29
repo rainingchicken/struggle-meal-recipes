@@ -5,6 +5,7 @@ import {
 } from "../../slices/personalRecipeSlice";
 import { useNavigate } from "react-router-dom";
 import IRecipeDetails from "../../interfaces/IRecipeDetails";
+import { toast } from "react-toastify";
 
 interface IParams {
   _id: string | any;
@@ -20,7 +21,7 @@ const EditRecipeForm = ({ _id }: IParams) => {
     desperation: 0,
   });
 
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const [getRecipeAPICall] = useGetPersonalRecipeMutation();
 
@@ -30,7 +31,8 @@ const EditRecipeForm = ({ _id }: IParams) => {
       setRecipe(res);
     } catch (err) {
       console.log(err);
-      setError("Something went wrong. Cannot set error");
+      // setError("Something went wrong. Cannot set error");
+      toast.dark("Something went wrong. Cannot get the recipe");
     }
   };
 
@@ -88,7 +90,8 @@ const EditRecipeForm = ({ _id }: IParams) => {
       setRecipe(res);
       navigate(`/dashboard/edit/${recipe._id}/ingredients-and-procedures`);
     } catch (error) {
-      setError("Something went wrong. Cannot submit");
+      // setError("Something went wrong. Cannot submit");
+      toast.dark("Something went wrong. Cannot update the recipe");
       console.log(error);
     }
   };
@@ -111,7 +114,8 @@ const EditRecipeForm = ({ _id }: IParams) => {
       setRecipe(res);
       navigate(`/dashboard`);
     } catch (error) {
-      setError("Something went wrong. Cannot submit");
+      // setError("Something went wrong. Cannot submit");
+      toast.dark("Something went wrong. Cannot update the recipe");
       console.log(error);
     }
   };
@@ -240,7 +244,7 @@ const EditRecipeForm = ({ _id }: IParams) => {
 
             <button className="btnForm">SAVE and NEXT</button>
 
-            <p className="error">{error}</p>
+            {/* <p className="error">{error}</p> */}
           </form>{" "}
           <button className="btn" onClick={handleSaveandExit}>
             SAVE and EXIT

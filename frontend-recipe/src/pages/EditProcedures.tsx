@@ -5,6 +5,7 @@ import { useGetPersonalRecipeProceduresMutation } from "../slices/personalRecipe
 // import { ProceduresContext } from "../context/ProceduresContext";
 import IProcedures from "../interfaces/IProcedures";
 import EditProcedureTextEditor from "../components/edit/editProceduresTextEditor";
+import { toast } from "react-toastify";
 
 const EditProcedures = () => {
   const { _id } = useParams();
@@ -12,7 +13,7 @@ const EditProcedures = () => {
   // const { procedures, setProcedures } = useContext(ProceduresContext);
 
   const [procedures, setProcedures] = useState<any>([]);
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const [
     getRecipeProceduresAPICall,
@@ -26,7 +27,8 @@ const EditProcedures = () => {
       //   console.log(res);
     } catch (err) {
       console.log(err);
-      setError("Something went wrong. Cannot get procedures");
+      // setError("Something went wrong. Cannot get procedures");
+      toast.dark("Something went wrong. Cannot get the procedures");
     }
   };
 
@@ -67,7 +69,7 @@ const EditProcedures = () => {
                 procedure={procedure}
               />
             ))}
-          <p className="error">{error}</p>
+          {/* <p className="error">{error}</p> */}
         </>
       )}
     </>

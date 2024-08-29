@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import Ingredient from "./Ingredient";
 import Procedures from "./Procedures";
+import { toast } from "react-toastify";
 
 interface IParams {
   _id: string | any;
@@ -18,7 +19,7 @@ const DetailedRecipe = ({ _id }: IParams) => {
 
   const [recipe, setRecipe] = useState<Array<IRecipeDetails> | any>([]);
 
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,7 +35,8 @@ const DetailedRecipe = ({ _id }: IParams) => {
       // console.log(res);
     } catch (err) {
       console.log(err);
-      setError("Something went wrong. Cannot set error");
+      // setError("Something went wrong. Cannot set error");
+      toast.dark("Something went wrong. Cannot delete the recipe");
     }
   };
 
@@ -46,10 +48,10 @@ const DetailedRecipe = ({ _id }: IParams) => {
     try {
       await deleteRecipeAPICall(recipe._id).unwrap();
       console.log("deleted");
-
+      toast.dark("Recipe deleted!");
       navigate("/dashboard");
     } catch (error) {
-      setError("Cant delete");
+      toast.dark("Something went wrong. Cannot get the delete");
       console.log(error);
     }
   };
@@ -118,7 +120,7 @@ const DetailedRecipe = ({ _id }: IParams) => {
               Procedures:
               {recipe._id ? <Procedures _id={recipe._id} /> : <>Loading...</>}
             </div>
-            <p className="error">{error}</p>
+            {/* <p className="error">{error}</p> */}
           </div>
         ) : (
           <h1>Loading...</h1>

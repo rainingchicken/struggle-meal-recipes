@@ -6,6 +6,7 @@ import {
 } from "../../slices/personalRecipeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setIngredients } from "../../slices/ingredientsSlice";
+import { toast } from "react-toastify";
 
 interface IParams {
   recipe_id: string | undefined;
@@ -24,7 +25,7 @@ const IngredientForm = ({ recipe_id }: IParams) => {
   const dispatch = useDispatch();
   const ingredients = useSelector((state: any) => state.ingredients.state);
 
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   // const navigate = useNavigate();
 
@@ -77,7 +78,7 @@ const IngredientForm = ({ recipe_id }: IParams) => {
       dispatch(setIngredients(newIngredients));
       // setIngredient({ amount: 0, unit: "", ingredient: "" });
     } catch (error) {
-      setError("Something went wrong. Cannot submit");
+      toast.dark("Something went wrong. Cannot get ingredients");
       console.log(error);
     }
   };
@@ -152,7 +153,7 @@ const IngredientForm = ({ recipe_id }: IParams) => {
           />
         </span>
         <button className="inline-btn">ADD</button>
-        <p className="error">{error}</p>
+        {/* <p className="error">{error}</p> */}
       </form>
       {/* <button onClick={handleBackButton}>BACK</button>
       <button onClick={handleNextButton}>NEXT</button>

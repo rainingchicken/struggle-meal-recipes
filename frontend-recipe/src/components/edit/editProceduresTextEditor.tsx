@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import IProcedures from "../../interfaces/IProcedures";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import "@lexical/rich-text";
+import { toast } from "react-toastify";
 
 const theme = {};
 
@@ -40,7 +41,7 @@ interface IEditorParams {
 function EditProcedureTextEditor({ recipe_id, procedure }: IEditorParams) {
   const [editorState, setEditorState] = useState<any>({});
 
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -58,7 +59,10 @@ function EditProcedureTextEditor({ recipe_id, procedure }: IEditorParams) {
       editorState &&
       JSON.parse(editorState).root.children[0].children == ""
     ) {
-      setError("Please provide instuctions for this recipe");
+      // setError("Please provide instuctions for this recipe");
+      toast.dark(
+        "Something went wrong. Please provide the procedures for this recipe"
+      );
     } else {
       try {
         const res = await updateProceduresAPICall({
@@ -71,7 +75,8 @@ function EditProcedureTextEditor({ recipe_id, procedure }: IEditorParams) {
 
         navigate("/dashboard");
       } catch (error) {
-        setError("Something went wrong. Cannot submit");
+        // setError("Something went wrong. Cannot submit");
+        toast.dark("Something went wrong. Cannot update the procedures");
         console.log(error);
       }
     }
@@ -123,7 +128,7 @@ function EditProcedureTextEditor({ recipe_id, procedure }: IEditorParams) {
         </LexicalComposer>
 
         <button className="btnForm"> UPDATE RECIPE </button>
-        <p className="error">{error}</p>
+        {/* <p className="error">{error}</p> */}
       </form>{" "}
       {/* <button onClick={handleBackButton}>BACK</button> */}
       <button className="btnForm" onClick={handleCancelClick}>

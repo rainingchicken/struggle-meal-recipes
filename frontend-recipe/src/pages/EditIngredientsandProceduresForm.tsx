@@ -6,6 +6,7 @@ import IngredientForm from "../components/create/IngredientForm";
 import IProcedures from "../interfaces/IProcedures";
 import EditProcedureTextEditor from "../components/edit/editProceduresTextEditor";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const EditIngredientsandProceduresForm = () => {
   const { _id } = useParams();
@@ -14,7 +15,7 @@ const EditIngredientsandProceduresForm = () => {
   // const { procedures, setProcedures } = useContext(ProceduresContext);
 
   const [procedures, setProcedures] = useState<any>([]);
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const [
     getRecipeProceduresAPICall,
@@ -28,7 +29,8 @@ const EditIngredientsandProceduresForm = () => {
       //   console.log(res);
     } catch (err) {
       console.log(err);
-      setError("Something went wrong. Cannot get procedures");
+      // setError("Something went wrong. Cannot get procedures");
+      toast.dark("Something went wrong. Cannot get the procedures");
     }
   };
 
@@ -76,7 +78,7 @@ const EditIngredientsandProceduresForm = () => {
                   procedure={procedure}
                 />
               ))}
-            <p className="error">{error}</p>
+            {/* <p className="error">{error}</p> */}
           </>
         )}
       </>

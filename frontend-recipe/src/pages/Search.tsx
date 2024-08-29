@@ -5,6 +5,7 @@ import IRecipeDetails from "../interfaces/IRecipeDetails";
 // import ShortDetailedRecipe from "../components/displays/ShortDetailedRecipe";
 import { useLocation, useNavigate } from "react-router-dom";
 import PublicShortDetailedRecipe from "../components/displays/PublicShortDetailedRecipe";
+import { toast } from "react-toastify";
 
 const Search = () => {
   //   const urlParams = new URLSearchParams(location.search);
@@ -22,7 +23,7 @@ const Search = () => {
   });
   const [showMore, setShowMore] = useState(true);
 
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
   const [getAllRecipesAPICall, { isLoading }] = useGetAllRecipesMutation();
 
   useEffect(() => {
@@ -62,7 +63,8 @@ const Search = () => {
         setRecipes(res);
       } catch (err) {
         console.log(err);
-        setError("Something went wrong. Cannot load recipes");
+        // setError("Something went wrong. Cannot load recipes");
+        toast.dark("Something went wrong. Cannot get the recipes");
       }
     };
     fetchRecipes();
@@ -83,7 +85,8 @@ const Search = () => {
       }
     } catch (err) {
       console.log(err);
-      setError("Something went wrong. Cannot load recipes");
+      // setError("Something went wrong. Cannot load recipes");
+      toast.dark("Something went wrong. Cannot get the recipes");
     }
   };
 
@@ -238,7 +241,7 @@ const Search = () => {
             SHOW MORE
           </button>
         )}
-        <p className="error">{error}</p>
+        {/* <p className="error">{error}</p> */}
       </>
     );
   };

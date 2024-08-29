@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import IIngredients from "../../interfaces/IIngredients";
 import { useGetAllPersonalRecipesIngredientsMutation } from "../../slices/personalRecipeSlice";
 // import { IngredientContext } from "../../context/IngredientContext.tsx";
 import DetailedIngredient from "./DetailedIngredient";
 import { useDispatch, useSelector } from "react-redux";
 import { setIngredients } from "../../slices/ingredientsSlice";
+import { toast } from "react-toastify";
 
 interface IParams {
   _id: string | undefined;
@@ -17,7 +18,7 @@ const Ingredient = ({ _id, user }: IParams) => {
   const dispatch = useDispatch();
   const ingredients = useSelector((state: any) => state.ingredients.state);
 
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const [
     getAllRecipeIngredientAPICall,
@@ -31,7 +32,8 @@ const Ingredient = ({ _id, user }: IParams) => {
       // console.log(res);
     } catch (err) {
       console.log(err);
-      setError("Something went wrong. Cannot get ingredients");
+      // setError("Something went wrong. Cannot get ingredients");
+      toast.dark("Something went wrong. Cannot get ingredients");
     }
   };
 
@@ -55,7 +57,7 @@ const Ingredient = ({ _id, user }: IParams) => {
               </li>
             ))}
         </ul>
-        <p className="errors">{error}</p>
+        {/* <p className="errors">{error}</p> */}
       </>
     );
   };
