@@ -59,43 +59,71 @@ const DetailedRecipe = ({ _id }: IParams) => {
   };
 
   return (
-    <div>
-      {!isLoading ? (
-        <div className="recipeContainer">
-          {userInfo._id === recipe.user &&
-          location.pathname == `/recipes/${recipe._id}` ? (
-            <>
-              <button onClick={handleEditClick}>EDIT</button>
-              <button onClick={handleDeleteClick}>DELETE</button>
-            </>
-          ) : (
-            <></>
-          )}
-          <h1>{recipe.title}</h1>
-          <p>Author: {recipe.user}</p>
-          <p>
-            Created: {recipe.createdAt} Last updated: {recipe.updatedAt}
-          </p>
-          <p>Categories: {recipe.categories}</p>
-          <p>Servings: {recipe.servings}</p>
-          <p>Vegan: {recipe.vegan ? "Yes" : "No"}</p>
-          <p>Desperation Level: {recipe.desperation}</p>
-          <p>Healthy Meter: {recipe.health}</p>
-          <p>Ingredient</p>
-          {recipe._id ? (
-            <Ingredient _id={recipe._id} user={recipe.user} />
-          ) : (
-            <>Loading...</>
-          )}
-          <div>
-            Procedures:
-            {recipe._id ? <Procedures _id={recipe._id} /> : <>Loading...</>}
+    <div className="recipeLongDetailedContainerparent">
+      <div className="recipeLongDetailedContainer">
+        {!isLoading ? (
+          <div className="">
+            {userInfo._id === recipe.user &&
+            location.pathname == `/recipes/${recipe._id}` ? (
+              <>
+                <button onClick={handleEditClick}>EDIT</button>
+                <button onClick={handleDeleteClick}>DELETE</button>
+              </>
+            ) : (
+              <></>
+            )}
+            <div className="recipeLongDetailed">
+              <h1>{recipe.title}</h1>
+              <p>Chef: {recipe.user}</p>
+              <p className="recipeDetailstime">
+                {recipe.createdAt && (
+                  <>
+                    <span>
+                      Last updated: {recipe.createdAt.slice(0, 10)} |{" "}
+                    </span>
+                    <span>Last updated: {recipe.updatedAt.slice(0, 10)}</span>
+                  </>
+                )}
+              </p>
+
+              <p>Categories: {recipe.categories}</p>
+
+              <p>Servings: {recipe.servings}</p>
+
+              <p>Vegan: {recipe.vegan !== "notvegan" ? "✔️" : "✖️"}</p>
+
+              <p>
+                {" "}
+                Desperation Level:{" "}
+                <span className="recipeDetailsHealth">
+                  {recipe.desperation}
+                </span>
+              </p>
+
+              <p>
+                {" "}
+                Healthy Meter:{" "}
+                <span className="recipeDetailsHealth">{recipe.health}</span>
+              </p>
+            </div>
+            <p>Ingredient</p>
+            {recipe._id ? (
+              <div className="recipedetailedingredient">
+                <Ingredient _id={recipe._id} user={recipe.user} />
+              </div>
+            ) : (
+              <>Loading...</>
+            )}
+            <div>
+              Procedures:
+              {recipe._id ? <Procedures _id={recipe._id} /> : <>Loading...</>}
+            </div>
+            <p className="error">{error}</p>
           </div>
-          <p className="error">{error}</p>
-        </div>
-      ) : (
-        <h1>Loading...</h1>
-      )}
+        ) : (
+          <h1>Loading...</h1>
+        )}
+      </div>
     </div>
   );
 };

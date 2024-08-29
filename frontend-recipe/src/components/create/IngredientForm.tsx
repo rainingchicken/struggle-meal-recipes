@@ -127,6 +127,7 @@ const IngredientForm = ({ recipe_id }: IParams) => {
             onChange={handleChange}
             type="number"
             name="amount"
+            step="0.01"
             placeholder="1"
           />
         </span>

@@ -172,7 +172,7 @@ const RecipeForm = () => {
           onChange={handleChange}
         />
 
-        <label htmlFor="health">health Meter: {recipe.health}</label>
+        <label htmlFor="health">Health Meter: {recipe.health}</label>
         <input
           onChange={handleChange}
           type="range"

@@ -26,15 +26,25 @@ const PublicShortDetailedRecipe = ({ recipe }: IParams) => {
   }
 
   return (
-    <div>
+    <div className="recipeDetails">
       <h1>{recipe.title}</h1>
-      <p>Author: {recipe.user}</p>
+      <p>Chef: {recipe.user}</p>
       <p>Categories: {recipe.categories}</p>
-      <span>Servings: {recipe.servings}</span>
-      <span>Vegan: {recipe.vegan !== "notvegan" ? "Yes" : "No"}</span>{" "}
-      <span>Desperation Level: {recipe.desperation}</span>{" "}
-      <span>Healthy Meter: {recipe.health}</span>
-      <p>Last updated: {recipe.updatedAt}</p>
+      <div className="recipeMoreDetails">
+        <span>Servings: {recipe.servings}</span>{" "}
+        <span>Vegan: {recipe.vegan !== "notvegan" ? "✔️" : "✖️"}</span>{" "}
+        <span>
+          Desperation Level:{" "}
+          <span className="recipeDetailsHealth">{recipe.desperation}</span>
+        </span>{" "}
+        <span>
+          Healthy Meter:{" "}
+          <span className="recipeDetailsHealth">{recipe.health}</span>
+        </span>
+      </div>
+      <p className="recipeDetailstime">
+        Last updated: {recipe.updatedAt.slice(0, 10)}
+      </p>
       <div>
         {
           <Link key={`link${recipe._id}`} to={`/recipes/${recipe._id}`}>

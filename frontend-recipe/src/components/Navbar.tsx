@@ -32,32 +32,43 @@ function Navbar() {
 
   return (
     <div className="navbar">
-      <span>
-        <Link to="/">Home</Link> <Link to="/search">Recipes</Link>{" "}
-        <Link to="/about">About</Link>
+      <span className="navbarTopLeft">
+        <span>
+          <Link to="/">Home </Link>
+        </span>
+        <span>
+          {" "}
+          <Link to="/search">Recipes </Link>
+        </span>{" "}
+        <span>
+          <Link to="/about">About</Link>
+        </span>
       </span>
-      <form onSubmit={handleSearchSubmit}>
-        <input
-          value={searchTerm}
-          placeholder="Search..."
-          onChange={handleSearchChange}
-        />
-        <button>SEARCH</button>
-      </form>
-      {!userInfo ? (
-        <span>
-          <Link to="/login">Login</Link>{" "}
-          <Link to="/signup" className="button">
-            Signup
-          </Link>
-        </span>
-      ) : (
-        <span>
-          <Link to="/dashboard">Dashboard</Link>{" "}
-          <Link to="/profile">{userInfo.name}'s Profile</Link>{" "}
-          <Link to="/logout">Logout</Link>{" "}
-        </span>
-      )}
+      <span className="navbarTopRight">
+        <form className="searchbar" onSubmit={handleSearchSubmit}>
+          <input
+            value={searchTerm}
+            placeholder="Search..."
+            onChange={handleSearchChange}
+          />{" "}
+          <button className="buttons">SEARCH</button>{" "}
+        </form>
+        {!userInfo ? (
+          <span>
+            <Link to="/login"> Login</Link>{" "}
+            <Link to="/signup" className="button">
+              Signup
+            </Link>
+          </span>
+        ) : (
+          <span>
+            {" "}
+            <Link to="/dashboard"> Dashboard</Link>{" "}
+            <Link to="/profile">{userInfo.name}'s Profile</Link>{" "}
+            <Link to="/logout">Logout</Link>{" "}
+          </span>
+        )}
+      </span>
     </div>
   );
 }

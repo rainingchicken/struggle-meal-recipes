@@ -5,6 +5,7 @@ import { useGetAllRecipesMutation } from "../../slices/recipeApiSlice";
 // import ShortDetailedRecipe from "../../components/displays/ShortDetailedRecipe";
 import IRecipeDetails from "../../interfaces/IRecipeDetails";
 import PublicShortDetailedRecipe from "../../components/displays/PublicShortDetailedRecipe";
+import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [recipes, setRecipes] = useState<Array<IRecipeDetails>>([]);
@@ -12,6 +13,8 @@ const Home = () => {
 
   const [error, setError] = useState<string | null>(null);
   const [getAllRecipesAPICall, { isLoading }] = useGetAllRecipesMutation();
+
+  const navigate = useNavigate();
 
   const fetchRecipes = async () => {
     try {
@@ -48,16 +51,32 @@ const Home = () => {
       setError("Something went wrong. Cannot load recipes");
     }
   };
+  const handlesignup = () => {
+    navigate("/signup");
+  };
   const loaded = () => {
     return (
       <>
-        {/* {console.log(recipes)} */}
-        {recipes &&
-          recipes.map((recipe: IRecipeDetails) => (
-            <PublicShortDetailedRecipe key={recipe._id} recipe={recipe} />
-          ))}
-        {showMore && <button onClick={handleShowMore}>SHOW MORE</button>}
-        <p className="error">{error}</p>
+        <div className="recipeParentParentContainer">
+          <div className="recipeParentContainer">
+            {/* {console.log(recipes)} */}
+            {recipes &&
+              recipes.map((recipe: IRecipeDetails) => (
+                <div className="recipeContainer" key={`div${recipe._id}`}>
+                  <PublicShortDetailedRecipe key={recipe._id} recipe={recipe} />
+                </div>
+              ))}
+
+            <p className="error">{error}</p>
+          </div>{" "}
+        </div>{" "}
+        <div>
+          {showMore && (
+            <button className="btnForm" onClick={handleShowMore}>
+              SHOW MORE
+            </button>
+          )}
+        </div>
       </>
     );
   };
@@ -67,8 +86,26 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Struggle Meal Recipes</h1>
+      <header className="hero">
+        <div className="content">
+          <h1>Hungry?</h1>
+          <p>Try this Avacado-Egg Toast recipe</p>
+          <Link to={"/recipes/66cfbecfd8c48a91a918f980"} className="headerLink">
+            View recipe
+          </Link>
+        </div>
+      </header>
+      <h1 className="title">Struggle Meal Recipes</h1>
+      <h2 className="title">Recent</h2>
       <>{isLoading ? loading() : loaded()}</>
+      <div className="homeSignup">
+        <h1 className="title">Want to share?</h1>
+        <div>
+          <button onClick={handlesignup} className="btnForm">
+            SIGNUP
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

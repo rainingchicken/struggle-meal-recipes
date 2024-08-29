@@ -118,3 +118,7 @@ Create a full-stack web application using MongoDB, Express, React, and Node (MER
   - add, edit, delete are on its own page
 - profile (private route)
 - about
+
+## Souces
+
+- Photo by Tony Schnagl: https://www.pexels.com/photo/person-eating-noodles-5588490/

@@ -222,12 +222,21 @@ const Search = () => {
 
           <button className="btnForm">FILTER</button>
         </form>
-
-        {recipes &&
-          recipes.map((recipe: IRecipeDetails) => (
-            <PublicShortDetailedRecipe key={recipe._id} recipe={recipe} />
-          ))}
-        {showMore && <button onClick={handleShowMore}>SHOW MORE</button>}
+        <div className="recipeParentParentContainer">
+          <div className="recipeParentContainer">
+            {recipes &&
+              recipes.map((recipe: IRecipeDetails) => (
+                <div className="recipeContainer" key={`div${recipe._id}`}>
+                  <PublicShortDetailedRecipe key={recipe._id} recipe={recipe} />{" "}
+                </div>
+              ))}{" "}
+          </div>
+        </div>
+        {showMore && (
+          <button className="btnForm" onClick={handleShowMore}>
+            SHOW MORE
+          </button>
+        )}
         <p className="error">{error}</p>
       </>
     );
@@ -238,7 +247,7 @@ const Search = () => {
 
   return (
     <div>
-      <h1>Search Results</h1>
+      <h1 className="title">Search Results</h1>
       <>{isLoading ? loading() : loaded()}</>
     </div>
   );

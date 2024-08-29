@@ -90,6 +90,7 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+
 }
 
 button {
@@ -102,6 +103,7 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  margin: 0 .5em
 }
 
 button:hover {
@@ -139,6 +141,70 @@ footer {
   width: 500px;
 } */
 
+/* Header - HERO */
+/* Photo by Tony Schnagl: https://www.pexels.com/photo/person-eating-noodles-5588490/ */
+/* Photo by Jane Trang Doan: https://www.pexels.com/photo/sliced-egg-on-top-of-green-salad-with-bread-824635/ */
+.hero {
+  background: url('../public/pexels-janetrangdoan-824635.jpg');
+  height: 100vh;
+  position: relative;
+  color: #fff;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.hero .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero .content h1 {
+  font-size: 55px;
+}
+
+.hero .content p {
+  font-size: 23px;
+  margin: 20px 0 30px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  background-color: rgba(0, 0, 0, .6);
+  width: 100%;
+  height: 100%;
+}
+
+.hero * {
+  z-index: 1;
+}
+
+.headerLink {
+  background-color: #1a1a1a;
+  padding: .5em;
+  border-radius: 8px;
+}
+
+.homeSignup {
+  height: 200px;
+  padding: 1em;
+  margin: 1em auto 0;
+  background-color: #1a1a1a;
+}
+
+footer {
+
+  width: 100%;
+  height: 100px;
+  bottom: 0;
+  background-color: #1a1a1a;
+}
 
 .ingredientsFormDiv {
   display: flex;
@@ -213,6 +279,8 @@ li {
   list-style: none;
 }
 
+
+
 .navbar {
   box-sizing: border-box;
   padding: 1em;
@@ -222,10 +290,42 @@ li {
   justify-content: space-between;
 }
 
+.navbarTopRight {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+
+.navbarTopLeft {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbarTopLeft span {
+  margin: 0 .5em;
+}
+
+.recipeParentParentContainer {
+  display: flex;
+  margin: 0 auto;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.recipeParentContainer {
+  display: flex;
+  margin: 0 auto;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
 .recipeContainer {
-  width: 80%;
+  display: flex;
+  width: 400px;
   border-radius: 8px;
   border: 1px solid #535bf2;
   padding: 0.6em 1.2em;
@@ -233,7 +333,64 @@ li {
   font-weight: 500;
   font-family: inherit;
   transition: border-color 0.25s;
-  margin: 1em auto;
+  margin: 1em;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.recipeMoreDetails {
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.recipeMoreDetails span {
+  margin: .2em .2em 0 .2em;
+}
+
+.recipeDetailsHealth {
+  background-color: #535bf2;
+  padding: .2em .5em;
+  border-radius: 8px;
+}
+
+.recipeDetailstime {
+  font-size: .8em;
+
+}
+
+.recipeLongDetailedContainer {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  /* width: 100%; */
+  min-width: 70vw;
+  padding: 0 3em;
+}
+
+
+.recipeLongDetailedContainerparent {
+  justify-content: center;
+  display: flex;
+  width: 100%;
+}
+
+.recipeLongDetailed {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.recipeLongDetailed p {
+  margin: 0;
+  padding: .5em 0;
+}
+
+.recipedetailedingredient span {
+  margin: 0;
+  padding: 0;
+
 }
 
 .RecipeForm {
@@ -357,5 +514,25 @@ ul {
 @media only screen and (max-width: 500px) {
   form {
     width: 95vw;
+  }
+
+  .navbar {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navbar .navbarTopLeft {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navbar .navbarTopRight {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navbar .searchbar {
+    display: flex;
+    flex-direction: column;
   }
 }

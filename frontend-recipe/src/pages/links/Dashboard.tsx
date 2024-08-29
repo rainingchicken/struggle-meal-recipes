@@ -44,16 +44,18 @@ const Dashboard = () => {
 
   const loaded = () => {
     return (
-      <>
-        {/* {console.log(recipes)} */}
-        {recipes &&
-          recipes.map((recipe: IRecipeDetails) => (
-            <div className="recipeContainer" key={`div${recipe._id}`}>
-              <ShortDetailedRecipe key={recipe._id} recipe={recipe} />{" "}
-            </div>
-          ))}
-        <p className="error">{error}</p>
-      </>
+      <div className="recipeParentParentContainer">
+        <div className="recipeParentContainer">
+          {/* {console.log(recipes)} */}
+          {recipes &&
+            recipes.map((recipe: IRecipeDetails) => (
+              <div className="recipeContainer" key={`div${recipe._id}`}>
+                <ShortDetailedRecipe key={recipe._id} recipe={recipe} />{" "}
+              </div>
+            ))}
+          <p className="error">{error}</p>
+        </div>
+      </div>
     );
   };
   const loading = () => {
@@ -62,8 +64,10 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h1>Dashboard</h1>
-      <button onClick={handleCreateRecipe}>Create new recipe</button>
+      <h1 className="title">Dashboard</h1>
+      <button className="btnForm" onClick={handleCreateRecipe}>
+        Create new recipe
+      </button>
       <>{isLoading ? loading() : loaded()}</>
     </div>
   );

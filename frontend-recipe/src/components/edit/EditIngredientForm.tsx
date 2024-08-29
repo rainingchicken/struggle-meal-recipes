@@ -81,6 +81,7 @@ const EditIngredientForm = ({ recipe_id, ingredient, setEdit }: IParams) => {
             onChange={handleChange}
             type="number"
             name="amount"
+            step="0.01"
             value={thisIngredient.amount}
           />
         </span>
