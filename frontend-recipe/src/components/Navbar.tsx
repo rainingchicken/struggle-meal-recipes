@@ -12,20 +12,25 @@ function Navbar() {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    const searchTermFromURL = urlParams.get("searchTerm");
-    if (searchTermFromURL) {
-      setSearchTerm(searchTermFromURL);
+    const searchTermFromUrl = urlParams.get("searchTerm");
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
     }
   }, [location.search]);
 
-  const handleSearchChange = (e: FormEvent) => {
-    setSearchTerm((e.target as HTMLInputElement).value);
-  };
+  // const handleSearchChange = (e: FormEvent) => {
+  //   setSearchTerm((e.target as HTMLInputElement).value);
+  // };
 
   const handleSearchSubmit = (e: FormEvent) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(location.search);
     urlParams.set("searchTerm", searchTerm);
+    urlParams.set("sort", "desc");
+    urlParams.set("vegan", "");
+    urlParams.set("categories", "");
+    urlParams.set("health", "");
+    urlParams.set("desperation", "");
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
   };
@@ -47,11 +52,14 @@ function Navbar() {
       <span className="navbarTopRight">
         <form className="searchbar" onSubmit={handleSearchSubmit}>
           <input
-            value={searchTerm}
+            type="text"
             placeholder="Search..."
-            onChange={handleSearchChange}
-          />{" "}
-          <button className="buttons">SEARCH</button>{" "}
+            value={searchTerm}
+            onChange={(e: FormEvent) =>
+              setSearchTerm((e.target as HTMLInputElement).value)
+            }
+          />
+          <button className="buttons">SEARCH</button>
         </form>
         {!userInfo ? (
           <span>

@@ -44,9 +44,9 @@ const Search = () => {
     ) {
       setFilters({
         ...filters,
+        searchTerm: searchTermFromURL,
         vegan: veganFromURL,
         categories: categoriesFromURL,
-        // categories: "",
         health: healthFromURL,
         desperation: desperationFromURL,
         sort: sortFromURL,
@@ -55,7 +55,7 @@ const Search = () => {
     const fetchRecipes = async () => {
       const searchQuery = urlParams.toString();
       try {
-        const res = await getAllRecipesAPICall(searchQuery).unwrap();
+        const res = await getAllRecipesAPICall(`${searchQuery}`).unwrap();
         if (res.length < 5) {
           setShowMore(false);
         }
@@ -88,33 +88,34 @@ const Search = () => {
   };
 
   const handleSearchChange = (e: FormEvent) => {
-    const { id, type } = e.target as HTMLInputElement;
     // console.log(type, id, value);
-    if ((type === "text" && id === "searchTerm") || id === "categories") {
+    if ((e.target as HTMLInputElement).id === "searchTerm") {
       setFilters({
         ...filters,
-        [id]: (e.target as HTMLInputElement).value,
+        searchTerm: (e.target as HTMLInputElement).value,
       });
     }
-    if ((type === "range" && id === "health") || id === "desperation") {
-      setFilters({
-        ...filters,
-        [id]: +(e.target as HTMLInputElement).value,
-      });
-    }
-    if (id === "vegan") {
-      const isVegan = (e.target as HTMLInputElement).value || "";
-      setFilters({
-        ...filters,
-        [id]: isVegan,
-      });
-    }
-    if (id === "sort") {
+    if ((e.target as HTMLInputElement).id === "sort") {
       const order = (e.target as HTMLInputElement).value || "desc";
-      setFilters({
-        ...filters,
-        [id]: order,
-      });
+      setFilters({ ...filters, sort: order });
+    }
+    if ((e.target as HTMLInputElement).id === "categories") {
+      const categories =
+        (e.target as HTMLInputElement).value || "uncategorized";
+      setFilters({ ...filters, categories });
+    }
+
+    if ((e.target as HTMLInputElement).id === "vegan") {
+      const vegan = (e.target as HTMLInputElement).value || "notvegan";
+      setFilters({ ...filters, vegan });
+    }
+    if ((e.target as HTMLInputElement).id === "health") {
+      const health = +(e.target as HTMLInputElement).value || 0;
+      setFilters({ ...filters, health });
+    }
+    if ((e.target as HTMLInputElement).id === "desperation") {
+      const desperation = +(e.target as HTMLInputElement).value || 0;
+      setFilters({ ...filters, desperation });
     }
   };
 
@@ -135,15 +136,15 @@ const Search = () => {
   const loaded = () => {
     return (
       <>
-        {/* {console.log(filters)}
-        {console.log(recipes)} */}
+        {/* {console.log(filters)} */}
+        {/* {console.log(recipes)} */}
         <form className="RecipeForm" onSubmit={handleSubmit}>
           <label htmlFor="searchTerm">Search</label>
           <input
             type="text"
             name="searchTerm"
             id="searchTerm"
-            value={filters.searchTerm}
+            value={filters.searchTerm == null ? "" : filters.searchTerm}
             onChange={handleSearchChange}
           />
 
@@ -152,10 +153,10 @@ const Search = () => {
             className="RecipeFormSelection"
             name="categories"
             id="categories"
-            value={filters.categories}
+            value={filters.categories == null ? "" : filters.categories}
             onChange={handleSearchChange}
           >
-            <option value=""></option>
+            <option value="uncategorized"></option>
             <option value="Mix">Mix</option>
             <option value="Asia">Asia</option>
             <option value="Africa">Africa</option>
@@ -172,10 +173,10 @@ const Search = () => {
             className="RecipeFormSelection"
             name="vegan"
             id="vegan"
-            value={filters.vegan}
+            value={filters.vegan == null ? "" : filters.vegan}
             onChange={handleSearchChange}
           >
-            <option value="">No</option>{" "}
+            <option value="notvegan">No</option>{" "}
             <option value="true">Vegan only</option>
             <option value="notvegan">Nonvegan only</option>
           </select>
@@ -185,7 +186,7 @@ const Search = () => {
             className="RecipeFormSelection"
             name="sort"
             id="sort"
-            value={filters.sort}
+            value={filters.sort == null ? "" : filters.sort}
             onChange={handleSearchChange}
           >
             <option value="desc">Latest</option>
@@ -203,7 +204,7 @@ const Search = () => {
             step="1"
             id="desperation"
             name="desperation"
-            value={filters.desperation}
+            value={filters.desperation == null ? 0 : filters.desperation}
             onChange={handleSearchChange}
           />
 
@@ -216,7 +217,7 @@ const Search = () => {
             id="health"
             name="health"
             className="slider"
-            value={filters.health}
+            value={filters.health == null ? 0 : filters.health}
             onChange={handleSearchChange}
           />
 
