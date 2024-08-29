@@ -515,6 +515,10 @@ li {
   margin: 1em;
 }
 
+.Toastify__progress-bar {
+  background-color: var(--themeColorBright);
+}
+
 ul {
   margin: 0;
   padding: 0;
