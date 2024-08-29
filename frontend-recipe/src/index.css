@@ -11,6 +11,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --themeColor: #44a4c4;
+  --themeColorBright: #2A6174
 }
 
 .editorContainer {
@@ -61,19 +64,22 @@ div:has(> .editor-placeholder) {
 
 a {
   font-weight: 500;
-  color: #646cff;
+  /* color: #646cff; */
+  color: var(--themeColor);
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #535bf2;
+  /* color: #535bf2; */
+  color: var(--themeColorBright);
 }
 
 .addBtn button,
 .btn {
   display: flex;
   margin: 0 auto;
-  background-color: #535bf2;
+  /* background-color: #535bf2; */
+  color: var(--themeColorBright);
   align-content: center;
 }
 
@@ -107,7 +113,9 @@ button {
 }
 
 button:hover {
-  border-color: #646cff;
+  /* border-color: #646cff; */
+  border: var(--themeColor);
+
 }
 
 button:focus,
@@ -119,14 +127,16 @@ button:focus-visible {
   margin: 2em auto 0;
   display: flex;
 
-  background-color: #535bf2;
+  /* background-color: #535bf2; */
+  background-color: var(--themeColorBright);
   align-content: center;
 }
 
 .error {
   color: white;
   text-align: center;
-  background-color: #535bf2;
+  /* background-color: #535bf2; */
+  background-color: var(--themeColorBright);
 }
 
 footer {
@@ -186,7 +196,8 @@ footer {
 }
 
 .headerLink {
-  background-color: #1a1a1a;
+  /* background-color: #1a1a1a; */
+  background-color: lightgray;
   padding: .5em;
   border-radius: 8px;
 }
@@ -288,6 +299,7 @@ li {
   max-width: 100%;
   display: flex;
   justify-content: space-between;
+  background-color: #1a1a1a;
 }
 
 .navbarTopRight {
@@ -305,6 +317,17 @@ li {
 
 .navbarTopLeft span {
   margin: 0 .5em;
+}
+
+.navbarsearchBtn {
+  background-color: var(--themeColor);
+  transition: border-color 0.25s;
+  transition: background-color 0.25s;
+}
+
+.navbarsearchBtn:hover {
+  background-color: transparent;
+  border: 1px solid var(--themeColorBright);
 }
 
 .recipeParentParentContainer {
@@ -327,7 +350,7 @@ li {
   display: flex;
   width: 400px;
   border-radius: 8px;
-  border: 1px solid #535bf2;
+  border: 1px solid var(--themeColorBright);
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
@@ -349,7 +372,8 @@ li {
 }
 
 .recipeDetailsHealth {
-  background-color: #535bf2;
+  /* background-color: #535bf2; */
+  background-color: var(--themeColorBright);
   padding: .2em .5em;
   border-radius: 8px;
 }
@@ -494,21 +518,6 @@ li {
 ul {
   margin: 0;
   padding: 0;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
 }
 
 @media only screen and (max-width: 500px) {

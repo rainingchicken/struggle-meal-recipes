@@ -59,7 +59,7 @@ function Navbar() {
               setSearchTerm((e.target as HTMLInputElement).value)
             }
           />
-          <button className="buttons">SEARCH</button>
+          <button className="navbarsearchBtn">SEARCH</button>
         </form>
         {!userInfo ? (
           <span>
