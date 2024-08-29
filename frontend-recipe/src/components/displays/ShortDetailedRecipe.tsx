@@ -69,7 +69,7 @@ const ShortDetailedRecipe = ({ recipe }: IParams) => {
       });
       dispatch(setRecipes(newRecipes));
       navigate("/dashboard");
-      toast.dark("Cancelled sharing recipe");
+      toast.dark("Recipe deleted!");
     } catch (error) {
       // setError("Cant delete");
       toast.dark("Something went wrong. Cannot get delete");
